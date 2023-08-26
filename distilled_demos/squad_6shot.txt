@@ -1,0 +1,14 @@
+User: What century did Nasser rule in?
+Response: 20th
+
+User: What country outside Ireland is known for having Irish pubs?
+Response: New Zealand
+
+User: What kind of information were websites set up to store?
+Response: contact information
+
+User: Pirie believes Hayek to be a conservative for what reason?
+Response: mistakes the nature of the conservative outlook
+
+User: Which system indicates that the date that the Julian date has been adjusted for length?
+Response: unanswerable

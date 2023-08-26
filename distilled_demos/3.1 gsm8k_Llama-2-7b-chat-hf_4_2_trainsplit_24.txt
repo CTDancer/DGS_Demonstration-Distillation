@@ -1,0 +1,16 @@
+Q1: Salesman bought 48 backpacks for $576. Sold 17 for $18 each, 10 for $25 each, rest for $22 each. Profit?
+A1: Sold 17 bags x $18/bag = $306. Sold 10 bags x $25/bag = $250. Sold 21 bags for $22 each = $462. Total sales = $306 + $250 + $462 = $1018. Profit = $1018 - $576 = $442. Therefore the answer is 442.
+Q2: Ursula earns $8.50/hr, works 8 hrs/day, 20 days/month. Annual salary?
+A2: Daily = $8.50 x 8 = $68. Monthly = $68 x 20 = $1360. Annual = $1360 x 12 = $16,320. Therefore the answer is 16320.
+Q3: Bike sold for $220, 15% increase. New price?
+A3: Increase = $220 x 15/100 = $33. New price = $220 + $33 = $253. Therefore the answer is 253.
+Q4: Room is 10 ft each side. Area in sq inches?
+A4: 10 ft = 10 x 12 = 120 inches. Area = 120 x 120 = 14,400 sq inches. Therefore the answer is 14400.
+Q5: Ruiz's $500 salary, 6% raise. New salary?
+A5: Raise = $500 x 6/100 = $30. New salary = $500 + $30 = $530. Therefore the answer is 530.
+Q6: Jeans $40 each, 10% off for every 2. 3 pairs cost?
+A6: 2 pairs = $40 x 2 = $80. 10% off = $80 x 10/100 = $8. Cost = $80 - $8 = $72. 3 pairs = $72 + $40 = $112. Therefore the answer is 112.
+Q7: 50 reps, 8 hr/day, $14/hr. 5 days pay?
+A7: 50 reps x 8 hr/day = 400 hrs. 5 days = 5 x 400 = 2000 hrs. Pay = $14 x 2000 = $28,000. Therefore the answer is 28000.
+Q8: Factory has 300 employees. 200 earn $12/hr, 40 earn $14/hr, rest $17/hr. Cost for 8-hr shift?
+A8: 200 x $12/hr + 40 x $14/hr + (300 - 200 - 40) x $17/hr = $3980/hr. Total for 8 hrs = $3980 x 8 = $31,840. Therefore the answer is 31840.

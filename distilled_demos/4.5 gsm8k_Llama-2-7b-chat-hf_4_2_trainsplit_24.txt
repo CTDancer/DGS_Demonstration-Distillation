@@ -1,0 +1,16 @@
+Q: Backpacks: 48 for $576. Sold: 17 x $18, 10 x $25, rest at $22. Profit?
+A: Sales: $1018. Profit: $442. Therefore the answer is 442.
+Q: Ursula: $8.50/hr, 8hr/day, 20 days/month. Annual salary?
+A: Monthly: $1360. Annual: $16,320. Therefore the answer is 16320.
+Q: Bicycle: $220, 15% increase. New price?
+A: New price: $253. Therefore the answer is 253.
+Q: Blossom's room: 10ft x 10ft. Area in sq inches?
+A: Area: 14,400 sq inches. Therefore the answer is 14400.
+Q: Ruiz's $500 salary got 6% raise. New salary?
+A: New salary: $530. Therefore the answer is 530.
+Q: Jeans: $40, 10% off for 2. 3 pairs cost?
+A: Cost of 3 pairs: $112. Therefore the answer is 112.
+Q: 50 reps, 8hr/day, $14/hr. 5 days, total cost?
+A: Total cost: $28,000. Therefore the answer is 28000.
+Q: Factory: 300 employees. 200 earn $12/hr. 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+A: 8-hour shift cost: $31,840. Therefore the answer is 31840.

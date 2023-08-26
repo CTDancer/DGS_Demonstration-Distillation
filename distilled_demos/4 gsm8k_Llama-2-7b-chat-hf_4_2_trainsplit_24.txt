@@ -1,0 +1,93 @@
+Q: A salesman bought a case of 48 backpacks for $576. He sold 17 of them for $18 at the swap meet, 10 were sold to a department store for $25 each. If the remainder were sold for $22 each. How much was the salesman's profit?
+A: The salesman sold 17 bags for 17 bags x $18/bag = $306. He sold 10 more for 10 bags x $25/bag = $250. Thus far he has sold 17 bags + 10 bags = 27 bags. Therefore he sold 48 bags - 27 bags = 21 bags for $22 each. 21 bags were sold for 21 bags x $22/bag = $462. In total the salesman made $306 + $250 + $462 = $1018. The salesman made $1018 - $576 = $442 in profit. Therefore the answer is 442.
+Q: Ursula earns $8.50 an hour working in a restaurant. She works 8 hours a day. If she works 20 days a month, determine her annual salary.
+A: Ursula earns 8 x $8.50 = $68 a day. In a month, she earns 20 x $68 = $1360. Therefore, Ursula's annual salary is 12 x $1360 = $16,320. Therefore the answer is 16320.
+Q: The selling price of a bicycle that had sold for $220 last year was increased by 15%. What is the new price?
+A: The price of the bicycle increased by $220 * 15/100 = $33. Adding the increment price, the new price is $220 + $33 = $253. Therefore the answer is 253.
+Q: There are 12 inches to a foot. Blossom measures her room and finds that it is exactly 10 feet long in each direction. In square inches, what is the area of her room?
+A: First translate the feet to inches or 10 feet * 12 inches per foot = 120 inches. Then use length * width which is 120 * 120 = 14400 square inches. Therefore the answer is 14400.
+Q: Ruiz receives a monthly salary of $500. If he received a 6% raise, how much will be Ruiz's new salary?
+A: Ruiz has $500 x 6/100 = $30 salary raise. Thus, his new salary is $500 + $30 = $530. Therefore the answer is 530.
+Q: A store sold a certain brand of jeans for $40. They only have few pairs of jeans left so they decided to give 10% discount on every two pairs of jeans bought by a customer at any one time. How much will a customer pay for 3 pairs of jeans?
+A: Two pairs of jeans cost $40 x 2 = $80. A discount of $80 x 10/100 = $8 will be given for this. Hence, the cost of two pairs of jeans will now be $80 - $8 = $72. Therefore, the customer will pay $72 + $40 = $112 for the three pairs of jeans. Therefore the answer is 112.
+Q: A retail store wants to hire 50 new phone reps to assist with the increased call volume that they will experience over the holiday.  Each phone rep will work 8 hours a day and will be paid $14.00 an hour.  After 5 days, how much will the company pay all 50 new employees?
+A: There are 50 reps and they will work 8 hour days so that's 50*8 = 400 hours. They will work 5 days a week so that's 5*400 = 2,000 hours. Each worker will be paid $14.00 an hour and in 5 days they will have worked 2,000 hours so that's 14*2000 = $28,000. Therefore the answer is 28000.
+Q: In a factory, there are 300 employees. 200 of them earn $12 per hour. Of the rest, 40 of them earn $14 per hour. All others earn $17 per hour. What is the cost to employ all these people for one 8-hour long shift?
+A: The cost of the 200 employees is 200 employees * $12/employee/hour = $2400 per hour. The cost of the 40 employees is 40 employees * $14/employee/hour = $560 per hour. The rest means 300 employees - 200 employees - 40 employees = 60 employees. These 60 employees' employment costs are at 60 employees * $17/employee/hour = $1020 per hour. So in total all employees earn $2400/hour + $560/hour + $1020/hour = $3980/hour. During an 8-hour shift, this cost would be at 8 hours * $3980/hour = $31840. Therefore the answer is 31840.
+731
+
+
+Q: Salesman bought 48 backpacks for $576. Sold 17 at $18 each, 10 for $25 each, rest for $22 each. Profit?
+A: Sold 17 bags for $306, 10 for $250. Sold 21 for $462. Total sales: $306 + $250 + $462 = $1018. Profit: $1018 - $576 = $442.
+Q: Ursula earns $8.50/hr, works 8hr/day, 20 days/month. Annual salary?
+A: Monthly earnings = $8.50 * 8 * 20 = $1360. Annual salary = $1360 * 12 = $16,320.
+Q: Bicycle sold for $220, 15% increase. New price?
+A: Increase = $220 * 15/100 = $33. New price = $220 + $33 = $253.
+Q: Blossom's room is 10ft x 10ft. Area in sq inches?
+A: 10ft = 10 * 12 = 120 inches. Area = 120 * 120 = 14,400 sq inches.
+Q: Ruiz's $500 salary got 6% raise. New salary?
+A: Raise = $500 * 6/100 = $30. New salary = $500 + $30 = $530.
+Q: Jeans cost $40, 10% off for 2. 3 pairs cost?
+A: 2 pairs = $40 * 2 = $80, $8 discount. Cost = $80 - $8 + $40 = $112.
+Q: 50 reps, 8hr/day, $14/hr. 5 days, total cost?
+A: 50 reps * 8hr/day * $14/hr * 5 days = $28,000.
+Q: Factory: 300 employees. 200 earn $12/hr. 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+A: Cost: (200 * $12 + 40 * $14 + (300 - 200 - 40) * $17) * 8 hours = $31,840.
+247
+
+
+Q: Salesman bought 48 backpacks for $576. Sold 17 at $18 each, 10 for $25 each, rest for $22 each. Profit?
+A: Sold 17 bags at $306, 10 at $250, rest at $462. Total sales: $1018. Profit: $442.
+Q: Ursula earns $8.50/hr, works 8hr/day, 20 days/month. Annual salary?
+A: Monthly: $1360. Annual: $16,320.
+Q: Bicycle sold for $220, 15% increase. New price?
+A: Increase: $33. New price: $253.
+Q: Blossom's room is 10ft x 10ft. Area in sq inches?
+A: Area: 14,400 sq inches.
+Q: Ruiz's $500 salary got 6% raise. New salary?
+A: Raise: $30. New salary: $530.
+Q: Jeans cost $40, 10% off for 2. 3 pairs cost?
+A: 3 pairs cost: $112.
+Q: 50 reps, 8hr/day, $14/hr. 5 days, total cost?
+A: Total cost: $28,000.
+Q: Factory: 300 employees. 200 earn $12/hr. 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+A: 8-hour shift cost: $31,840.
+149
+
+
+Q: Salesman bought 48 backpacks for $576. Sold 17 at $18, 10 for $25, rest for $22 each. Profit?
+A: Sold 17 bags at $306, 10 at $250, rest at $462. Total sales: $1018. Profit: $442.
+Q: Ursula earns $8.50/hr, works 8hr/day, 20 days/month. Annual salary?
+A: Monthly: $1360. Annual: $16,320.
+Q: Bicycle sold for $220, 15% increase. New price?
+A: Increase: $33. New price: $253.
+Q: Blossom's room is 10ft x 10ft. Area in sq inches?
+A: Area: 14,400 sq inches.
+Q: Ruiz's $500 salary got 6% raise. New salary?
+A: Raise: $30. New salary: $530.
+Q: Jeans cost $40, 10% off for 2. 3 pairs cost?
+A: 3 pairs cost: $112.
+Q: 50 reps, 8hr/day, $14/hr. 5 days, total cost?
+A: Total cost: $28,000.
+Q: Factory: 300 employees. 200 earn $12/hr. 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+A: 8-hour shift cost: $31,840.
+147
+
+
+Q: Backpacks: 48 for $576. Sold: 17 x $18, 10 x $25, rest at $22. Profit?
+A: Sales: $1018. Profit: $442. Therefore the answer is 442.
+Q: Ursula: $8.50/hr, 8hr/day, 20 days/month. Annual salary?
+A: Monthly: $1360. Annual: $16,320. Therefore the answer is 16320.
+Q: Bicycle: $220, 15% increase. New price?
+A: New price: $253. Therefore the answer is 253.
+Q: Blossom's room: 10ft x 10ft. Area in sq inches?
+A: Area: 14,400 sq inches. Therefore the answer is 14400.
+Q: Ruiz's $500 salary got 6% raise. New salary?
+A: New salary: $530. Therefore the answer is 530.
+Q: Jeans: $40, 10% off for 2. 3 pairs cost?
+A: Cost of 3 pairs: $112. Therefore the answer is 112.
+Q: 50 reps, 8hr/day, $14/hr. 5 days, total cost?
+A: Total cost: $28,000. Therefore the answer is 28000.
+Q: Factory: 300 employees. 200 earn $12/hr. 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+A: 8-hour shift cost: $31,840. Therefore the answer is 31840.
+123+40

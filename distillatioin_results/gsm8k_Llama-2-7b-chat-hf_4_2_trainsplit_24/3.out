@@ -1,0 +1,507 @@
+Temperature: 0
+*****************************
+Namespace(random_seed=42, dataset='gsm8k', trainset_path='./dataset/GSM8K/train.jsonl', demo_path='./logdifference_results/gsm8k_Llama-2-7b-chat-hf_4_2_trainsplit_24.txt', save_path='./distilled_demos/', model='gpt-3.5-turbo', output_dir='./QA_records/', max_tokens=1024, qes_limit=10, api_time_interval=2.0, temperature=0, multipath=1, concat_length=4, use_code_style_prompt=False, raw=False, dataset_path='./dataset/GSM8K/test.jsonl')
+*****************************
+dataset: gsm8k
+dataset_size: 1319
+dataloader size: 1319
+question is:  The ratio of the electric poles and electric wires needed to connect and supply the electricity in a certain neighborhood is 1:3. If the total number of electric wires needed to connect the electricity in the neighborhood is 45, calculate the total number of electric poles required by an electric company to supply the electricity in the neighborhood.
+answer is:  15
+previous demo: Q: A salesman bought a case of 48 backpacks for $576. He sold 17 of them for $18 at the swap meet, 10 were sold to a department store for $25 each. If the remainder were sold for $22 each. How much was the salesman's profit?
+A: The salesman sold 17 bags for 17 bags x $18/bag = $306. He sold 10 more for 10 bags x $25/bag = $250. Thus far he has sold 17 bags + 10 bags = 27 bags. Therefore he sold 48 bags - 27 bags = 21 bags for $22 each. 21 bags were sold for 21 bags x $22/bag = $462. In total the salesman made $306 + $250 + $462 = $1018. The salesman made $1018 - $576 = $442 in profit. Therefore the answer is 442.
+Q: Ursula earns $8.50 an hour working in a restaurant. She works 8 hours a day. If she works 20 days a month, determine her annual salary.
+A: Ursula earns 8 x $8.50 = $68 a day. In a month, she earns 20 x $68 = $1360. Therefore, Ursula's annual salary is 12 x $1360 = $16,320. Therefore the answer is 16320.
+Q: The selling price of a bicycle that had sold for $220 last year was increased by 15%. What is the new price?
+A: The price of the bicycle increased by $220 * 15/100 = $33. Adding the increment price, the new price is $220 + $33 = $253. Therefore the answer is 253.
+Q: There are 12 inches to a foot. Blossom measures her room and finds that it is exactly 10 feet long in each direction. In square inches, what is the area of her room?
+A: First translate the feet to inches or 10 feet * 12 inches per foot = 120 inches. Then use length * width which is 120 * 120 = 14400 square inches. Therefore the answer is 14400.
+Q: Ruiz receives a monthly salary of $500. If he received a 6% raise, how much will be Ruiz's new salary?
+A: Ruiz has $500 x 6/100 = $30 salary raise. Thus, his new salary is $500 + $30 = $530. Therefore the answer is 530.
+Q: A store sold a certain brand of jeans for $40. They only have few pairs of jeans left so they decided to give 10% discount on every two pairs of jeans bought by a customer at any one time. How much will a customer pay for 3 pairs of jeans?
+A: Two pairs of jeans cost $40 x 2 = $80. A discount of $80 x 10/100 = $8 will be given for this. Hence, the cost of two pairs of jeans will now be $80 - $8 = $72. Therefore, the customer will pay $72 + $40 = $112 for the three pairs of jeans. Therefore the answer is 112.
+Q: A retail store wants to hire 50 new phone reps to assist with the increased call volume that they will experience over the holiday.  Each phone rep will work 8 hours a day and will be paid $14.00 an hour.  After 5 days, how much will the company pay all 50 new employees?
+A: There are 50 reps and they will work 8 hour days so that's 50*8 = 400 hours. They will work 5 days a week so that's 5*400 = 2,000 hours. Each worker will be paid $14.00 an hour and in 5 days they will have worked 2,000 hours so that's 14*2000 = $28,000. Therefore the answer is 28000.
+Q: In a factory, there are 300 employees. 200 of them earn $12 per hour. Of the rest, 40 of them earn $14 per hour. All others earn $17 per hour. What is the cost to employ all these people for one 8-hour long shift?
+A: The cost of the 200 employees is 200 employees * $12/employee/hour = $2400 per hour. The cost of the 40 employees is 40 employees * $14/employee/hour = $560 per hour. The rest means 300 employees - 200 employees - 40 employees = 60 employees. These 60 employees' employment costs are at 60 employees * $17/employee/hour = $1020 per hour. So in total all employees earn $2400/hour + $560/hour + $1020/hour = $3980/hour. During an 8-hour shift, this cost would be at 8 hours * $3980/hour = $31840. Therefore the answer is 31840.
+
+
+prompt is: These are the demonstrations for LLM chat completion. Revise the demonstrations using abbreviations and shortening where appropriate, ensuring the essential details and logic remain intact. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Salesman's profit from backpacks?
+A: Sold 17 bags for $306, 10 for $250, and 21 for $462. Total sales $1018. Profit $442.
+
+Q: Ursula's annual salary?
+A: $8.50/hour x 8 hours/day x 20 days/month = $1360/month. Annual salary $16,320.
+
+Q: New price after 15% increase?
+A: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: 10 feet * 12 inches/foot = 120 inches. Area = 120 * 120 = 14400 square inches.
+
+Q: Ruiz's new salary after 6% raise?
+A: Raise of $30. New salary $500 + $30 = $530.
+
+Q: Cost for 3 jeans with 10% discount on 2?
+A: 2 jeans cost $72. Customer pays $72 + $40 = $112 for 3 jeans.
+
+Q: Cost for 50 new phone reps after 5 days?
+A: 50 reps * 8 hours/day * 5 days = 2000 hours. Cost $14/hour * 2000 = $28,000.
+
+Q: Cost for 300 employees with different wages for 8-hour shift?
+A: 200 earn $12/hour, 40 earn $14/hour, 60 earn $17/hour. Total cost: $2400 + $560 + $1020 = $3980/hour. Cost for 8-hour shift = $3980 * 8 = $31840.
+
+previous demo length: 731
+distilled demo length: 186
+
+Judgement is: No
+
+prediction is: Let's break down the steps to solve the problem:
+
+1. Given the ratio of electric poles to electric wires is 1:3.
+2. It's mentioned that the total number of electric wires needed is 45.
+
+Let's denote the number of electric poles as "P" and the number of electric wires as "W."
+
+From the given ratio, we know that P/W = 1/3.
+
+Given that the total number of electric wires is 45, we can set up an equation:
+
+W = 45
+
+Now, we can solve for the number of electric poles (P) using the ratio:
+
+P/W = 1/3
+P/45 = 1/3
+
+To isolate P, multiply both sides of the equation by 45:
+
+P = 45 * (1/3)
+P = 15
+
+Therefore the answer is:
+The electric company would need a total of 15 electric poles to supply electricity in the neighborhood.
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Edit the given demonstrations to remove any redundant or repetitive information, ensuring the core message and logic remain intact. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Salesman's profit from backpacks?
+A: Sold 17 bags for $306, 10 for $250, and 21 for $462, totaling $1018 in sales and $442 in profit.
+
+Q: Ursula's annual salary?
+A: Ursula earns $8.50/hour x 8 hours/day x 20 days/month, resulting in an annual salary of $16,320.
+
+Q: New price after 15% increase?
+A: After a 15% increase, the new price is $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: With dimensions 10 feet by 12 inches, Blossom's room has an area of 14400 square inches.
+
+Q: Ruiz's new salary after 6% raise?
+A: After a 6% raise of $30, Ruiz's new salary becomes $530.
+
+Q: Cost for 3 jeans with 10% discount on 2?
+A: Two jeans cost $72, and for three jeans, the customer pays $112 after applying the 10% discount.
+
+Q: Cost for 50 new phone reps after 5 days?
+A: Hiring 50 phone reps for 8 hours a day over 5 days costs $28,000.
+
+Q: Cost for 300 employees with different wages for 8-hour shift?
+A: Among the 300 employees, 200 earn $12/hour, 40 earn $14/hour, and 60 earn $17/hour. The total cost for an 8-hour shift is $31,840.
+
+previous demo length: 186
+distilled demo length: 196
+
+prompt is: These are the demonstrations for LLM chat completion. Revise the demonstrations using abbreviations and shortening where appropriate, ensuring the essential details and logic remain intact. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sold 17 bags at $306, 10 at $250, and 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: $8.50/hr x 8 hrs/day x 20 days/month = $1360/mo. Yearly: $16,320.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in/ft = 120 in. Area = 120 * 120 = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: Raise: $30. New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $72 + $40 = $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: 50 reps * 8 hrs/day * 5 days = 2000 hrs. Cost: $14/hr * 2000 = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: 200 earn $12/hr, 40 earn $14/hr, 60 earn $17/hr. Total: $2400 + $560 + $1020 = $3980/hr. 8-hr shift: $3980 * 8 = $31,840.
+
+previous demo length: 186
+distilled demo length: 173
+
+Judgement is: No
+
+prediction is: Given the information provided, we can break down the problem step by step:
+
+1. The ratio of electric poles to electric wires is 1:3.
+2. The total number of electric wires needed is 45.
+
+Let's denote the number of electric poles as "P" and the number of electric wires as "W". According to the ratio, we have:
+
+P/W = 1/3
+
+Now, we know that the total number of electric wires is 45:
+
+W = 45
+
+We can rearrange the ratio equation to solve for the number of electric poles:
+
+P = (1/3) * W
+P = (1/3) * 45
+P = 15
+
+Therefore the answer is: 15. The electric company needs 15 electric poles to supply electricity in the neighborhood.
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Revise the demonstrations using abbreviations and shortening where appropriate, ensuring the essential details and logic remain intact. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sold 17 bags at $306, 10 at $250, and 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: $8.50/hr x 8 hrs/day x 20 days/month = $1360/mo. Yearly: $16,320.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in/ft = 120 in. Area = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: Raise: $30. New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: 50 reps * 8 hrs/day * 5 days = 2000 hrs. Cost: $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: 200 earn $12/hr, 40 earn $14/hr, 60 earn $17/hr. Total: $31,840 for an 8-hr shift.
+
+previous demo length: 173
+distilled demo length: 152
+
+Judgement is: No
+
+prediction is: Given that the ratio of electric poles to electric wires is 1:3, and the total number of electric wires needed is 45, we can use this information to calculate the number of electric poles required.
+
+Let's denote the number of electric poles as "x" and the number of electric wires as "y."
+
+According to the given ratio, we have:
+x : y = 1 : 3
+
+Since the total number of electric wires needed is 45, we can set up an equation:
+y = 45
+
+Now we can use the ratio to find the value of "x" (the number of electric poles):
+x = (1/3) * y
+x = (1/3) * 45
+x = 15
+
+Therefore the answer is: 15 electric poles.
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Craft a succinct version of the demonstrations that omits redundant information while retaining its core essence and logic. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sold 17 bags at $306, 10 at $250, and 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in/ft = 120 in. Area = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: Raise: $30. New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: 200 earn $12/hr, 40 earn $14/hr, 60 earn $17/hr. Total: $31,840 for an 8-hr shift.
+
+previous demo length: 152
+distilled demo length: 148
+
+Judgement is: No
+
+prediction is: Given information:
+- Ratio of electric poles to electric wires: 1:3
+- Total number of electric wires needed: 45
+
+Let's use the given ratio to calculate the number of electric poles required. Since the ratio of electric poles to electric wires is 1:3, for every 1 electric pole, there are 3 electric wires.
+
+1 electric pole corresponds to 3 electric wires.
+
+Now, we can set up a proportion to find the number of electric poles:
+1 electric pole / 3 electric wires = x electric poles / 45 electric wires
+
+Cross-multiplying:
+1 * 45 = 3 * x
+45 = 3x
+
+Dividing both sides by 3:
+x = 45 / 3
+x = 15
+
+Therefore the answer is: 15 electric poles.
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Revise the demonstrations using abbreviations and shortening where appropriate, ensuring the essential details and logic remain intact. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sold 17 bags at $306, 10 at $250, and 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in/ft = 120 in. Area = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: Raise: $30. New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: 200 earn $12/hr, 40 earn $14/hr, 60 earn $17/hr. Total: $31,840 for an 8-hr shift.
+
+previous demo length: 148
+distilled demo length: 148
+
+prompt is: These are the demonstrations for LLM chat completion. Craft a succinct version of the demonstrations that omits redundant information while retaining its core essence and logic. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sold 17 bags at $306, 10 at $250, and 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft x 12 ft = 120 sq ft.
+
+Q: Ruiz's new salary after 6% raise?
+A: New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: Total: $112 for 3 jeans.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: Total: $31,840 for an 8-hr shift.
+
+previous demo length: 148
+distilled demo length: 130
+
+Judgement is: Yes.
+
+prompt is: These are the demonstrations for LLM chat completion. Rephrase or edit the demonstrations above so as to delete as much unimportant information as possible. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sales: 17 bags at $306, 10 at $250, 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: Salary: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in = 120 in. Area = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: Total: $31,840 for an 8-hr shift.
+
+previous demo length: 148
+distilled demo length: 137
+
+Judgement is: No
+
+prediction is: Given:
+- Ratio of electric poles to electric wires: 1:3
+- Total number of electric wires needed: 45
+
+Let's break down the information:
+
+1. The ratio of electric poles to electric wires is 1:3, meaning for every 1 electric pole, there are 3 electric wires.
+
+2. The total number of electric wires needed is 45.
+
+To find the total number of electric poles required, we can use the ratio. Since the ratio is 1:3, for every set of 1 electric pole and 3 electric wires, we have 3 electric wires.
+
+Number of sets of 1 electric pole and 3 electric wires = Total number of electric wires / Number of electric wires per set
+
+Number of sets = 45 / 3 = 15 sets
+
+Since each set contains 1 electric pole, the total number of electric poles required is 15.
+
+Therefore the answer is: 15
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Reduce wordiness in the demonstrations, making it more concise without losing its essential meaning and logic.NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack sales profit?
+A: Sales: 17 bags at $306, 10 at $250, 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: Salary: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of Blossom's room?
+A: Room: 10 ft * 12 in = 120 in. Area = 14,400 sq in.
+
+Q: Ruiz's new salary after 6% raise?
+A: New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 new phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: Total: $31,840 for an 8-hr shift.
+
+previous demo length: 137
+distilled demo length: 137
+
+prompt is: These are the demonstrations for LLM chat completion. Rephrase or edit the demonstrations above so as to delete as much unimportant information as possible. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack profit?
+A: Sales: 17 bags at $306, 10 at $250, 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: Salary: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of room?
+A: Room: 10 ft * 12 in = 120 in. Area = 14,400 sq in.
+
+Q: New salary after 6% raise?
+A: New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: Total: $31,840 for an 8-hr shift.
+
+previous demo length: 137
+distilled demo length: 133
+
+Judgement is: No
+
+prediction is: Given that the ratio of electric poles to electric wires needed is 1:3, and the total number of electric wires needed is 45, we can follow these steps to calculate the total number of electric poles required:
+
+Step 1: Calculate the number of electric poles for each electric wire.
+Since the ratio of poles to wires is 1:3, for every 3 electric wires, there is 1 electric pole.
+
+Step 2: Calculate the number of sets of 3 electric wires.
+Divide the total number of electric wires (45) by 3 to find out how many sets of 3 wires are needed.
+
+45 / 3 = 15 sets
+
+Step 3: Calculate the total number of electric poles.
+Since each set of 3 electric wires requires 1 electric pole, the total number of electric poles needed is equal to the number of sets of 3 electric wires.
+
+Total number of electric poles = 15
+
+Therefore the answer is: 15.
+
+Extracted answer: 15
+
+**************************
+yes
+prompt is: These are the demonstrations for LLM chat completion. Rephrase or edit the demonstrations above so as to delete as much unimportant information as possible. NOTE: 1. If you think that the given demonstrations cannot be further distilled, you just need to output "The demonstrations cannot be further distilled." 2. You must not remove the Q&A format. 3. You can rephrase but must not remove any important information or key steps in solving each problem. 
+
+distilled_demos is: Q: Backpack profit?
+A: Sales: 17 bags at $306, 10 at $250, 21 at $462. Total sales $1018, profit $442.
+
+Q: Ursula's yearly salary?
+A: Salary: $8.50/hr x 8 hrs/day x 20 days/month = $16,320/year.
+
+Q: Price after 15% increase?
+A: New price: $220 + $33 = $253.
+
+Q: Area of room?
+A: Room: 10 ft * 12 in = 120 in. Area = 14,400 sq in.
+
+Q: New salary after 6% raise?
+A: New: $500 + $30 = $530.
+
+Q: Cost for 3 jeans, 10% off 2?
+A: 2 jeans cost $72. Total: $112 for 3.
+
+Q: Cost for 50 phone reps in 5 days?
+A: Cost: 50 reps * 8 hrs/day * 5 days = $28,000.
+
+Q: Cost for 300 employees, varied 8-hr wages?
+A: Total: $31,840 for an 8-hr shift.
+
+previous demo length: 133
+distilled demo length: 133
+
+It is not shorter than the previous distilled version.

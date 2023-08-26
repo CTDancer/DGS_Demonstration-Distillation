@@ -1,0 +1,16 @@
+Question: Salesman bought 48 backpacks for $576. Sold 17 for $18 each, 10 for $25 each, rest for $22 each. What's his profit?
+Answer: Profit = ($306 + $250 + $462) - $576 = $442. Therefore the answer is 442.
+Question: Ursula earns $8.50/hr, works 8 hrs/day, 20 days/month. What's her annual salary?
+Answer: Annual salary = 12 * (8 * $8.50 * 20) = $16,320. Therefore the answer is 16320.
+Question: Bicycle sold for $220, 15% increase. New price?
+Answer: New price = $220 + ($220 * 0.15) = $253. Therefore the answer is 253.
+Question: Room 10 ft long, 10 ft wide. Area in sq inches?
+Answer: Area = 10 * 12 * 10 * 12 = 14,400 sq inches. Therefore the answer is 14400.
+Question: Ruiz's $500 salary got 6% raise. New salary?
+Answer: New salary = $500 + ($500 * 0.06) = $530. Therefore the answer is 530.
+Question: Jeans cost $40 each, 10% off every 2 bought. Price for 3?
+Answer: Price = ($40 * 2) - 10% + $40 = $112. Therefore the answer is 112.
+Question: Store hires 50 reps, work 8 hrs/day. $14/hr. 5 days. Cost after 5 days?
+Answer: Cost = 50 * 8 * $14 * 5 = $28,000. Therefore the answer is 28000.
+Question: Factory has 300 employees. 200 earn $12/hr, 40 earn $14/hr. Rest earn $17/hr. 8-hour shift cost?
+Answer: Cost = (200 * $12 + 40 * $14 + (300 - 200 - 40) * $17) * 8 = $31,840. Therefore the answer is 31840.

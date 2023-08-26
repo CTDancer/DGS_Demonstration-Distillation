@@ -1,0 +1,4 @@
+correct_num: 1035
+total: 1319
+Accuracy: 0.7846853677028052
+Execution time: 11690.785917282104 seconds

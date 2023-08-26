@@ -1,0 +1,23 @@
+Q1: Salesman bought 48 backpacks for $576. Sold 17 at $18 each, 10 at $25 each, and the rest at $22 each. Profit?
+A1: Sales: $306 + $250 + $462 = $1018. Profit: $1018 - $576 = $442. Therefore the answer is 442.
+
+Q2: Ursula earns $8.50/hr, works 8 hrs/day, 20 days/month. Annual salary?
+A2: Salary: $1360/month. Annual: $16,320. Therefore the answer is 16320.
+
+Q3: Bicycle sold for $220, increased by 15%. New price?
+A3: Increase: $33. New price: $220 + $33 = $253. Therefore the answer is 253.
+
+Q4: Blossom's 10ft x 10ft room area in sq. inches?
+A4: Area: 120 x 120 = 14400 sq. inches. Therefore the answer is 14400.
+
+Q5: Ruiz's $500 salary got 6% raise. New salary?
+A5: Raise: $30. New salary: $530. Therefore the answer is 530.
+
+Q6: Jeans priced $40, 10% off for 2 pairs. Cost for 3 pairs?
+A6: 2 pairs cost $72. 3 pairs cost $112. Therefore the answer is 112.
+
+Q7: Store hires 50 reps for $14/hr, 8 hrs/day, 5 days. Cost?
+A7: Cost: 50 * 8 * 5 * $14 = $28,000. Therefore the answer is 28000.
+
+Q8: In a factory, 200 employees earn $12/hr, 40 earn $14/hr, others $17/hr. Cost for an 8-hour shift?
+A8: Cost: (200 * $12) + (40 * $14) + (60 * $17) = $31840. Therefore the answer is 31840.
