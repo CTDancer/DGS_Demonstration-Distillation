@@ -1,2 +1,3 @@
 /home/dqwang/mambaforge/envs/ct/lib/python3.11/site-packages/bitsandbytes/cuda_setup/main.py:149: UserWarning: /home/dqwang/mambaforge/envs/ct did not contain ['libcudart.so', 'libcudart.so.11.0', 'libcudart.so.12.0'] as expected! Searching further paths...
   warn(msg)
+Terminated

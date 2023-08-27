@@ -118,7 +118,7 @@ and followed by a score between 0 and 100.
         print(f"SCORE RESPONSE: {response}")
         if len(re.findall(r'\d+', response.split('\n')[-1])) != 0:
             score = int(re.findall(r'\d+', response.split('\n')[-1])[0])
-        elif len(re.findall(r'\d+', response.split('\n')[-2])[0]) != 0:
+        elif len(re.findall(r'\d+', response.split('\n')[-2])) != 0:
             score = int(re.findall(r'\d+', response.split('\n')[-2])[0])
         else:
             score = 0
