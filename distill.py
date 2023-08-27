@@ -30,6 +30,7 @@ Accomplish the following task if you can:
 and then omit other unnecessary information.
 - Must NOT omit quesitons in each User message
 - Must NOT change the final answers in each Response message.
+- Must ensure that in your result, each response can be derived soley based on the user message.
 
 If you think you can't accomplish the task, just write 'No need for further distillation'.
 Otherwise, don't write 'No need for further distillation'.
@@ -78,10 +79,11 @@ Your task is to score the text out of 100.
 You must follow the following scoring rules:
 1. The total score is 100 for all these User-Response pairs.
 2. Examine each User-Response pair. For each pair, \
-whether the response is correct if it is solely based on the user's message? \
+whether the response can be derived solely based on the user's message? \
 If not, then deduct 10 points from the total score. Otherwise, no points need to be deducted.
 
-Note that the last sentence in your response can ONLY start with `Therefore the score is:`
+Note that you should first provide your detailed reasons and the last sentence in your response \
+can ONLY start with `Therefore the score is:`, and followed by a score between 0 and 100.
 
 User-Response pairs: ```{distilled_demos}```
 """
@@ -115,7 +117,8 @@ User-Response pairs: ```{distilled_demos}```
                     "role": "assistant", "content": distilled_demos
                 })
                 messages_for_distillation.append({
-                    "role": "user", "content": "You have omitted necessary information in the User messages. Please try again."
+                    "role": "user", "content": "You have omitted necessary information in the User messages. Please try again. If you think the initial \
+                    version does not need further distillation, just write 'No need for further distillation'."
                 })
                 print("Distillation Another Trial")
             else:
@@ -224,7 +227,7 @@ def main():
     previous_demos = utils.get_demos(questions, answers)
     initial_prompt = utils.get_initial_prompt(args.dataset)
     question, answer = utils.sample(dataloader, args)
-    previous_demos, previous_length = distill(previous_demos, question, answer, initial_prompt, args)
+    previous_demos, previous_length, previous_answer = distill(previous_demos, question, answer, initial_prompt, args)
     
     dest = os.path.join(args.save_path, args.demo_path.split('/')[-1])
     if os.path.exists(dest):

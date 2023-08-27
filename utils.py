@@ -356,9 +356,8 @@ def get_demos(questions=None, answers=None):
 
 def get_initial_prompt(dataset):
     if dataset == 'gsm8k':
-        initial_prompt = "Follow the given examples and answer the final question step by step.\
-        Note that the last sentence in your response can ONLY start with `Therefore the answer is:`, \
-        and provide ONLY ONE number as the answer to the final answer.\n"
+        initial_prompt = "Follow the given examples and answer the following question step by step.\
+        Note that the last sentence in your response can ONLY start with `Therefore the answer is:`\n"
     elif dataset == 'squad':
         initial_prompt = "Follow the given examples and you only need to answer the following question step by step. \
         You should only use the information in the context to answer the question. \

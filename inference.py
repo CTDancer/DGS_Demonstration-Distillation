@@ -1,7 +1,7 @@
 import time
 import argparse
 import json
-
+import re
 from transformers import pipeline
 from pathlib import Path
 from tqdm import tqdm
@@ -21,7 +21,7 @@ def main():
     # questions, answers = utils.get_qas(args)
     # demo = utils.get_demos(questions, answers)
     
-    initial_prompt = "Follow the given examples and answer the final question step by step. \
+    initial_prompt = "Follow the given examples. Your task is to read the following question carefully and answer it step by step. \
     Note that the last sentence in your response can ONLY start with `Therefore the answer is`. \
     If you don't know the answer, just write 'unanwerable'."
     
@@ -37,6 +37,8 @@ def main():
         
     correct = 0
     wrong_list = []
+    wrong_right_list = []
+    right_wrong_list = []
     if args.qes_limit == 0:
         args.qes_limit = len(dataloader)
         
@@ -55,42 +57,88 @@ def main():
     for count, qa in enumerate(dataloader):
         if args.qes_limit is not None and count == args.qes_limit:
             break
-        predictions = []
+        # predictions = []
         if args.multiple_prompting_rounds:
             messages.append({ "role": "user", "content": qa['question'] })
             messages.append({ "role": "system", "content": initial_prompt })
         else:
             messages = [
-                {"role": "system", "content": initial_prompt},
-                {"role": "user", "content": (demo + "\nUser: " + qa['question'])}
+                {"role": "system", "content": 'You are a helpful assistant.'},
+                {"role": "user", "content": (demo + '\n' + initial_prompt + "\nUser: " + qa['question'])}
             ]
         
-        for i in range(0, args.multipath):
-            prediction = utils.GPT3_5_request(
-                model=args.model, 
-                messages=messages,
-                max_tokens=args.max_tokens,
-                time_interval=args.api_time_interval,
-                temperature=args.temperature
-            )
-            last_line = prediction.split('\n')[-1]
-            print(f"question is: {qa['question']}")
-            print(f"prediction is: {last_line}")
-            prediction = utils.answer_extraction(args, prediction).lstrip()
-            predictions.append(prediction)
-        prediction = max(predictions, key=predictions.count)
-        print(f"Extracted answer: {prediction}")
+        # for i in range(0, args.multipath):
+        #     prediction = utils.GPT3_5_request(
+        #         model=args.model, 
+        #         messages=messages,
+        #         max_tokens=args.max_tokens,
+        #         time_interval=args.api_time_interval,
+        #         temperature=args.temperature
+        #     )
+        #     last_line = prediction.split('\n')[-1]
+        #     print(f"question is: {qa['question']}")
+        #     print(f"prediction is: {last_line}")
+        #     prediction = utils.answer_extraction(args, prediction).lstrip()
+        #     predictions.append(prediction)
+        # prediction = max(predictions, key=predictions.count)
+        # print(f"Extracted answer: {prediction}")
+        prediction = utils.GPT3_5_request(
+            model=args.model, 
+            messages=messages,
+            max_tokens=args.max_tokens,
+            time_interval=args.api_time_interval,
+            temperature=args.temperature
+        )
+        extracted_answer = utils.answer_extraction(args, prediction).lstrip()
+        print(f"question is: {qa['question']}\n")
+        print(f"prediction is: {prediction}\n")
         print(f"Ground Truth: {qa['answer']}")
-        print("**************************")
-        
-        if qa['answer'].lower() in prediction.lower():
-            correct += 1
+        print("---------------------------")
+        score_prompt = f"""
+Question: ```{qa['question']}```
+
+Student's answer:  ```{prediction}```
+
+Your task is to read the given question first and tell me your reasoning of whether \
+the answer is correct or not and finally score the answer out of 100. 
+Note that the last sentence in your response can ONLY start with `Therefore the score is:` \
+and followed by a score between 0 and 100.
+"""
+        score_message = [
+            {"role": "system", "content": "You are serious teacher."},
+            {"role": "user", "content": (score_prompt)}
+        ]
+        response = utils.GPT3_5_request(
+            model=args.model, 
+            messages=score_message,
+            max_tokens=args.max_tokens,
+            time_interval=args.api_time_interval,
+            temperature=args.temperature
+        )
+        print(f"SCORE RESPONSE: {response}")
+        if len(re.findall(r'\d+', response.split('\n')[-1])) != 0:
+            score = int(re.findall(r'\d+', response.split('\n')[-1])[0])
+        elif len(re.findall(r'\d+', response.split('\n')[-2])[0]) != 0:
+            score = int(re.findall(r'\d+', response.split('\n')[-2])[0])
         else:
-            wrong_list.append({'question': qa['question'], 'last_line': last_line, 'pred_ans': prediction, 'ground_truth': qa['answer']})
+            score = 0
+        print(f"Score is {score}")
+        print("**************************")
+        if extracted_answer == qa['answer'] and int(score) > 90:
+            correct += 1
+        elif extracted_answer == qa['answer'] and score <= 90:
+            right_wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+        elif extracted_answer != qa['answer'] and score > 90:
+            wrong_right_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+        else:
+            wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
     
     end = time.time()
     print(f"Total correct number: {correct}")
-    print(f"Percentage: {correct / args.qes_limit}")
+    print(f"Correct Percentage: {correct / args.qes_limit}")
+    print(f"right-wrong Percentage: {len(right_wrong_list) / args.qes_limit}")
+    print(f"wrong_right Percentage: {len(wrong_right_list) / args.qes_limit}")
+    print(f"wrong Percentage: {len(wrong_list) / args.qes_limit}")
     print(f"Execution time: {end - start} seconds")
     
     # 将运行结果抄送到 summaries 文件夹
@@ -105,8 +153,15 @@ def main():
         f.write(f"Execution time: {end - start} seconds\n")
         
     wrong_list_path = f"./wrong_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    wrong_right_path = f"./wrong_right_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    right_wrong_path = f"./right_wrong_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    
     with open(wrong_list_path, "a") as f:
         f.write(json.dumps(wrong_list, indent=4))
+    with open(wrong_right_path, "a") as f:
+        f.write(json.dumps(wrong_right_list, indent=4))
+    with open(right_wrong_path, "a") as f:
+        f.write(json.dumps(right_wrong_list, indent=4))
         
         
 def arg_parser():
