@@ -7,7 +7,7 @@ python distill.py \
 --trainset_path="./dataset/GSM8K/train.jsonl" \
 --demo_path="./logdifference_results/gsm8k_Llama-2-7b-chat-hf_4_2_trainsplit_24.txt" \
 --save_path="./distilled_demos_new/" \
---max_tokens=1024 --api_time_interval=2 --temperature=0 \
+--max_tokens=4096 --api_time_interval=2 --temperature=0 \
 --multipath=1 \
 --json_demo
 

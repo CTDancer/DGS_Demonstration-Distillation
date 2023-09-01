@@ -1,0 +1,30 @@
+User: A salesman bought a case of 48 backpacks for $576. He sold 17 for $18 each, 10 for $25 each to a store, and the rest for $22 each. What's his profit?
+Response: Sold 17 bags for $18 each = $306. Sold 10 bags for $25 each = $250. Sold 21 bags for $22 each = $462. Total sales = $306 + $250 + $462 = $1018. Profit = $1018 - $576 = $442. Answer: $442.
+User: Ursula earns $8.50/hr, works 8hrs/day, 20 days/month. Calculate her annual salary.
+Response: Daily earnings = $8.50 x 8 = $68. Monthly earnings = $68 x 20 = $1360. Annual salary = $1360 x 12 = $16,320. Answer: $16,320.
+User: Bicycle sold for $220 last year, 15% price increase. What's the new price?
+Response: Price increase = $220 x 0.15 = $33. New price = $220 + $33 = $253. Answer: $253.
+User: Blossom's room is 10 feet long. What's its area in sq. inches?
+Response: Length in inches = 10 feet x 12 inches/foot = 120 inches. Area = 120 x 120 = 14400 sq. inches. Answer: 14400.
+User: Ruiz's $500 salary increased by 6%. What's his new salary?
+Response: Raise = $500 x 0.06 = $30. New salary = $500 + $30 = $530. Answer: $530.
+User: Store offers 10% off for every 2 pairs of $40 jeans. Price for 3 pairs?
+Response: 2 pairs cost $40 x 2 = $80. Discount = $80 x 0.10 = $8. Cost = $80 - $8 = $72. Total cost = $72 + $40 = $112. Answer: $112.
+User: 50 phone reps, 8hrs/day, $14/hr. 5 days. What's the cost?
+Response: Total hours = 50 reps x 8 hrs/day x 5 days = 2000 hrs. Cost = 2000 hrs x $14/hr = $28,000. Answer: $28,000.
+User: 300 employees. 200 earn $12/hr, 40 earn $14/hr, rest earn $17/hr. 8-hr shift cost?
+Response: Cost of 200 = 200 x $12 x 8 = $19,200. Cost of 40 = 40 x $14 x 8 = $4,480. Cost of 60 = 60 x $17 x 8 = $8,160. Total cost = $19,200 + $4,480 + $8,160 = $31,840. Answer: $31,840.
+User: Church's 100 members bake 10 sheets of 16 cookies. How many cookies?
+Response: Each bakes 10 sheets x 16 cookies/sheet = 160 cookies. Total = 100 members x 160 cookies/member = 16,000 cookies. Answer: 16,000.
+User: Sean buys 100 patches at $1.25 each, sells for $12 each. His net profit?
+Response: Cost = 100 patches x $1.25/patch = $125. Revenue = 100 patches x $12/patch = $1200. Net profit = $1200 - $125 = $1075. Answer: $1075.
+User: Theater sells 24 tickets at $8 each, could've sold 50. Loss?
+Response: Sold = 24 tickets x $8/ticket = $192. Could've sold = 50 tickets x $8/ticket = $400. Loss = $400 - $192 = $208. Answer: $208.
+User: Roger buys $100,000 house, 20% down, parents pay 30% of balance. What's his remaining debt?
+Response: Down payment = 20% x $100,000 = $20,000. Remaining balance = $100,000 - $20,000 = $80,000. Parents pay $80,000 x 30% = $24,000. Remaining debt = $80,000 - $24,000 = $56,000. Answer: $56,000.
+User: Elizabeth buys 2 sets of steak knives for $80 each. Each set has 4 knives. Cost of 1 knife?
+Response: Total knives = 2 sets x 4 knives/set = 8 knives. Total cost = 2 sets x $80/set = $160. Cost per knife = $160/8 = $20. Answer: $20.
+User: John buys 3 shirts at $20 each, plus 10% tax. Total cost?
+Response: Shirts cost = 3 shirts x $20/shirt = $60. Tax = $60 x 0.10 = $6. Total cost = $60 + $6 = $66. Answer: $66.
+User: Mrs. Garcia pays $378 quarterly. Yearly cost?
+Response: 4 quarters in a year. Yearly cost = $378/quarter x 4 quarters = $1512. Answer: $1512.

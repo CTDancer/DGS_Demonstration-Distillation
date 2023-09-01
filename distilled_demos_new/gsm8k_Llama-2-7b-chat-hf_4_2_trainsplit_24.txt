@@ -1,0 +1,25 @@
+Sure, I can help with that! Here's the distilled version of the provided User-Response pairs while meeting all the requirements:
+
+**User:** A salesman bought 48 backpacks for $576. He sold 17 for $18 each, 10 for $25 each, and the rest for $22 each. What's his profit?
+**Response:** Sold 17 bags for $306, 10 for $250, and 21 for $462. Total: $1018. Profit: $442.
+
+**User:** Ursula earns $8.50/hour, works 8 hrs/day, 20 days/month. Her annual salary?
+**Response:** Ursula earns $1360/month. Annual: $16,320.
+
+**User:** Bicycle sold for $220 last year, 15% price increase. New price?
+**Response:** Increase: $33. New price: $253.
+
+**User:** Blossom's room: 10ft each side. Area in sq. inches?
+**Response:** Area: 14400 sq. inches.
+
+**User:** Ruiz's $500 salary, 6% raise. New salary?
+**Response:** Raise: $30. New salary: $530.
+
+**User:** Jeans cost $40. 10% off for 2 jeans. Price for 3 jeans?
+**Response:** 2 jeans: $72. 3 jeans: $112.
+
+**User:** 50 phone reps, $14/hr, 8-hr shift, 5 days. Total cost?
+**Response:** Total: $31,840.
+
+**User:** Factory: 300 employees. 200 earn $12/hr, 40 earn $14/hr, rest $17/hr. Cost for 8-hr shift?
+**Response:** Total cost: $31,840.

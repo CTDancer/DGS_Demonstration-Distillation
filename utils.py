@@ -8,6 +8,7 @@ from datasets import load_dataset
 import numpy as np
 import torch
 import openai
+import requests
 
 API_KEY = " "
 # define for no solution if GPT cannot generate a valid solution
@@ -90,6 +91,58 @@ def GPT3_5_request(model:str, messages:list, max_tokens:int, time_interval=2, te
     # print("response is: ", resp)
     return resp['choices'][0]['message']['content']
 
+def openai_ChatCompletion_create(**kwargs):
+    url = 'https://api.dqwang.group/v1/chat/completions'
+    headers = {
+        "Authorization": "Bearer " + "sk-AAMOOJ4kAVI8NeZKE066De9947874dF39aD8C804Dd89Be38",
+        "Content-type": "application/json",
+        }
+    data = json.dumps(kwargs)
+    resp = requests.post(url, headers=headers, data=data)
+    return json.loads(resp.content)['choices'][0]['message']['content']
+
+def claude(message):
+    token = 'xoxp-5807096092167-5818713672245-5821798158691-02183e2b3eac7e91f5a9c7f29b19050b'
+    
+    def send_msg(token, message):
+        sendurl = 'https://slack.com/api/chat.postMessage'
+        data = {
+            "token": token,
+            "channel": "@Claude",
+            "text": message
+        }
+        response = requests.post(sendurl, data=data)
+        return response.text
+
+    def receive_msg(token, timestamp):
+        receiveurl = 'https://slack.com/api/conversations.history'
+        data = {
+            "token": token,
+            "channel": "D05PZ7X729L",
+            "oldest": timestamp
+        }
+        response = requests.post(receiveurl, data=data)
+        return response.text
+
+    msg = send_msg(token, message)
+    data = json.loads(msg)
+    timestamp = data['message']['ts']
+    while True:
+        time.sleep(5)
+        response1 = json.loads(receive_msg(token, timestamp))['messages']
+        if len(response1) != 0:
+            response1 = response1[-1]['text']
+        else:
+            response1 = ''
+        time.sleep(5)
+        response2 = json.loads(receive_msg(token, timestamp))['messages']
+        if len(response2) != 0:
+            response2 = response2[-1]['text']
+        else:
+            response2 = ''
+        if response2 != '' and response1 == response2:
+            break
+    return response1
 
 def load_data(args):
     questions = []

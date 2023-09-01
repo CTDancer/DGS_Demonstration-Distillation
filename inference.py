@@ -1,5 +1,6 @@
 import time
 import argparse
+import requests
 import json
 import re
 from transformers import pipeline
@@ -43,7 +44,7 @@ def main():
         args.qes_limit = len(dataloader)
         
     if args.multiple_prompting_rounds:
-        messages = [{ "role": "system", "content": initial_prompt }]
+        messages = [{ "role": "system", "content": "You are a helpful assistant." }]
         assert type(demo) == str, "The given demonstration should be a string"
         demo = demo.split('\n')
         print(f"demo length = {len(demo)}")
@@ -60,7 +61,7 @@ def main():
         # predictions = []
         if args.multiple_prompting_rounds:
             messages.append({ "role": "user", "content": qa['question'] })
-            messages.append({ "role": "system", "content": initial_prompt })
+            messages.append({ "role": "system", "content": "You are a helpful assistant." })
         else:
             messages = [
                 {"role": "system", "content": 'You are a helpful assistant.'},
@@ -82,13 +83,23 @@ def main():
         #     predictions.append(prediction)
         # prediction = max(predictions, key=predictions.count)
         # print(f"Extracted answer: {prediction}")
-        prediction = utils.GPT3_5_request(
-            model=args.model, 
-            messages=messages,
-            max_tokens=args.max_tokens,
-            time_interval=args.api_time_interval,
-            temperature=args.temperature
-        )
+        if args.model == "claude":
+            prediction = utils.claude((demo + '\n' + initial_prompt + "\nUser: " + qa['question']))
+        else:
+            prediction = utils.GPT3_5_request(
+                model=args.model, 
+                messages=messages,
+                max_tokens=args.max_tokens,
+                time_interval=args.api_time_interval,
+                temperature=args.temperature
+            )
+        # print("messages: ", messages)
+        # kwargs = {
+        #     "model": args.model,
+        #     "messages": messages,
+        #     "temperature": 0
+        # }
+        # prediction = utils.openai_ChatCompletion_create(**kwargs)
         extracted_answer = utils.answer_extraction(args, prediction).lstrip()
         print(f"question is: {qa['question']}\n")
         print(f"prediction is: {prediction}\n")
@@ -99,8 +110,25 @@ Question: ```{qa['question']}```
 
 Student's answer:  ```{prediction}```
 
-Your task is to read the given question first and tell me your reasoning of whether \
-the answer is correct or not and finally score the answer out of 100. 
+You should first read the given question and then read the student's answer. \
+Take your time to organize and understand the logic of the student's answer. \
+Your task is to provide a score out of 100 for the student's answer based on the following criteria:
+1. Accuracy: whether the logic of the student's answer is correct and whether the final answer of the student's answer is correct
+2. Relevance: how closely the student's answer aligns with the question's requirements
+3. Coherence: whether the student's answer flow logically and make sense
+
+You should also meet the following requirements:
+- You should first explicitly analyze the question and the student's answer.
+- Then, you should find all the mistakes in the student's answer if mistakes exist.
+- If you've found mistakes in the student's answer, please give your solutions. \
+After giving your solutions, check whether the student's answer is actually different from your solutions. \
+If not, then your judgement may not be right, so review again.
+- If the student's final answer is wrong, the score should not be over 90. \
+If there are no errors, the score should be close to 100. \
+If there are minor errors which do not impact the correctness of the final answer, the score can be slightly lower but not below 90.
+- You should assign a fair score based on whether the student's answer is actually correct or incorrect, \
+rather than relying on appearances of correctness or incorrectness.
+
 Note that the last sentence in your response can ONLY start with `Therefore the score is:` \
 and followed by a score between 0 and 100.
 """
@@ -108,27 +136,42 @@ and followed by a score between 0 and 100.
             {"role": "system", "content": "You are serious teacher."},
             {"role": "user", "content": (score_prompt)}
         ]
-        response = utils.GPT3_5_request(
-            model=args.model, 
-            messages=score_message,
-            max_tokens=args.max_tokens,
-            time_interval=args.api_time_interval,
-            temperature=args.temperature
-        )
-        print(f"SCORE RESPONSE: {response}")
-        if len(re.findall(r'\d+', response.split('\n')[-1])) != 0:
-            score = int(re.findall(r'\d+', response.split('\n')[-1])[0])
-        elif len(re.findall(r'\d+', response.split('\n')[-2])) != 0:
-            score = int(re.findall(r'\d+', response.split('\n')[-2])[0])
+        if args.model == 'claude':
+            response = utils.claude(score_prompt)
         else:
-            score = 0
+            response = utils.GPT3_5_request(
+                model=args.model, 
+                messages=score_message,
+                max_tokens=args.max_tokens,
+                time_interval=args.api_time_interval,
+                temperature=args.temperature
+            )
+        # kwargs = {
+        #     "model": args.model,
+        #     "messages": score_message
+        # }
+        # response = utils.openai_ChatCompletion_create(**kwargs)
+        print(f"SCORE RESPONSE: {response}")
+        response_list = response.split('\n')
+        score = 0
+        for i in range(len(response_list)-1, 0, -1):
+            if re.findall(r'\d+', response_list[i]):
+                score = int(re.findall(r'\d+', response_list[i])[0])
+                break
+        
+        # if len(re.findall(r'\d+', response.split('\n')[-1])) != 0:
+        #     score = int(re.findall(r'\d+', response.split('\n')[-1])[0])
+        # elif len(response.split('\n')) >= 2 and len(re.findall(r'\d+', response.split('\n')[-2])) != 0:
+        #     score = int(re.findall(r'\d+', response.split('\n')[-2])[0])
+        # else:
+        #     score = 0
         print(f"Score is {score}")
         print("**************************")
-        if extracted_answer == qa['answer'] and int(score) > 90:
+        if extracted_answer == qa['answer'] and score >= 90:
             correct += 1
-        elif extracted_answer == qa['answer'] and score <= 90:
+        elif extracted_answer == qa['answer'] and score < 90:
             right_wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
-        elif extracted_answer != qa['answer'] and score > 90:
+        elif extracted_answer != qa['answer'] and score >= 90:
             wrong_right_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
         else:
             wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
@@ -143,18 +186,20 @@ and followed by a score between 0 and 100.
     
     # 将运行结果抄送到 summaries 文件夹
     if args.multiple_prompting_rounds:
-        summary_path = f"./summaries/multiple_prompt_rounds/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+        summary_path = f"./summaries/multiple_prompt_rounds/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
     else:
-        summary_path = f"./summaries/one_prompt_round/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+        summary_path = f"./summaries/one_prompt_round/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
     with open(summary_path, "a") as f:
-        f.write(f"correct_num: {correct}\n")
-        f.write(f"total: {args.qes_limit}\n")
-        f.write(f"Accuracy: {correct / (count+1)}\n")
-        f.write(f"Execution time: {end - start} seconds\n")
+        f.write(f"Total correct number: {correct}\n")
+        f.write(f"Correct Percentage: {correct / args.qes_limit}\n")
+        f.write(f"right-wrong Percentage: {len(right_wrong_list) / args.qes_limit}\n")
+        f.write(f"wrong_right Percentage: {len(wrong_right_list) / args.qes_limit}\n")
+        f.write(f"wrong Percentage: {len(wrong_list) / args.qes_limit}\n")
+        f.write(f"Execution time: {end - start} seconds")
         
-    wrong_list_path = f"./wrong_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
-    wrong_right_path = f"./wrong_right_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
-    right_wrong_path = f"./right_wrong_lists/{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    wrong_list_path = f"./wrong_lists/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    wrong_right_path = f"./wrong_right_lists/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
+    right_wrong_path = f"./right_wrong_lists/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
     
     with open(wrong_list_path, "a") as f:
         f.write(json.dumps(wrong_list, indent=4))
@@ -189,7 +234,7 @@ def arg_parser():
         "--multiple_prompting_rounds", action='store_true', help="how to format `messages` for openai ChatCompletion"
     )
     parser.add_argument(
-        "--model", type=str, default="gpt-3.5-turbo", choices=["gpt-3.5-turbo"], help="model used for decoding."
+        "--model", type=str, default="gpt-3.5-turbo", help="model used for decoding."
     )
     parser.add_argument(
         "--QA_dir", type=str, default="./QA_records/", help="output directory for QA records"

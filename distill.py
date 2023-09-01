@@ -23,25 +23,34 @@ def distill(previous_demos, question, answer=None, initial_prompt=None, args=Non
     while True:
         distillation_prompt = f"""
 I'm giving you several User-Response pairs, delimited by triple backticks.
-
-Accomplish the following task if you can:
-- Distill the given User-Response pairs to be succinct while keeping the response logic and the format.
-- In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
-and then omit other unnecessary information.
-- Must NOT omit quesitons in each User message
-- Must NOT change the final answers in each Response message.
-- Must ensure that in your result, each response can be derived soley based on the user message.
-
-If you think you can't accomplish the task, just write 'No need for further distillation'.
-Otherwise, don't write 'No need for further distillation'.
-
 ```{previous_demos}```
+
+# Task:
+1. Distill the given User-Response pairs to be succinct while keeping the response logic and format and satisfying all the requirements. \
+If you think the given User-Response pairs does not need distillation, then just simply write 'No need for further distillation', \
+so no distillation is needed and the task is over.
+2. After accomplishing the task, don't rush to give your result. You must examine each User-Response pair in both the initial version \
+and its corresponding distilled version in your result carefully and check whether your result meets this requirement: \
+If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
+then the distilled User-Response pair in your result should also have this derivation.
+If your result doesn't meet these requirements, you have two options:
+(i) You can modify your result accordingly if you can.
+(ii) Do not modify the User-Response pair and simply use the initial version.
+3. Finally, after your check and modification, you can give your distillation results.
+
+# Requirements:
+1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
+and then omit other unnecessary information.
+2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result.
+3. Must NOT change or omit the final answers in each Response message.
+4. Must NOT omit questions in each User message
 """        
         messages_for_distillation = [
             {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
             {"role": "user", "content": (distillation_prompt)},
             {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."}
         ]
+        stop = False
         while True:
             distilled_demos = utils.GPT3_5_request(
                 model=args.model, 
@@ -62,28 +71,33 @@ Otherwise, don't write 'No need for further distillation'.
                 break
 
             if distilled_length >= previous_length:
-                messages_for_distillation.append({
-                    "role": "assistant", "content": distilled_demos
-                })
-                messages_for_distillation.append({
-                    "role": "user", "content": "Your distilled version is longer \
-                    than the initial version. Please try again. If you think the initial \
-                    version does not need further distillation, just write 'No need for further distillation'."
-                })
-                print("Distillation Another Trial")
-                continue
+                # messages_for_distillation.append({
+                #     "role": "assistant", "content": distilled_demos
+                # })
+                # messages_for_distillation.append({
+                #     "role": "user", "content": "Your distilled version is longer \
+                #     than the initial version. Please try again. If you think the initial \
+                #     version does not need further distillation, just write 'No need for further distillation'."
+                # })
+                # print("Distillation Another Trial")
+                # continue
+                stop = True
+                break
             
             check_prompt = f"""
 I'm giving you a text containing some User-Response pairs, delimited by three backticks.
-Your task is to score the text out of 100.
+Your task is to score the text and tell me how many scores are deducted in total.
 You must follow the following scoring rules:
-1. The total score is 100 for all these User-Response pairs.
-2. Examine each User-Response pair. For each pair, \
-whether the response can be derived solely based on the user's message? \
-If not, then deduct 10 points from the total score. Otherwise, no points need to be deducted.
+1. Examine each User-Response pair:
+(i) For each pair, whether the Response can be derived solely based on the User message? \
+If not, then deduct 10 points from the total score.
+(ii) For each pair, whether the Response message uses values or information that should be provided in the User message \
+to derive the final answer but are missing in the User message? \
+If does, then deduct 10 points from the total score.
+2. Double check your scoring at the end to make sure that you have evaluated each pair appropriately.
 
-Note that you should first provide your detailed reasons and the last sentence in your response \
-can ONLY start with `Therefore the score is:`, and followed by a score between 0 and 100.
+Note that the last sentence in your response \
+can ONLY start with `Therefore the score deducted is:`, and followed by the score deducted in total.
 
 User-Response pairs: ```{distilled_demos}```
 """
@@ -112,7 +126,7 @@ User-Response pairs: ```{distilled_demos}```
             )
             print(f"check response is {check_response}")
             check_score = int(re.findall(r'\d+', check_response.split('\n')[-1])[0])
-            if check_score <= 90:
+            if check_score >= 20:
                 messages_for_distillation.append({
                     "role": "assistant", "content": distilled_demos
                 })
@@ -125,7 +139,7 @@ User-Response pairs: ```{distilled_demos}```
                 print("End Distillation")
                 break
         
-        if 'No need for further distillation' in distilled_demos:
+        if 'No need for further distillation' in distilled_demos or stop is True:
             break
         # 将出现次数最多的答案当成预测结果
         predictions = []
@@ -157,21 +171,31 @@ User-Response pairs: ```{distilled_demos}```
         print(f"prediction is: {prediction}\n")
         print("**************************")
         score_prompt = f"""
-The question and student's answer are given, delimited by three backticks.
-Your task is to score the student's answer out of 100 points.
-You need to do the following:
-- First, work out your own answer to the problem.
-- Then compare your answer to the student's answer and \
-evaluate if the student's answer is correct or not.
-- Finally, score the student's answer out of 100 points based on your evaluation.
-
-Don't score the student's answer until you have done the problem yourself.
-Note that the last sentence in your response can ONLY start with `Therefore the score is:` \
-and followed by a score between 0 and 100.
-
 Question: ```{question}```
 
 Student's answer:  ```{prediction}```
+
+You should first read the given question and then read the student's answer. \
+Take your time to organize and understand the logic of the student's answer. \
+Your task is to provide a score out of 100 for the student's answer based on the following criteria:
+1. Accuracy: whether the logic of the student's answer is correct and whether the final answer of the student's answer is correct
+2. Relevance: how closely the student's answer aligns with the question's requirements
+3. Coherence: whether the student's answer flow logically and make sense
+
+You should also meet the following requirements:
+- You should first explicitly analyze the question and the student's answer.
+- Then, you should find all the mistakes in the student's answer if mistakes exist.
+- If you've found mistakes in the student's answer, please give your solutions. \
+After giving your solutions, check whether the student's answer is actually different from your solutions. \
+If not, then your judgement may not be right, so review again.
+- If the student's final answer is wrong, the score should not be over 90. \
+If there are no errors, the score should be close to 100. \
+If there are minor errors which do not impact the correctness of the final answer, the score can be slightly lower but not below 90.
+- You should assign a fair score based on whether the student's answer is actually correct or incorrect, \
+rather than relying on appearances of correctness or incorrectness.
+
+Note that the last sentence in your response can ONLY start with `Therefore the score is:` \
+and followed by a score between 0 and 100.
 """
         score_message = [
             {"role": "system", "content": "You are a serious teacher."},
@@ -185,9 +209,14 @@ Student's answer:  ```{prediction}```
             temperature=args.temperature
         )
         print(f"SCORE RESPONSE: {response}")
-        score = re.findall(r'\d+', response.split('\n')[-1])[0]
+        response_list = response.split('\n')
+        score = 0
+        for i in range(len(response_list)-1, 0, -1):
+            if re.findall(r'\d+', response_list[i]):
+                score = int(re.findall(r'\d+', response_list[i])[0])
+                break
         print(f"Score is {score}")
-        if int(score) > 90:
+        if int(score) >= 90:
             print("yes")
             previous_demos = distilled_demos
             previous_length = distilled_length
