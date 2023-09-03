@@ -1,7 +1,7 @@
 export CUDA_VISIBLE_DEVICES=0,1
 
 python inference.py \
---random_seed=3407 \
+--random_seed=37 \
 --dataset="gsm8k" \
 --model="claude" \
 --trainset_path="./dataset/GSM8K/train.jsonl" \

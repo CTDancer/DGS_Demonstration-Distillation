@@ -1,0 +1,8 @@
+[
+    {
+        "question": "A marketing company pays its employees on a commission-based salary system. If you sell goods worth $1000, you earn a 30% commission. Sales over $1000 get you an additional 10% commission. Calculate the amount of money Antonella earned if she sold goods worth $2500.",
+        "pred_ans": " Okay, let's solve this step-by-step:\n\n- Antonella sold goods worth $2500\n- For the first $1000 in sales, she earns 30% commission \n- 30% of $1000 is 0.3 * $1000 = $300\n\n- For sales over $1000, she earns an additional 10% commission\n- She sold $2500 - $1000 = $1500 over $1000\n- 10% of $1500 is 0.1 * $1500 = $150\n\n- Her total commission is:\n- Commission on first $1000: $300 \n- Additional commission on amount over $1000: $150\n- Total commission: $300 + $150 = $450\n\nTherefore, the amount of money Antonella earned is:\n$450",
+        "ground_truth": "450",
+        "score": " Based on my analysis:\n\n- The question asks to calculate the total commission earned by Antonella based on\n\n_Typing\u2026_"
+    }
+]

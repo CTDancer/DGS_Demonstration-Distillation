@@ -10,7 +10,9 @@ Total correct number: 1075
 Correct Percentage: 0.6959818044
 right-wrong Percentage: 0.11902956785443518
 wrong_right Percentage: 0.1190295679
-wrong Percentage: 0.06595905989385899Total correct number: 891
+wrong Percentage: 0.06595905989385899
+
+Total correct number: 891
 Correct Percentage: 0.6755117513267627
 right-wrong Percentage: 0.1152388172858226
 wrong_right Percentage: 0.14025777103866566
