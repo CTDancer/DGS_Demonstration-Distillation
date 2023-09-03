@@ -123,7 +123,7 @@ You should also meet the following requirements:
 - If you've found mistakes in the student's answer, please give your solutions. \
 After giving your solutions, check whether the student's answer is actually different from your solutions. \
 If not, then your judgement may not be right, so review again.
-- If the student's final answer is wrong, the score should not be over 90. \
+- If the student's final answer is wrong or there is a critical mistake in the calculation that leads to an incorrect answer, the score should not be below 80. \
 If there are no errors, the score should be close to 100. \
 If there are minor errors which do not impact the correctness of the final answer, the score can be slightly lower but not below 90.
 - You should assign a fair score based on whether the student's answer is actually correct or incorrect, \

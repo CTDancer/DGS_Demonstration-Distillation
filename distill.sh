@@ -5,7 +5,7 @@ python distill.py \
 --dataset="gsm8k" \
 --model="gpt-3.5-turbo" \
 --trainset_path="./dataset/GSM8K/train.jsonl" \
---demo_path="./logdifference_results/gsm8k_Llama-2-7b-chat-hf_4_2_trainsplit_24.txt" \
+--demo_path="./initial_demos/gsm8k_16shot.txt" \
 --save_path="./distilled_demos_new/" \
 --max_tokens=4096 --api_time_interval=2 --temperature=0 \
 --multipath=1 \

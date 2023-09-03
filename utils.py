@@ -102,7 +102,7 @@ def openai_ChatCompletion_create(**kwargs):
     return json.loads(resp.content)['choices'][0]['message']['content']
 
 def claude(message):
-    token = 'xoxp-5807096092167-5818713672245-5836262221027-cb1645a18a8404fb239dbc2c835b6e4d'
+    token = 'xoxp-5807096092167-5818713672245-5854209995281-9f0e19f5245c307d16d3b81bec984a00'
     
     def send_msg(token, message):
         sendurl = 'https://slack.com/api/chat.postMessage'

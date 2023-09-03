@@ -4,3 +4,10 @@ right-wrong Percentage: 0.04169825625473844
 wrong_right Percentage: 0.23730098559514784
 wrong Percentage: 0.03790750568612585
 Execution time: 25943.08842086792 seconds
+
+After check:
+Total correct number: 1049
+Correct Percentage: 0.753601213
+right-wrong Percentage: 0.04169825625473844
+wrong_right Percentage: 0.166793025
+wrong Percentage: 0.03790750568612585

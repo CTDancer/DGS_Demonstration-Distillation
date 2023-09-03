@@ -27,23 +27,23 @@ I'm giving you several User-Response pairs, delimited by triple backticks.
 
 # Task:
 1. Distill the given User-Response pairs to be succinct while keeping the response logic and format and satisfying all the requirements. \
-If you think the given User-Response pairs does not need distillation, then just simply write 'No need for further distillation', \
+If you think any distillation of the given User-Response pairs will fail to meet all the requirements, then just simply write 'No need for further distillation', \
 so no distillation is needed and the task is over.
-2. After accomplishing the task, don't rush to give your result. You must examine each User-Response pair in both the initial version \
-and its corresponding distilled version in your result carefully and check whether your result meets this requirement: \
-If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
-then the distilled User-Response pair in your result should also have this derivation.
-If your result doesn't meet these requirements, you have two options:
-(i) You can modify your result accordingly if you can.
-(ii) Do not modify the User-Response pair and simply use the initial version.
-3. Finally, after your check and modification, you can give your distillation results.
+2. After distillation, don't rush to give your result. Examine each User-Response pair and check whether each pair satisifies \
+all the requirements. If not, you should modify your result accordingly.
+3. Finally you can give your distillation result.
 
 # Requirements:
 1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
 and then omit other unnecessary information.
 2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result.
 3. Must NOT change or omit the final answers in each Response message.
-4. Must NOT omit questions in each User message
+4. Must NOT omit questions in each User message.
+5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
+then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
+
+# Note:
+If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it.
 """        
         messages_for_distillation = [
             {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
@@ -88,16 +88,14 @@ and then omit other unnecessary information.
 I'm giving you a text containing some User-Response pairs, delimited by three backticks.
 Your task is to score the text and tell me how many scores are deducted in total.
 You must follow the following scoring rules:
-1. Examine each User-Response pair:
-(i) For each pair, whether the Response can be derived solely based on the User message? \
-If not, then deduct 10 points from the total score.
-(ii) For each pair, whether the Response message uses values or information that should be provided in the User message \
+1. Examine each User-Response pair: \
+whether the Response message uses values or information that should be provided in the User message \
 to derive the final answer but are missing in the User message? \
 If does, then deduct 10 points from the total score.
 2. Double check your scoring at the end to make sure that you have evaluated each pair appropriately.
 
-Note that the last sentence in your response \
-can ONLY start with `Therefore the score deducted is:`, and followed by the score deducted in total.
+Note that the first sentence in your response \
+can ONLY start with `The score deducted is:`, and followed by the score deducted in total.
 
 User-Response pairs: ```{distilled_demos}```
 """
@@ -125,7 +123,7 @@ User-Response pairs: ```{distilled_demos}```
                 temperature=args.temperature
             )
             print(f"check response is {check_response}")
-            check_score = int(re.findall(r'\d+', check_response.split('\n')[-1])[0])
+            check_score = int(re.findall(r'\d+', check_response.split('\n')[0])[0])
             if check_score >= 20:
                 messages_for_distillation.append({
                     "role": "assistant", "content": distilled_demos
@@ -188,7 +186,7 @@ You should also meet the following requirements:
 - If you've found mistakes in the student's answer, please give your solutions. \
 After giving your solutions, check whether the student's answer is actually different from your solutions. \
 If not, then your judgement may not be right, so review again.
-- If the student's final answer is wrong, the score should not be over 90. \
+- If the student's final answer is wrong or there is a critical mistake in the calculation that leads to an incorrect answer, the score should not be below 80. \
 If there are no errors, the score should be close to 100. \
 If there are minor errors which do not impact the correctness of the final answer, the score can be slightly lower but not below 90.
 - You should assign a fair score based on whether the student's answer is actually correct or incorrect, \
