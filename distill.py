@@ -21,7 +21,33 @@ def distill(previous_demos, question, answer=None, initial_prompt=None, args=Non
     previous_answer = answer
 
     while True:
-        distillation_prompt = f"""
+        if args.model == "claude":
+            distillation_prompt = f"""
+I'm giving you several User-Response pairs, delimited by triple backticks.
+
+# Task:
+Distill the given User-Response pairs to be succinct while keeping the response logic and format and satisfying all the requirements. \
+If you think any distillation of the given User-Response pairs will fail to meet all the requirements, then just simply write 'No need for further distillation', \
+so no distillation is needed and the task is over.
+You only need to provide your distillation result, no other information needed.
+
+# Requirements:
+1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
+and then omit other unnecessary information.
+2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result.
+3. Must NOT change or omit the final answers in each Response message.
+4. Must NOT omit questions in each User message.
+5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
+then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
+
+# Note:
+If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it. \
+Thus, the number of User-Response pairs in your distillation result should be the same as the given User-Response pairs.
+
+```{previous_demos}```
+"""
+        else:
+            distillation_prompt = f"""
 I'm giving you several User-Response pairs, delimited by triple backticks.
 ```{previous_demos}```
 
@@ -43,7 +69,8 @@ and then omit other unnecessary information.
 then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
 
 # Note:
-If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it.
+If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it. \
+Thus, the number of User-Response pairs in your distillation result should be the same as the given User-Response pairs.
 """        
         messages_for_distillation = [
             {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
@@ -52,13 +79,16 @@ If you think a User-Response pair does not need distillation, you should keep it
         ]
         stop = False
         while True:
-            distilled_demos = utils.GPT3_5_request(
-                model=args.model, 
-                messages=messages_for_distillation,
-                max_tokens=args.max_tokens,
-                time_interval=args.api_time_interval,
-                temperature=args.temperature
-            )
+            if args.model == "claude":
+                distilled_demos = utils.claude(distillation_prompt)
+            else:
+                distilled_demos = utils.GPT3_5_request(
+                    model=args.model, 
+                    messages=messages_for_distillation,
+                    max_tokens=args.max_tokens,
+                    time_interval=args.api_time_interval,
+                    temperature=args.temperature
+                )
             print(f"distilled_demos is: {distilled_demos}\n")
             distilled_length = len(distilled_demos.split())
             print(f"previous demo length: {previous_length}")
@@ -115,6 +145,8 @@ User-Response pairs: ```{distilled_demos}```
                 {"role": "system", "content": "You are a serious teacher."},
                 {"role": "user", "content": (check_prompt)}
             ]
+            if args.model == "claude":
+                check_response = utils.claude(check_prompt)
             check_response = utils.GPT3_5_request(
                 model=args.model, 
                 messages=messages_for_check,
@@ -125,13 +157,17 @@ User-Response pairs: ```{distilled_demos}```
             print(f"check response is {check_response}")
             check_score = int(re.findall(r'\d+', check_response.split('\n')[0])[0])
             if check_score >= 20:
-                messages_for_distillation.append({
-                    "role": "assistant", "content": distilled_demos
-                })
-                messages_for_distillation.append({
-                    "role": "user", "content": "You have omitted necessary information in the User messages. Please try again. If you think the initial \
-                    version does not need further distillation, just write 'No need for further distillation'."
-                })
+                if args.model == "claude":
+                    utils.claude("You have omitted necessary information in the User messages. Please try again. If you think the initial \
+                    version does not need further distillation, just write 'No need for further distillation'.")
+                else:
+                    messages_for_distillation.append({
+                        "role": "assistant", "content": distilled_demos
+                    })
+                    messages_for_distillation.append({
+                        "role": "user", "content": "You have omitted necessary information in the User messages. Please try again. If you think the initial \
+                        version does not need further distillation, just write 'No need for further distillation'."
+                    })
                 print("Distillation Another Trial")
             else:
                 print("End Distillation")
@@ -199,13 +235,16 @@ and followed by a score between 0 and 100.
             {"role": "system", "content": "You are a serious teacher."},
             {"role": "user", "content": (score_prompt)}
         ]
-        response = utils.GPT3_5_request(
-            model=args.model, 
-            messages=score_message,
-            max_tokens=args.max_tokens,
-            time_interval=args.api_time_interval,
-            temperature=args.temperature
-        )
+        if args.model == "claude":
+            response = utils.claude(score_prompt)
+        else:
+            response = utils.GPT3_5_request(
+                model=args.model, 
+                messages=score_message,
+                max_tokens=args.max_tokens,
+                time_interval=args.api_time_interval,
+                temperature=args.temperature
+            )
         print(f"SCORE RESPONSE: {response}")
         response_list = response.split('\n')
         score = 0
@@ -227,13 +266,16 @@ and followed by a score between 0 and 100.
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": (initial_prompt + previous_demos + '\nUser: ' + question)}
         ]
-        previous_answer = utils.GPT3_5_request(
-            model=args.model, 
-            messages=messages_for_inference,
-            max_tokens=args.max_tokens,
-            time_interval=args.api_time_interval,
-            temperature=args.temperature
-        )
+        if args.model == 'claude':
+            previous_answer = utils.claude(messages_for_inference)
+        else:
+            previous_answer = utils.GPT3_5_request(
+                model=args.model, 
+                messages=messages_for_inference,
+                max_tokens=args.max_tokens,
+                time_interval=args.api_time_interval,
+                temperature=args.temperature
+            )
         print(f"Prediction is: {previous_answer}")
     
     return previous_demos, previous_length, previous_answer

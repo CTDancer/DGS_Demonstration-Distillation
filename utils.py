@@ -9,6 +9,7 @@ import numpy as np
 import torch
 import openai
 import requests
+import tiktoken
 
 API_KEY = " "
 # define for no solution if GPT cannot generate a valid solution
@@ -88,7 +89,7 @@ def GPT3_5_request(model:str, messages:list, max_tokens:int, time_interval=2, te
         # pause between each request to avoid rate limit
         time.sleep(time_interval)
     
-    # print("response is: ", resp)
+    print("response is: ", resp)
     return resp['choices'][0]['message']['content']
 
 def openai_ChatCompletion_create(**kwargs):
@@ -102,7 +103,7 @@ def openai_ChatCompletion_create(**kwargs):
     return json.loads(resp.content)['choices'][0]['message']['content']
 
 def claude(message):
-    token = 'xoxp-5807096092167-5818713672245-5854209995281-9f0e19f5245c307d16d3b81bec984a00'
+    token = 'xoxp-5807096092167-5818713672245-5841552251043-21a356216b20a6ee028d42dafc890a91'
     
     def send_msg(token, message):
         sendurl = 'https://slack.com/api/chat.postMessage'
@@ -128,13 +129,13 @@ def claude(message):
     data = json.loads(msg)
     timestamp = data['message']['ts']
     while True:
-        time.sleep(5)
+        time.sleep(10)
         response1 = json.loads(receive_msg(token, timestamp))['messages']
         if len(response1) != 0:
             response1 = response1[-1]['text']
         else:
             response1 = ''
-        time.sleep(5)
+        time.sleep(10)
         response2 = json.loads(receive_msg(token, timestamp))['messages']
         if len(response2) != 0:
             response2 = response2[-1]['text']
@@ -534,3 +535,22 @@ def create_chat_completion_input_prompt_from_APS(args) -> list:
         qa_pair["question"] = processed_question
     
     return selected_QAs
+
+def num_tokens_from_messages(messages, model="gpt-3.5-turbo"):
+  """Returns the number of tokens used by a list of messages."""
+  try:
+      encoding = tiktoken.encoding_for_model(model)
+  except KeyError:
+      encoding = tiktoken.get_encoding("cl100k_base")
+  if model == "gpt-3.5-turbo":  # note: future models may deviate from this
+      num_tokens = 0
+      for message in messages:
+          num_tokens += 4  # every message follows <im_start>{role/name}\n{content}<im_end>\n
+          for key, value in message.items():
+              num_tokens += len(encoding.encode(value))
+              if key == "name":  # if there's a name, the role is omitted
+                  num_tokens += -1  # role is always required and always 1 token
+      num_tokens += 2  # every reply is primed with <im_start>assistant
+      return num_tokens
+  else:
+      raise NotImplementedError(f"""num_tokens_from_messages() is not presently implemented for model {model}.""")

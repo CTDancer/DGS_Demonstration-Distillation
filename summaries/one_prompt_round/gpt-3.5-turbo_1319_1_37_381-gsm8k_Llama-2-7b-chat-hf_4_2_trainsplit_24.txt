@@ -6,8 +6,8 @@ wrong Percentage: 0.07202426080363912
 Execution time: 31307.179756879807 seconds
 
 After check:
-Total correct number: 1069
+Total correct number: 1084
 Correct Percentage: 0.7217589083
-right-wrong Percentage: 0.0887035633055345
+right-wrong Percentage: 0.100075815
 wrong_right Percentage: 0.1175132676
-wrong Percentage: 0.07202426080363912
+wrong Percentage: 0.0606520091
