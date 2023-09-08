@@ -1,0 +1,191 @@
+[
+    {
+        "question": "Despite its name, this act did not outlaw the consumption of alcoholic beverages by those under 21 years of age, just its purchase. However, Alabama, Indiana, Kansas, Michigan, North Carolina, Pennsylvania, and Vermont, and the District of Columbia extended the law into an outright ban. The minimum purchase and drinking ages is a state law, and most states still permit ``underage'' consumption of alcohol in some circumstances. In some states, no restriction on private consumption is made, while in other states, consumption is only allowed in specific locations, in the presence of consenting and supervising family members, as in the states of Colorado, Maryland, Montana, New York, Texas, West Virginia, Washington, Wisconsin, and Wyoming. The act also does not seek to criminalize alcohol consumption during religious occasions (e.g. communion wines, Kiddush). do all states enforce a minimum drinking age of 21?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (Schiller 2003:20--21). Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends the game (Burgess 2009:502). do you win chess by taking the queen?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "After the completion of the first season titled Spartacus: Blood and Sand, production for another season was delayed because lead actor Andy Whitfield was diagnosed with early-stage non-Hodgkin lymphoma so Starz produced a six-episode prequel mini-series entitled Spartacus: Gods of the Arena. When the actor's cancer recurred and he later died on September 11, 2011, Starz had actor Liam McIntyre take on the role of Spartacus in the second season titled Spartacus: Vengeance. On June 4, 2012, Starz announced the third and final season, titled Spartacus: War of the Damned. will there be a new spartacus season 5?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "The heat comes from the natural heating of rocks as depth increases. The composition of the water indicates it is heated rainwater which has not approached a magmatic source, so no volcanic action is involved in the formation of these hot springs. The result is the mildly alkaline, pleasant tasting solution with dissolved calcium carbonate. is hot springs arkansas sitting on a volcano?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "The London congestion charge is a fee charged on most motor vehicles operating within the Congestion Charge Zone (CCZ) in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year's Day (inclusive). The charge was introduced on 17 February 2003. As of 2017, the London charge zone remains as one of the largest congestion charge zones in the world, despite the cancellation of the Western Extension which operated between February 2007 and January 2011. The charge aims to reduce high traffic flow and pollution in the central area and raise investment funds for London's transport system. is there a congestion charge in london on sunday?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "A goal cannot be scored directly from a throw-in; if a player throws the ball directly into their own goal without any other player touching it, the result is a corner kick to the opposing side. Likewise an offensive goal cannot be scored directly from a throw in; the result in this case is a goal kick for the defending team. can you score from a throw in in soccer?",
+        "answer": " yes",
+        "ground_truth": false
+    }
+][
+    {
+        "question": "Despite its name, this act did not outlaw the consumption of alcoholic beverages by those under 21 years of age, just its purchase. However, Alabama, Indiana, Kansas, Michigan, North Carolina, Pennsylvania, and Vermont, and the District of Columbia extended the law into an outright ban. The minimum purchase and drinking ages is a state law, and most states still permit ``underage'' consumption of alcohol in some circumstances. In some states, no restriction on private consumption is made, while in other states, consumption is only allowed in specific locations, in the presence of consenting and supervising family members, as in the states of Colorado, Maryland, Montana, New York, Texas, West Virginia, Washington, Wisconsin, and Wyoming. The act also does not seek to criminalize alcohol consumption during religious occasions (e.g. communion wines, Kiddush). do all states enforce a minimum drinking age of 21?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (Schiller 2003:20--21). Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends the game (Burgess 2009:502). do you win chess by taking the queen?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "After the completion of the first season titled Spartacus: Blood and Sand, production for another season was delayed because lead actor Andy Whitfield was diagnosed with early-stage non-Hodgkin lymphoma so Starz produced a six-episode prequel mini-series entitled Spartacus: Gods of the Arena. When the actor's cancer recurred and he later died on September 11, 2011, Starz had actor Liam McIntyre take on the role of Spartacus in the second season titled Spartacus: Vengeance. On June 4, 2012, Starz announced the third and final season, titled Spartacus: War of the Damned. will there be a new spartacus season 5?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "Homologous chromosomes are important in the processes of meiosis and mitosis. They allow for the recombination and random segregation of genetic material from the mother and father into new cells. are homologous chromosomes present in both mitosis and meiosis?",
+        "answer": " hom",
+        "ground_truth": true
+    },
+    {
+        "question": "The heat comes from the natural heating of rocks as depth increases. The composition of the water indicates it is heated rainwater which has not approached a magmatic source, so no volcanic action is involved in the formation of these hot springs. The result is the mildly alkaline, pleasant tasting solution with dissolved calcium carbonate. is hot springs arkansas sitting on a volcano?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "The London congestion charge is a fee charged on most motor vehicles operating within the Congestion Charge Zone (CCZ) in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year's Day (inclusive). The charge was introduced on 17 February 2003. As of 2017, the London charge zone remains as one of the largest congestion charge zones in the world, despite the cancellation of the Western Extension which operated between February 2007 and January 2011. The charge aims to reduce high traffic flow and pollution in the central area and raise investment funds for London's transport system. is there a congestion charge in london on sunday?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "A goal cannot be scored directly from a throw-in; if a player throws the ball directly into their own goal without any other player touching it, the result is a corner kick to the opposing side. Likewise an offensive goal cannot be scored directly from a throw in; the result in this case is a goal kick for the defending team. can you score from a throw in in soccer?",
+        "answer": " yes",
+        "ground_truth": false
+    }
+][
+    {
+        "question": "Despite its name, this act did not outlaw the consumption of alcoholic beverages by those under 21 years of age, just its purchase. However, Alabama, Indiana, Kansas, Michigan, North Carolina, Pennsylvania, and Vermont, and the District of Columbia extended the law into an outright ban. The minimum purchase and drinking ages is a state law, and most states still permit ``underage'' consumption of alcohol in some circumstances. In some states, no restriction on private consumption is made, while in other states, consumption is only allowed in specific locations, in the presence of consenting and supervising family members, as in the states of Colorado, Maryland, Montana, New York, Texas, West Virginia, Washington, Wisconsin, and Wyoming. The act also does not seek to criminalize alcohol consumption during religious occasions (e.g. communion wines, Kiddush). do all states enforce a minimum drinking age of 21?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (Schiller 2003:20--21). Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends the game (Burgess 2009:502). do you win chess by taking the queen?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "After the completion of the first season titled Spartacus: Blood and Sand, production for another season was delayed because lead actor Andy Whitfield was diagnosed with early-stage non-Hodgkin lymphoma so Starz produced a six-episode prequel mini-series entitled Spartacus: Gods of the Arena. When the actor's cancer recurred and he later died on September 11, 2011, Starz had actor Liam McIntyre take on the role of Spartacus in the second season titled Spartacus: Vengeance. On June 4, 2012, Starz announced the third and final season, titled Spartacus: War of the Damned. will there be a new spartacus season 5?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "Homologous chromosomes are important in the processes of meiosis and mitosis. They allow for the recombination and random segregation of genetic material from the mother and father into new cells. are homologous chromosomes present in both mitosis and meiosis?",
+        "answer": " hom",
+        "ground_truth": true
+    },
+    {
+        "question": "The heat comes from the natural heating of rocks as depth increases. The composition of the water indicates it is heated rainwater which has not approached a magmatic source, so no volcanic action is involved in the formation of these hot springs. The result is the mildly alkaline, pleasant tasting solution with dissolved calcium carbonate. is hot springs arkansas sitting on a volcano?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "The London congestion charge is a fee charged on most motor vehicles operating within the Congestion Charge Zone (CCZ) in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year's Day (inclusive). The charge was introduced on 17 February 2003. As of 2017, the London charge zone remains as one of the largest congestion charge zones in the world, despite the cancellation of the Western Extension which operated between February 2007 and January 2011. The charge aims to reduce high traffic flow and pollution in the central area and raise investment funds for London's transport system. is there a congestion charge in london on sunday?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "A goal cannot be scored directly from a throw-in; if a player throws the ball directly into their own goal without any other player touching it, the result is a corner kick to the opposing side. Likewise an offensive goal cannot be scored directly from a throw in; the result in this case is a goal kick for the defending team. can you score from a throw in in soccer?",
+        "answer": " yes",
+        "ground_truth": false
+    }
+][
+    {
+        "question": "A queen ant (formally known as a gyne) is an adult, reproducing female ant in an ant colony; generally she will be the mother of all the other ants in that colony. Some female ants, such as Cataglyphis cursor, do not need to mate to produce offspring, reproducing through asexual parthenogenesis or cloning, and all of those offspring will be female. Others, like those in the genus Crematogaster, mate in a nuptial flight. Queen offspring develop from larvae specially fed in order to become sexually mature among most species. Depending on the species, there can be either a single mother queen, or potentially, hundreds of fertile queens in some species. Queen ants have one of the longest life-spans of any known insect -- up to 30 years. A queen of Lasius niger was held in captivity by German entomologist Hermann Appel for 283\u20444 years; also a Pogonomyrmex owyheei has a maximum estimated longevity of 30 years in the field. do queen ants give birth to queen ants?",
+        "answer": " false",
+        "ground_truth": true
+    },
+    {
+        "question": "Despite its name, this act did not outlaw the consumption of alcoholic beverages by those under 21 years of age, just its purchase. However, Alabama, Indiana, Kansas, Michigan, North Carolina, Pennsylvania, and Vermont, and the District of Columbia extended the law into an outright ban. The minimum purchase and drinking ages is a state law, and most states still permit ``underage'' consumption of alcohol in some circumstances. In some states, no restriction on private consumption is made, while in other states, consumption is only allowed in specific locations, in the presence of consenting and supervising family members, as in the states of Colorado, Maryland, Montana, New York, Texas, West Virginia, Washington, Wisconsin, and Wyoming. The act also does not seek to criminalize alcohol consumption during religious occasions (e.g. communion wines, Kiddush). do all states enforce a minimum drinking age of 21?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (Schiller 2003:20--21). Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends the game (Burgess 2009:502). do you win chess by taking the queen?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "After the completion of the first season titled Spartacus: Blood and Sand, production for another season was delayed because lead actor Andy Whitfield was diagnosed with early-stage non-Hodgkin lymphoma so Starz produced a six-episode prequel mini-series entitled Spartacus: Gods of the Arena. When the actor's cancer recurred and he later died on September 11, 2011, Starz had actor Liam McIntyre take on the role of Spartacus in the second season titled Spartacus: Vengeance. On June 4, 2012, Starz announced the third and final season, titled Spartacus: War of the Damned. will there be a new spartacus season 5?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "Homologous chromosomes are important in the processes of meiosis and mitosis. They allow for the recombination and random segregation of genetic material from the mother and father into new cells. are homologous chromosomes present in both mitosis and meiosis?",
+        "answer": " hom",
+        "ground_truth": true
+    },
+    {
+        "question": "The heat comes from the natural heating of rocks as depth increases. The composition of the water indicates it is heated rainwater which has not approached a magmatic source, so no volcanic action is involved in the formation of these hot springs. The result is the mildly alkaline, pleasant tasting solution with dissolved calcium carbonate. is hot springs arkansas sitting on a volcano?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "The London congestion charge is a fee charged on most motor vehicles operating within the Congestion Charge Zone (CCZ) in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year's Day (inclusive). The charge was introduced on 17 February 2003. As of 2017, the London charge zone remains as one of the largest congestion charge zones in the world, despite the cancellation of the Western Extension which operated between February 2007 and January 2011. The charge aims to reduce high traffic flow and pollution in the central area and raise investment funds for London's transport system. is there a congestion charge in london on sunday?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "A goal cannot be scored directly from a throw-in; if a player throws the ball directly into their own goal without any other player touching it, the result is a corner kick to the opposing side. Likewise an offensive goal cannot be scored directly from a throw in; the result in this case is a goal kick for the defending team. can you score from a throw in in soccer?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "``Lord of all Hopefulness'' is a Christian hymn written by Jan Struther, which was published in the enlarged edition of Songs of Praise (Oxford University Press) in 1931. The hymn is used in liturgy, at weddings and at the beginning of funeral services. is lord of all hopefulness a funeral hymn?",
+        "answer": " false",
+        "ground_truth": true
+    }
+][
+    {
+        "question": "A queen ant (formally known as a gyne) is an adult, reproducing female ant in an ant colony; generally she will be the mother of all the other ants in that colony. Some female ants, such as Cataglyphis cursor, do not need to mate to produce offspring, reproducing through asexual parthenogenesis or cloning, and all of those offspring will be female. Others, like those in the genus Crematogaster, mate in a nuptial flight. Queen offspring develop from larvae specially fed in order to become sexually mature among most species. Depending on the species, there can be either a single mother queen, or potentially, hundreds of fertile queens in some species. Queen ants have one of the longest life-spans of any known insect -- up to 30 years. A queen of Lasius niger was held in captivity by German entomologist Hermann Appel for 283\u20444 years; also a Pogonomyrmex owyheei has a maximum estimated longevity of 30 years in the field. do queen ants give birth to queen ants?",
+        "answer": " false",
+        "ground_truth": true
+    },
+    {
+        "question": "Despite its name, this act did not outlaw the consumption of alcoholic beverages by those under 21 years of age, just its purchase. However, Alabama, Indiana, Kansas, Michigan, North Carolina, Pennsylvania, and Vermont, and the District of Columbia extended the law into an outright ban. The minimum purchase and drinking ages is a state law, and most states still permit ``underage'' consumption of alcohol in some circumstances. In some states, no restriction on private consumption is made, while in other states, consumption is only allowed in specific locations, in the presence of consenting and supervising family members, as in the states of Colorado, Maryland, Montana, New York, Texas, West Virginia, Washington, Wisconsin, and Wyoming. The act also does not seek to criminalize alcohol consumption during religious occasions (e.g. communion wines, Kiddush). do all states enforce a minimum drinking age of 21?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "If a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (Schiller 2003:20--21). Unlike other pieces, the king is never actually captured or removed from the board because checkmate ends the game (Burgess 2009:502). do you win chess by taking the queen?",
+        "answer": " yes",
+        "ground_truth": false
+    },
+    {
+        "question": "After the completion of the first season titled Spartacus: Blood and Sand, production for another season was delayed because lead actor Andy Whitfield was diagnosed with early-stage non-Hodgkin lymphoma so Starz produced a six-episode prequel mini-series entitled Spartacus: Gods of the Arena. When the actor's cancer recurred and he later died on September 11, 2011, Starz had actor Liam McIntyre take on the role of Spartacus in the second season titled Spartacus: Vengeance. On June 4, 2012, Starz announced the third and final season, titled Spartacus: War of the Damned. will there be a new spartacus season 5?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "Homologous chromosomes are important in the processes of meiosis and mitosis. They allow for the recombination and random segregation of genetic material from the mother and father into new cells. are homologous chromosomes present in both mitosis and meiosis?",
+        "answer": " hom",
+        "ground_truth": true
+    },
+    {
+        "question": "The heat comes from the natural heating of rocks as depth increases. The composition of the water indicates it is heated rainwater which has not approached a magmatic source, so no volcanic action is involved in the formation of these hot springs. The result is the mildly alkaline, pleasant tasting solution with dissolved calcium carbonate. is hot springs arkansas sitting on a volcano?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "The London congestion charge is a fee charged on most motor vehicles operating within the Congestion Charge Zone (CCZ) in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year's Day (inclusive). The charge was introduced on 17 February 2003. As of 2017, the London charge zone remains as one of the largest congestion charge zones in the world, despite the cancellation of the Western Extension which operated between February 2007 and January 2011. The charge aims to reduce high traffic flow and pollution in the central area and raise investment funds for London's transport system. is there a congestion charge in london on sunday?",
+        "answer": " true",
+        "ground_truth": false
+    },
+    {
+        "question": "A goal cannot be scored directly from a throw-in; if a player throws the ball directly into their own goal without any other player touching it, the result is a corner kick to the opposing side. Likewise an offensive goal cannot be scored directly from a throw in; the result in this case is a goal kick for the defending team. can you score from a throw in in soccer?",
+        "answer": " yes",
+        "ground_truth": false
+    }
+]

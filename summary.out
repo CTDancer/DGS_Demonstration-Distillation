@@ -1,0 +1,32 @@
+nohup: ignoring input
+
+===================================BUG REPORT===================================
+Welcome to bitsandbytes. For bug reports, please run
+
+python -m bitsandbytes
+
+ and submit this information together with your error trace to: https://github.com/TimDettmers/bitsandbytes/issues
+================================================================================
+bin /home/dqwang/mambaforge/envs/ct/lib/python3.11/site-packages/bitsandbytes/libbitsandbytes_cuda117_nocublaslt.so
+/home/dqwang/mambaforge/envs/ct/lib/python3.11/site-packages/bitsandbytes/cuda_setup/main.py:149: UserWarning: /home/dqwang/mambaforge/envs/ct did not contain ['libcudart.so', 'libcudart.so.11.0', 'libcudart.so.12.0'] as expected! Searching further paths...
+  warn(msg)
+CUDA SETUP: CUDA runtime path found: /usr/local/cuda/lib64/libcudart.so.11.0
+CUDA SETUP: Highest compute capability among GPUs detected: 5.2
+CUDA SETUP: Detected CUDA version 117
+/home/dqwang/mambaforge/envs/ct/lib/python3.11/site-packages/bitsandbytes/cuda_setup/main.py:149: UserWarning: WARNING: Compute capability < 7.5 detected! Only slow 8-bit matmul is supported for your GPU!
+  warn(msg)
+CUDA SETUP: Loading binary /home/dqwang/mambaforge/envs/ct/lib/python3.11/site-packages/bitsandbytes/libbitsandbytes_cuda117_nocublaslt.so...
+Temperature: 0
+*****************************
+Namespace(random_seed=42, dataset='boolq', trainset_path='./dataset/GSM8K/train.jsonl', demo_path='./initial_demos/645_boolq.txt', QA_dir='./QA_records/', wrong_list_dir='./wrong_lists/', max_length_cot=512, qes_limit=0, multipath=1, concat_length=4, use_code_style_prompt=False, temperature=0, dataset_path='boolq')
+*****************************
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:21<00:21, 21.66s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 10.76s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.39s/it]
+Compressing 637 tokens to 50 summary vectors
+Found cached dataset boolq (/home/dqwang/.cache/huggingface/datasets/boolq/default/0.1.0/bf0dd57da941c50de94ae3ce3cef7fea48c08f337a4b7aac484e9dddc5aa24e5)
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 141.87it/s]
+dataset: boolq
+dataset_size: 3270
+dataloader size: 3270
+
+Follow the given examples and answer the following question with true or false: The fourth season of NCIS: New Orleans premiered on September 26, 2017 on CBS. The series continues to air following Bull, Tuesday at 10:00 p.m. (ET) and contained 24 episodes. The season concluded on May 15, 2018. is ncis new orleans over for the season? Answer is: 
+Terminated

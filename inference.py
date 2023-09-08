@@ -85,7 +85,7 @@ def main():
         # print(f"Extracted answer: {prediction}")
         if args.model == "claude":
             prediction = utils.claude((demo + '\n' + initial_prompt + "\nUser: " + qa['question']))
-        else:
+        elif args.model == 'gpt-3.5-turbo':
             prediction = utils.GPT3_5_request(
                 model=args.model, 
                 messages=messages,
@@ -93,13 +93,13 @@ def main():
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
-        # print("messages: ", messages)
-        # kwargs = {
-        #     "model": args.model,
-        #     "messages": messages,
-        #     "temperature": 0
-        # }
-        # prediction = utils.openai_ChatCompletion_create(**kwargs)
+        else:
+            kwargs = {
+                "model": args.model,
+                "messages": messages,
+                "temperature": 0
+            }
+            prediction = utils.openai_ChatCompletion_create(**kwargs)
         extracted_answer = utils.answer_extraction(args, prediction).lstrip()
         print(f"question is: {qa['question']}\n")
         print(f"prediction is: {prediction}\n")
@@ -138,7 +138,7 @@ and followed by a score between 0 and 100.
         ]
         if args.model == 'claude':
             response = utils.claude(score_prompt)
-        else:
+        elif args.model == 'gpt-3.5-turbo':
             response = utils.GPT3_5_request(
                 model=args.model, 
                 messages=score_message,
@@ -146,15 +146,16 @@ and followed by a score between 0 and 100.
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
-        # kwargs = {
-        #     "model": args.model,
-        #     "messages": score_message
-        # }
-        # response = utils.openai_ChatCompletion_create(**kwargs)
+        else:
+            kwargs = {
+                "model": args.model,
+                "messages": score_message
+            }
+            response = utils.openai_ChatCompletion_create(**kwargs)
         print(f"SCORE RESPONSE: {response}")
         response_list = response.split('\n')
         score = 0
-        for i in range(len(response_list)-1, 0, -1):
+        for i in range(len(response_list)-1, -1, -1):
             if re.findall(r'\d+', response_list[i]):
                 score = int(re.findall(r'\d+', response_list[i])[0])
                 break
@@ -271,6 +272,9 @@ def arg_parser():
     )
     parser.add_argument(
         "--json_demo", action='store_true', help='Use demonstrations or distilled demonstrations in json format'
+    )
+    parser.add_argument(
+        "--multiple_lines", action='store_true', help='Use demonstrations that has multiple lines in Response message.'
     )
 
     args = parser.parse_args()

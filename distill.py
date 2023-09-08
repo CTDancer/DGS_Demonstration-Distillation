@@ -6,6 +6,7 @@ import re
 import os
 import pdb
 import utils
+from count_tokens import num_tokens_from_string
 
 def distill(previous_demos, question, answer=None, initial_prompt=None, args=None):
     if initial_prompt is None:
@@ -17,19 +18,21 @@ def distill(previous_demos, question, answer=None, initial_prompt=None, args=Non
     print('*****************************')
     print(f"previous demo: {previous_demos}\n")
     print('*****************************')
-    previous_length = len(previous_demos.split())
+    previous_length = num_tokens_from_string(previous_demos, args.model)
     previous_answer = answer
-
+    
+    first_time = True
     while True:
-        if args.model == "claude":
+        if first_time is True: 
             distillation_prompt = f"""
 I'm giving you several User-Response pairs, delimited by triple backticks.
+```{previous_demos}```
 
 # Task:
-Distill the given User-Response pairs to be succinct while keeping the response logic and format and satisfying all the requirements. \
-If you think any distillation of the given User-Response pairs will fail to meet all the requirements, then just simply write 'No need for further distillation', \
-so no distillation is needed and the task is over.
-You only need to provide your distillation result, no other information needed.
+1. Distill the given User-Response pairs to be succinct while keeping the response logic and format and satisfying all the requirements.
+2. After distillation, don't rush to give your result. Examine each User-Response pair and check whether each pair satisifies \
+all the requirements. If not, you should modify your result accordingly.
+3. Finally you can give your distillation result.
 
 # Requirements:
 1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
@@ -39,13 +42,12 @@ and then omit other unnecessary information.
 4. Must NOT omit questions in each User message.
 5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
 then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
+6. The format of User messages and Response messages in your result must be the same as in the given version.
 
 # Note:
 If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it. \
 Thus, the number of User-Response pairs in your distillation result should be the same as the given User-Response pairs.
-
-```{previous_demos}```
-"""
+"""      
         else:
             distillation_prompt = f"""
 I'm giving you several User-Response pairs, delimited by triple backticks.
@@ -67,11 +69,13 @@ and then omit other unnecessary information.
 4. Must NOT omit questions in each User message.
 5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
 then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
+6. The format of User messages and Response messages in your result must be the same as in the given version.
 
 # Note:
 If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it. \
 Thus, the number of User-Response pairs in your distillation result should be the same as the given User-Response pairs.
-"""        
+"""      
+        first_time = False
         messages_for_distillation = [
             {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
             {"role": "user", "content": (distillation_prompt)},
@@ -90,16 +94,11 @@ Thus, the number of User-Response pairs in your distillation result should be th
                     temperature=args.temperature
                 )
             print(f"distilled_demos is: {distilled_demos}\n")
-            distilled_length = len(distilled_demos.split())
+            # distilled_length = len(distilled_demos.split())
+            distilled_length = num_tokens_from_string(distilled_demos, args.model)
             print(f"previous demo length: {previous_length}")
             print(f"distilled demo length: {distilled_length}\n")
-
-            if 'No need for further distillation' in distilled_demos:
-                if distilled_length >= 10:
-                    distilled_demos = distilled_demos.replace('No need for further distillation', '')
-                print("End Distillation")
-                break
-
+            
             if distilled_length >= previous_length:
                 # messages_for_distillation.append({
                 #     "role": "assistant", "content": distilled_demos
@@ -113,6 +112,12 @@ Thus, the number of User-Response pairs in your distillation result should be th
                 # continue
                 stop = True
                 break
+
+            if 'No need for further distillation' in distilled_demos:
+                if distilled_length >= 10:
+                    distilled_demos = distilled_demos.replace('No need for further distillation', '')
+                print("End Distillation")
+                break
             
             check_prompt = f"""
 I'm giving you a text containing some User-Response pairs, delimited by three backticks.
@@ -125,7 +130,7 @@ If does, then deduct 10 points from the total score.
 2. Double check your scoring at the end to make sure that you have evaluated each pair appropriately.
 
 Note that the first sentence in your response \
-can ONLY start with `The score deducted is:`, and followed by the score deducted in total.
+can ONLY start with `The score deducted in total is:`, and followed by the score deducted in total.
 
 User-Response pairs: ```{distilled_demos}```
 """
@@ -156,7 +161,7 @@ User-Response pairs: ```{distilled_demos}```
             )
             print(f"check response is {check_response}")
             check_score = int(re.findall(r'\d+', check_response.split('\n')[0])[0])
-            if check_score >= 20:
+            if check_score >= 10:
                 if args.model == "claude":
                     utils.claude("You have omitted necessary information in the User messages. Please try again. If you think the initial \
                     version does not need further distillation, just write 'No need for further distillation'.")
@@ -314,7 +319,7 @@ def arg_parser():
     parser = argparse.ArgumentParser(description="Inference with selected prompts.")
     parser.add_argument("--random_seed", type=int, default=1, help="random seed")
     parser.add_argument(
-        "--dataset", type=str, default="gsm8k", choices=["squad", "gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+        "--dataset", type=str, default="gsm8k", choices=["boolq", "squad", "gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
     )
     parser.add_argument(
         "--trainset_path", type=str, default="./dataset/GSM8K/train.jsonl", help="prompts to use"
@@ -355,6 +360,9 @@ def arg_parser():
     parser.add_argument(
         "--json_demo", action='store_true', help='Use demonstrations or distilled demonstrations in json format'
     )
+    parser.add_argument(
+        "--multiple_lines", action='store_true', help='Use demonstrations that has multiple lines in Response message.'
+    )
 
     args = parser.parse_args()
 
@@ -386,6 +394,8 @@ def arg_parser():
         args.dataset_path = "./dataset/MAWPS/MultiArith.json"
     elif args.dataset == 'squad':
         args.dataset_path = "squad_v2"
+    elif args.dataset == 'boolq':
+        args.dataset_path = "boolq"
     else:
         raise ValueError("dataset is not properly defined ...")
 

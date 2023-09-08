@@ -1,0 +1,11 @@
+Total correct number: 14
+Correct Percentage: 0.7
+Execution time: 135.8239631652832 secondsTotal correct number: 13
+Correct Percentage: 0.65
+Execution time: 137.1585247516632 secondsTotal correct number: 13
+Correct Percentage: 0.65
+Execution time: 167.192524433136 secondsTotal correct number: 11
+Correct Percentage: 0.55
+Execution time: 176.68611645698547 secondsTotal correct number: 12
+Correct Percentage: 0.6
+Execution time: 140.44261026382446 seconds

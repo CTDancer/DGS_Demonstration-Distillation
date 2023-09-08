@@ -89,7 +89,7 @@ def GPT3_5_request(model:str, messages:list, max_tokens:int, time_interval=2, te
         # pause between each request to avoid rate limit
         time.sleep(time_interval)
     
-    print("response is: ", resp)
+    # print("response is: ", resp)
     return resp['choices'][0]['message']['content']
 
 def openai_ChatCompletion_create(**kwargs):
@@ -100,6 +100,8 @@ def openai_ChatCompletion_create(**kwargs):
         }
     data = json.dumps(kwargs)
     resp = requests.post(url, headers=headers, data=data)
+    if 'choices' not in json.loads(resp.content):
+        return 'NILL'
     return json.loads(resp.content)['choices'][0]['message']['content']
 
 def claude(message):
@@ -252,6 +254,14 @@ def load_data(args):
                 answers.append('unanswerable')
             else:
                 answers.append(data['answers']['text'][0])
+    elif args.dataset == "boolq":
+        dataset_boolq = load_dataset("boolq")
+        # for data in dataset_boolq['validation']:
+        #     questions.append('Passage: ' + data['passage'] + '\nQuestion: ' + data['question'] + '\nAnswer: ')
+        #     answers.append(data['answer'])
+        for data in dataset_boolq['validation']:
+            questions.append(data['passage'] + ' ' + data['question'] + '?')
+            answers.append(data['answer'])
     else:
         raise NotImplementedError
 
@@ -385,6 +395,15 @@ def get_qas(args):
         qas = create_chat_completion_input_prompt(args, args.demo_path)
         questions = [qa["question"] for qa in qas]
         answers = [qa["answer"] for qa in qas]
+    elif args.multiple_lines:
+        with open(args.demo_path, 'r') as file:
+            qas = file.read()
+        qas = qas.split('\n\n')
+        questions = []
+        answers = []
+        for i in range(len(qas)):
+            questions.append(qas[i].split('\n')[0][6:])
+            answers.append(qas[i].split('Response: ')[1])
     else:
         with open(args.demo_path, 'r') as file:
             qas = file.read()
@@ -404,7 +423,7 @@ def get_demos(questions=None, answers=None):
     
     demonstrations = ""
     for i in range(len(questions)):
-        demonstrations += ( "User: " + questions[i] + "\n" + "Response: " + answers[i] + "\n" )
+        demonstrations += ( "User: " + questions[i] + "\n" + "Response: " + answers[i] + "\n\n" )
         
     return demonstrations
 
@@ -522,6 +541,20 @@ def create_chat_completion_input_prompt(args, selected_prompt_path) -> list:
 
     return selected_QAs
 
+def get_answers(trainset_path, question_list) -> list:
+    decoder = json.JSONDecoder()
+    count = len(question_list)
+    answer_list = [None] * count
+    with open(trainset_path, encoding="utf-8") as f:
+        trainset = f.readlines()
+        for qa in trainset:
+            question = decoder.raw_decode(qa)[0]['question']
+            if question in question_list:
+                count -= 1
+                answer_list[question_list.index(question)] = ". ".join(decoder.raw_decode(qa)[0]['answer'].split('\n')).replace('####', 'Therefore the answer is')
+                if count == 0:
+                    return answer_list
+    return None
 
 def create_chat_completion_input_prompt_from_APS(args) -> list:
     '''return formatted selected prompts from Active-Prompt Selections for openai ChatCompletion'''

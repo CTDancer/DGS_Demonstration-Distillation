@@ -1,0 +1,23 @@
+User: Angelo and Melanie plan to study 2 chapters and 4 worksheets. Each chapter is 3 hours, and each worksheet is 1.5 hours. They study no more than 4 hours a day, with 10-minute breaks every hour, 3 snack breaks, and 30 minutes for lunch. How many days should they study in a week?
+
+Response: They need to study for 12 hours in total, accounting for breaks. With a maximum of 4 hours per day, they should plan to study for 4 days. The answer is 4.
+
+User: Mark's team scores 25 2-pointers, 8 3-pointers, and 10 free throws. Opponents score double 2-pointers, half 3-pointers, and free throws. What's the total score for both teams?
+
+Response: Mark's team scores 84 points, and opponents score 117 points. The total score for both teams is 201 points. The answer is 201.
+
+User: Bella has twice as many marbles as frisbees and 20 more frisbees than deck cards. If she buys 2/5 more of each item and currently has 60 marbles, how many items will she have?
+
+Response: Bella will have 84 marbles, 42 frisbees, and 14 deck cards, totaling 140 items. The answer is 140.
+
+User: Four fruit baskets contain 9 apples, 15 oranges, and 14 bananas in the first three baskets. The fourth basket has 2 less of each fruit. How many fruits are there?
+
+Response: The first three baskets have 114 fruits. The fourth basket has 32 fruits. In total, there are 146 fruits. The answer is 146.
+
+User: You can buy 4 apples or 1 watermelon for the same price. You bought 36 fruits evenly split between oranges, apples, and watermelons, with 1 orange costing $0.50. How much does 1 apple cost if your total bill was $66?
+
+Response: One apple costs $1. The answer is 1.
+
+User: Susy goes to a school with 800 students, while Sarah's school has 300 students. Susy starts with 100 social media followers, gains 40, 20, and 10 followers over three weeks. Sarah starts with 50 followers, gains 90, 30, and 10 followers. Who has the most followers after three weeks?
+
+Response: After three weeks, Susy has 170 followers, and Sarah has 180 followers. Sarah has the most followers. The answer is 180.

@@ -1,0 +1,3 @@
+Total correct number: 1983
+Correct Percentage: 0.6064220183486239
+Execution time: 46815.21059727669 seconds
