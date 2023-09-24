@@ -1,0 +1,23 @@
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Osama Bin Laden is back: reports A new audiotape reportedly of Osama bin Laden appeared on Arabic Web sites. The voice on the tape says current instability in Saudi Arabia due to the regime there.
+Response: 0
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Nintendo gets touchy feely Nintendo wants you to know that its new handheld is not just another blob of circuitry encased in cold silver plastic. To make this point, my review copy of the Nintendo DS came in unusual packaging.
+Response: 3
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Australian state to increase secret police powers (AFP) AFP - Australia's most populous state has announced it will give counter-terrorism police increased powers to carry out covert surveillance to help them break up extremist cells.
+Response: 0
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Sudan Security Foils New Sabotage Plot -- Agency  KHARTOUM (Reuters) - Sudanese authorities said Friday they  foiled another plot by an opposition Islamist party to kidnap  and kill senior government officials and blow up sites in the  capital, a news agency close to the government reported.
+Response: 0
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Federal reserve bank chief finalist for A amp;M job Texas A amp;M University System regents selected the president of the Federal Reserve Bank of Dallas as the sole finalist for its chancellorship today.
+Response: 2
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Fight for Public Domain Goes On Archivists who want to digitize 'orphan works' -- books, movies and films that are no longer commercially viable but remain under copyright -- lose a court battle. But they vow to continue the war to rebalance copyright law. By Katie Dean.
+Response: 3
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Tuesday 24th August 2004 Could integrating antivirus software into Windows be the key to solving Microsoft #39;s security woes or could the technology create more problems than it solves?
+Response: 3
+
+User: Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). Human rights shadow over Beijing games At the closing ceremony of the Athens Olympic games last night Jacques Rogge, president of the International Olympic Committee, issued the traditional invitation to  quot;the youth of the world quot; to reassemble in four years #39; time.
+Response: 1

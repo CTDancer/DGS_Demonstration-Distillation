@@ -1,0 +1,7 @@
+Total correct number: 2715
+Correct Percentage: 0.5600247524752475
+Execution time: 260372.13984131813 secondsTotal correct number: 2715
+Correct Percentage: 0.5600247524752475
+Execution time: 260648.46309661865 secondsTotal correct number: 2715
+Correct Percentage: 0.5600247524752475
+Execution time: 260736.01249361038 seconds

@@ -10,15 +10,19 @@ from count_tokens import num_tokens_from_string
 
 def distill(previous_demos, question, answer=None, initial_prompt=None, args=None):
     if initial_prompt is None:
-        initial_prompt = "Follow the given examples and answer the final question step by step.\
-            Note that the last sentence in your response can ONLY start with `Therefore the answer is:`"
+        if args.dataset == 'multiple_rc':
+            # initial_prompt = "Follow the given examples and answer each multiple-choice question. You should choose all the correct options."
+            initial_prompt = "Follow the given examples and read the given passage carefully. A student has given his answer to the question based on the passage. Your task is to respond whether the student's answer is correct or wrong. Just answer 'correct' or 'wrong', no reasons needed."
+        else:
+            initial_prompt = "Follow the given examples and answer the final question step by step.\
+                Note that the last sentence in your response can ONLY start with `Therefore the answer is:`"
     print('*****************************')
     print("question is: ", question)
     print("answer is: ", answer)
     print('*****************************')
     print(f"previous demo: {previous_demos}\n")
     print('*****************************')
-    previous_length = num_tokens_from_string(previous_demos, args.model)
+    previous_length = num_tokens_from_string(previous_demos, 'gpt-3.5-turbo')
     previous_answer = answer
     
     first_time = True
@@ -35,11 +39,12 @@ all the requirements. If not, you should modify your result accordingly.
 3. Finally you can give your distillation result.
 
 # Requirements:
-1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
-and then omit other unnecessary information.
-2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result.
+1. In each User message, besides all the questions (and choices), preserve all the information related to these questions (and choices) and the Response message \
+and then omit other unnecessary information. The information given in the User message should not be distilled into the Response message.
+2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result. \
+Otherwise, if there are no derivation steps in the initial version, you must NOT add derivation steps in your distillation result.
 3. Must NOT change or omit the final answers in each Response message.
-4. Must NOT omit questions in each User message.
+4. Must NOT omit questions (and choices) in each User message.
 5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
 then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
 6. The format of User messages and Response messages in your result must be the same as in the given version.
@@ -62,11 +67,12 @@ all the requirements. If not, you should modify your result accordingly.
 3. Finally you can give your distillation result.
 
 # Requirements:
-1. In each User message, besides all the questions, preserve all the information related to these questions and the Response message \
-and then omit other unnecessary information.
-2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result.
+1. In each User message, besides all the questions (and choices), preserve all the information related to these questions (and choices) and the Response message \
+and then omit other unnecessary information. The information given in the User message should not be distilled into the Response message.
+2. For each Response message, if there is a step-by-step derivation to the final answer in the initial version, you must preserve it INTACT in your distillation result. \
+Otherwise, if there are no derivation steps in the initial version, you must NOT add derivation steps in your distillation result.
 3. Must NOT change or omit the final answers in each Response message.
-4. Must NOT omit questions in each User message.
+4. Must NOT omit questions (and choices) in each User message.
 5. If the User-Response pair in the initial version has a step-by-step derivation to the final answer in the Response message, \
 then you must also present this step-by-step derivation explicitly in the Response message in your distillation result.
 6. The format of User messages and Response messages in your result must be the same as in the given version.
@@ -75,17 +81,18 @@ then you must also present this step-by-step derivation explicitly in the Respon
 If you think a User-Response pair does not need distillation, you should keep it intact instead of omitting it. \
 Thus, the number of User-Response pairs in your distillation result should be the same as the given User-Response pairs.
 """      
-        first_time = False
+        # first_time = False
         messages_for_distillation = [
-            {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
+            # {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."},
             {"role": "user", "content": (distillation_prompt)},
-            {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."}
+            # {"role": "system", "content": "You are a helpful assistant who will exactly follow user's orders."}
         ]
         stop = False
         while True:
+            print(f"first time is {first_time}")
             if args.model == "claude":
                 distilled_demos = utils.claude(distillation_prompt)
-            else:
+            elif args.model == 'gpt-3.5-turbo':
                 distilled_demos = utils.GPT3_5_request(
                     model=args.model, 
                     messages=messages_for_distillation,
@@ -93,47 +100,79 @@ Thus, the number of User-Response pairs in your distillation result should be th
                     time_interval=args.api_time_interval,
                     temperature=args.temperature
                 )
+            # elif args.model == "chatglm_pro":
+            #     distilled_demos = utils.chatglm(messages_for_distillation, args)
+            else:
+                kwargs = {
+                    "model": args.model,
+                    "messages": messages_for_distillation,
+                    "temperature": args.temperature
+                }
+                distilled_demos = utils.openai_ChatCompletion_create(**kwargs)
             print(f"distilled_demos is: {distilled_demos}\n")
-            # distilled_length = len(distilled_demos.split())
-            distilled_length = num_tokens_from_string(distilled_demos, args.model)
+            distilled_length = len(distilled_demos.split())
+            distilled_length = num_tokens_from_string(distilled_demos, 'gpt-3.5-turbo')
             print(f"previous demo length: {previous_length}")
             print(f"distilled demo length: {distilled_length}\n")
             
             if distilled_length >= previous_length:
-                # messages_for_distillation.append({
-                #     "role": "assistant", "content": distilled_demos
-                # })
-                # messages_for_distillation.append({
-                #     "role": "user", "content": "Your distilled version is longer \
-                #     than the initial version. Please try again. If you think the initial \
-                #     version does not need further distillation, just write 'No need for further distillation'."
-                # })
-                # print("Distillation Another Trial")
-                # continue
-                stop = True
-                break
+                if first_time is True:
+                    messages_for_distillation.append({
+                        "role": "assistant", "content": distilled_demos
+                    })
+                    messages_for_distillation.append({
+                        "role": "user", "content": "Your distilled version is longer than the initial version. Please try again while meeting all the requirements."
+                    })
+                    print("Distillation Another Trial")
+                    first_time = False
+                    continue
+                else:
+                    stop = True
+                    break
 
             if 'No need for further distillation' in distilled_demos:
                 if distilled_length >= 10:
                     distilled_demos = distilled_demos.replace('No need for further distillation', '')
-                print("End Distillation")
-                break
+                else:
+                    print("End Distillation")
+                    break
+            
+            first_time = False
             
             check_prompt = f"""
-I'm giving you a text containing some User-Response pairs, delimited by three backticks.
+I'm giving you a text containing {args.num_pairs} User-Response pairs, delimited by three backticks.
+For each User-Response pair, only those after 'Response: ' belong to the Response message and all the others belong to the User message which may contain 'Passage', 'Question', 'Student's answer' etc.
 Your task is to score the text and tell me how many scores are deducted in total.
-You must follow the following scoring rules:
-1. Examine each User-Response pair: \
-whether the Response message uses values or information that should be provided in the User message \
-to derive the final answer but are missing in the User message? \
-If does, then deduct 10 points from the total score.
-2. Double check your scoring at the end to make sure that you have evaluated each pair appropriately.
+For variable N ranging from 1 to {args.num_pairs}, repeat the following process {args.num_pairs} times: 
+Examine the Nth User-Response pair: (Only the messages after 'Response: ' belong to the Response message, and the others are belong to the User message.)
+1. Whether the User message consists solely of questions without any additional content or context other than the questions? If it does, then deduct 10 points from the total score.
+2. Whether the response message uses values or information that should be provided in the user message \
+but are not explicitly provided in the user message to derive the final answer? \
+If it does, then deduct 10 points from the total score.
+3. Double check your score and make sure that your score is assigned according to these two criteria.
 
-Note that the first sentence in your response \
+You don't need to care about the accuracy of the Response message.
+
+Note that the last sentence in your response \
 can ONLY start with `The score deducted in total is:`, and followed by the score deducted in total.
 
 User-Response pairs: ```{distilled_demos}```
 """
+#             check_prompt = f"""
+# I'm giving you a text containing some User-Response pairs, delimited by three backticks.
+# Your task is to score the text and tell me how many scores are deducted in total.
+# You must follow the following scoring rules:
+# 1. Examine each User-Response pair: \
+# Whether the response message uses values or information that should be provided in the user message \
+# but are not explicitly provided in the user message to derive the final answer? \
+# If it does, then deduct 10 points from the total score.
+# 2. Double check your scoring at the end to make sure that you have evaluated each pair appropriately.
+
+# Note that the first sentence in your response \
+# can ONLY start with `The score deducted in total is:`, and followed by the score deducted in total.
+
+# User-Response pairs: ```{distilled_demos}```
+# """
 
 # 2. If it says "No need for further edition" but you think the initial version can be futher distilled while keeping the response logic and the format, \
 # then deduct 50 points from the total score, and write "It can be further distilled". \
@@ -147,31 +186,60 @@ User-Response pairs: ```{distilled_demos}```
 # 5. Otherwise, no points need to be deducted.
 
             messages_for_check = [
-                {"role": "system", "content": "You are a serious teacher."},
+                # {"role": "system", "content": "You are a serious teacher."},
                 {"role": "user", "content": (check_prompt)}
             ]
             if args.model == "claude":
                 check_response = utils.claude(check_prompt)
-            check_response = utils.GPT3_5_request(
-                model=args.model, 
-                messages=messages_for_check,
-                max_tokens=args.max_tokens,
-                time_interval=args.api_time_interval,
-                temperature=args.temperature
-            )
+            elif args.model == 'gpt-3.5-turbo':
+                check_response = utils.GPT3_5_request(
+                    model=args.model, 
+                    messages=messages_for_check,
+                    max_tokens=args.max_tokens,
+                    time_interval=args.api_time_interval,
+                    temperature=args.temperature
+                )
+            # elif args.model == "chatglm_pro":
+            #     check_response = utils.chatglm(messages_for_check, args)
+            else:
+                kwargs = {
+                    "model": args.model,
+                    "messages": messages_for_check,
+                    "temperature": args.temperature
+                }
+                check_response = utils.openai_ChatCompletion_create(**kwargs)
             print(f"check response is {check_response}")
-            check_score = int(re.findall(r'\d+', check_response.split('\n')[0])[0])
+            # check_score = int(re.findall(r'\d+', check_response.split("----------\n")[1])[0])
+            # if check_score < 10:
+            #     print("End Distilation")
+            #     break
+            # else:
+            #     suggestion = check_response.split("----------")[-1]
+            #     print(f"**********\nsuggestion is: {suggestion}")
+            #     messages_for_distillation.append({
+            #         "role": "assistant", "content": distilled_demos
+            #     })
+            #     messages_for_distillation.append({
+            #         "role": "user", "content": "These are some comments on your distillation result: \n" + suggestion + "\nYou should distill the given User-Response pairs again based on the comments. \
+            #         You must follow the requirements I required before. You need to present all the distilled User-Respone pairs, not just the pairs that need improvement. \
+            #         If you think the initial version does not need further distillation, just write 'No need for further distillation' and no distillation is needed."
+            #     })
+            #     print("Distillation Another Trial")
+            check_score = int(re.findall(r'\d+', check_response.split('\n')[-1])[0])
+            # check_score = int(re.findall(r'\d+', check_response.split('\n')[0])[0])
             if check_score >= 10:
                 if args.model == "claude":
-                    utils.claude("You have omitted necessary information in the User messages. Please try again. If you think the initial \
+                    utils.claude("Your previous distillation result has omitted necessary information or values in the User messages. Please try again. If you think the initial \
                     version does not need further distillation, just write 'No need for further distillation'.")
                 else:
                     messages_for_distillation.append({
                         "role": "assistant", "content": distilled_demos
                     })
                     messages_for_distillation.append({
-                        "role": "user", "content": "You have omitted necessary information in the User messages. Please try again. If you think the initial \
-                        version does not need further distillation, just write 'No need for further distillation'."
+                        "role": "user", "content": "Your previous distillation result has omitted necessary information or values in the User messages. Please try again \
+and make sure that your distillation result contains more necessary information and values in each User message this time than your previous result. \
+Your distillation result this time must also meet all the requirements previously proposed. \
+If you think the initial version does not need further distillation, just write 'No need for further distillation' and no distillation is needed."
                     })
                 print("Distillation Another Trial")
             else:
@@ -182,10 +250,16 @@ User-Response pairs: ```{distilled_demos}```
             break
         # 将出现次数最多的答案当成预测结果
         predictions = []
-        messages_for_inference = [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": (initial_prompt + distilled_demos + '\nUser: ' + question)}
+        if args.dataset == 'multiple_rc':
+            messages_for_inference = [
+            # {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": (initial_prompt + distilled_demos + '\nUser: ' + question + '\nResponse: The student\'s answer is: ')}
         ]
+        else:
+            messages_for_inference = [
+                # {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": (initial_prompt + distilled_demos + '\nUser: ' + question + '\nResponse: ')}
+            ]
         # for i in range(0, args.multipath):
         #     prediction = utils.GPT3_5_request(
         #         model=args.model, 
@@ -237,12 +311,12 @@ Note that the last sentence in your response can ONLY start with `Therefore the 
 and followed by a score between 0 and 100.
 """
         score_message = [
-            {"role": "system", "content": "You are a serious teacher."},
+            # {"role": "system", "content": "You are a serious teacher."},
             {"role": "user", "content": (score_prompt)}
         ]
         if args.model == "claude":
             response = utils.claude(score_prompt)
-        else:
+        elif args.model == 'gpt-3.5-turbo':
             response = utils.GPT3_5_request(
                 model=args.model, 
                 messages=score_message,
@@ -250,6 +324,15 @@ and followed by a score between 0 and 100.
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
+        # elif args.model == "chatglm_pro":
+        #     response = utils.chatglm(score_message, args)
+        else:
+            kwargs = {
+                "model": args.model,
+                "messages": score_message,
+                "temperature": args.temperature
+            }
+            response = utils.openai_ChatCompletion_create(**kwargs)
         print(f"SCORE RESPONSE: {response}")
         response_list = response.split('\n')
         score = 0
@@ -273,7 +356,7 @@ and followed by a score between 0 and 100.
         ]
         if args.model == 'claude':
             previous_answer = utils.claude(messages_for_inference)
-        else:
+        elif args.model == 'gpt-3.5-turbo':
             previous_answer = utils.GPT3_5_request(
                 model=args.model, 
                 messages=messages_for_inference,
@@ -281,6 +364,16 @@ and followed by a score between 0 and 100.
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
+        elif args.model == "chatglm_pro":
+            previous_answer = utils.chatglm(messages_for_inference, args)
+        else:
+            kwargs = {
+                "model": args.model,
+                "messages": messages_for_inference,
+                "temperature": args.temperature
+            }
+            previous_answer = utils.openai_ChatCompletion_create(**kwargs)
+        print(f"SCORE RESPONSE: {response}")
         print(f"Prediction is: {previous_answer}")
     
     return previous_demos, previous_length, previous_answer
@@ -296,30 +389,35 @@ def main():
     done = False
     select_prompt = True
     
-    dataloader = utils.create_dataloader(args)
-    questions, answers = utils.get_qas(args)
-    previous_demos = utils.get_demos(questions, answers)
+    # dataloader = utils.create_dataloader(args)
+    if args.json_demo:
+        questions, answers = utils.get_qas(args)
+        previous_demos = utils.get_demos(args, questions, answers)
+    else:
+        previous_demos = utils.get_demos(args)
     initial_prompt = utils.get_initial_prompt(args.dataset)
-    question, answer = utils.sample(dataloader, args)
-    previous_demos, previous_length, previous_answer = distill(previous_demos, question, answer, initial_prompt, args)
-    
+    question, answer = utils.sample(args)
+    distilled_demos, distilled_length, distilled_answer = distill(previous_demos, question, answer, initial_prompt, args)
     dest = os.path.join(args.save_path, args.demo_path.split('/')[-1])
     if os.path.exists(dest):
         with open(dest, "r") as file:
             demos = file.read()
         words_count = len(demos.split())
     
-    if os.path.exists(dest) and words_count < previous_length:
+    if os.path.exists(dest) and words_count < distilled_length:
         print("It is not shorter than the previous distilled version.")
     else:
         with open(dest, "w") as file: 
-            file.write(previous_demos)
+            file.write(distilled_demos)
 
 def arg_parser():
     parser = argparse.ArgumentParser(description="Inference with selected prompts.")
     parser.add_argument("--random_seed", type=int, default=1, help="random seed")
     parser.add_argument(
-        "--dataset", type=str, default="gsm8k", choices=["boolq", "squad", "gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+        "--dataset", type=str, default="gsm8k", choices=["multiple_rc", "ag_news", "boolq", "squad", "gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+    )
+    parser.add_argument(
+        "--dataset_path", type=str, default="./dataset/GSM8K/"
     )
     parser.add_argument(
         "--trainset_path", type=str, default="./dataset/GSM8K/train.jsonl", help="prompts to use"
@@ -363,6 +461,15 @@ def arg_parser():
     parser.add_argument(
         "--multiple_lines", action='store_true', help='Use demonstrations that has multiple lines in Response message.'
     )
+    parser.add_argument(
+        "--num_pairs", type=int, default=8, help="number of User-Response pairs"
+    )
+    parser.add_argument(
+        "--distill", type=bool, default=False, help="whether load training set"
+    )
+    parser.add_argument(
+        "--zhipukey", type=str, default="", help='API key for zhipu'
+    )
 
     args = parser.parse_args()
 
@@ -396,6 +503,10 @@ def arg_parser():
         args.dataset_path = "squad_v2"
     elif args.dataset == 'boolq':
         args.dataset_path = "boolq"
+    elif args.dataset == "ag_news":
+        args.dataset_path = "ag_news"
+    elif args.dataset == "multiple_rc":
+        args.dataset_path == "./dataset/MultiRC/"
     else:
         raise ValueError("dataset is not properly defined ...")
 

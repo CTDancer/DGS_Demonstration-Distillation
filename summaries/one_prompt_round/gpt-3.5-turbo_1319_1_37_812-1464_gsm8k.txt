@@ -1,0 +1,13 @@
+Total correct number: 868
+Correct Percentage: 0.6580742987111448
+right-wrong Percentage: 0.053828658074298714
+wrong_right Percentage: 0.2312357846853677
+wrong Percentage: 0.05686125852918878
+Execution time: 41153.67566037178 seconds
+
+After check:
+Total correct number: 868
+Correct Percentage: 0.7414708112
+right-wrong Percentage: 0.05913570887
+wrong_right Percentage: 0.1478392722
+wrong Percentage: 0.05155420773

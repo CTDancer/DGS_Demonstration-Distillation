@@ -1,0 +1,26 @@
+User: Darius scored 10 points?
+Response: Darius 10, Marius 13, Matt 15. Together, they scored 38 points.
+
+User: At the first pick-up point, how many people entered the bus?
+Response: At the first pick-up point, 48 people entered the bus. 
+
+User: How many people couldn't take the bus because it was full?
+Response: 18 people couldn't take the bus.
+
+User: How many calories does he lose a week from dancing?
+Response: James burns 600 calories per hour dancing. He dances 1 hour a day, so 2400 calories per week.
+
+User: How many cows will the rancher own on Happy Cattle Ranch in two years?
+Response: In two years, the rancher will have 450 cows.
+
+User: How much did she earn after selling 14 peaches?
+Response: Lilia earned $25 after selling 14 peaches.
+
+User: How many of the boys did not join varsity clubs?
+Response: 40 boys did not join varsity clubs.
+
+User: How many points do Samanta, Mark, and Eric have in total?
+Response: They have 32 points in total.
+
+User: How much do the bags weigh now?
+Response: The bags now weigh 42 kg.

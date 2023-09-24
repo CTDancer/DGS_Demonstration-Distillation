@@ -1,0 +1,23 @@
+User: Passage: The first player to get rid of their last card (``going out'') wins the hand and scores points for the cards held by the other players. Number cards count their face value, all action cards count 20, and Wild and Wild Draw Four cards count 50. If a Draw Two or Wild Draw Four card is played to go out, the next player in sequence must draw the appropriate number of cards before the score is tallied. Question: in uno can you win on a wild card?
+Response: True
+
+User: Passage: In-N-Out uses the Kennebec variety of potato for its fries and prepares them on-site as opposed to purchasing them pre-made from other companies. The company's french fries are cooked in ``100% pure, cholesterol-free sunflower oil.'' Fries can also be cooked to order, with cooking times ranging from ``light'' to ``extra well done''. Question: does in and out cook in peanut oil?
+Response: False
+
+User: Passage: The thematic and often-quoted (including by the Supreme Court of the United States) Spider-Man phrase with great power comes great responsibility is widely attributed to Uncle Ben. However, in Amazing Fantasy #15, where it first appears, it is not spoken by any character. In fact, Ben has only two lines in the entire comic. The original version of the phrase appears in a narrative caption of the comic's last panel, rather than as spoken dialogue. It reads, ``...with great power there must also come -- great responsibility!''. Question: did uncle ben say with great power comes great responsibility?
+Response: True
+
+User: Passage: The Kansas City metropolitan area is a 15-county metropolitan area anchored by Kansas City, Missouri, that straddles the border between the U.S. states of Missouri and Kansas. With a population of about 2,340,000, it ranks as the second largest metropolitan area with its core in Missouri (after Greater St. Louis). Alongside Kansas City, the area includes a number of other cities and suburbs, the largest being Overland Park, Kansas; Kansas City, Kansas; Olathe, Kansas; and Independence, Missouri; each over 100,000 in population. The Mid-America Regional Council (MARC) serves as the Council of Governments and the Metropolitan Planning Organization for the area. Question: kansas city missouri kansas city kansas same city?
+Response: False
+
+User: Passage: Pamela Morgan Halpert (née Beesly) is a fictional character on the U.S. television sitcom The Office, played by Jenna Fischer. Her counterpart in the original UK series of The Office is Dawn Tinsley. Her character is initially the receptionist at the paper distribution company Dunder Mifflin, before becoming a saleswoman and eventually office administrator until her termination in the series finale. Her character is shy, growing assertive but amiable, and artistically inclined, and shares romantic interest with Jim Halpert, whom she begins dating in the fourth season and marries and starts a family with as the series continues. Question: do jim and pam get together on the office?
+Response: True
+
+User: Passage: Although postal codes are usually assigned to geographical areas, special codes are sometimes assigned to individual addresses or to institutions that receive large volumes of mail, such as government agencies and large commercial companies. One example is the French CEDEX system. Question: can more than one house have the same postal code?
+Response: True
+
+User: Passage: In the earlier phase of the English Reformation there were both Catholic martyrs and radical Protestant martyrs. The later phases saw the Penal Laws punish Roman Catholic and nonconforming Protestants. In the 17th century, the Puritan and Presbyterian factions continued to challenge the leadership of the Church which under the Stuarts veered towards a more catholic interpretation of the Elizabethan Settlement especially under Archbishop Laud and the rise of the concept of Anglicanism as the Via Media. After the victory of the Parliamentarians the Prayer Book was abolished and the Presbyterian and Independent factions dominated. The Episcopacy was abolished. The Restoration restored the Church of England, episcopacy and the Prayer Book. Papal recognition of George III in 1766 led to greater religious tolerance. Question: is church of england the same as protestant?
+Response: True
+
+User: Passage: The Caribbean Sea (Spanish: Mar Caribe; French: Mer des Caraïbes; Dutch: Caraïbische Zee) is a sea of the Atlantic Ocean in the tropics of the Western Hemisphere. It is bounded by Mexico and Central America to the west and south west, to the north by the Greater Antilles starting with Cuba, to the east by the Lesser Antilles, and to the south by the north coast of South America. Question: is the caribbean part of the atlantic ocean?
+Response: True

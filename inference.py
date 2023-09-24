@@ -22,9 +22,15 @@ def main():
     # questions, answers = utils.get_qas(args)
     # demo = utils.get_demos(questions, answers)
     
-    initial_prompt = "Follow the given examples. Your task is to read the following question carefully and answer it step by step. \
-    Note that the last sentence in your response can ONLY start with `Therefore the answer is`. \
-    If you don't know the answer, just write 'unanwerable'."
+    if args.dataset == "boolq":
+        initial_prompt = "Follow the given examples. Your task is to read the following passage carefully and answer the question with True or False."
+    elif args.dataset == "multiple_rc":
+        initial_prompt = "Follow the given examples. Your need to read the following passage carefully first. \
+Then for each question, there are several answers. For each question, your task is to classify each answer into True or False, and return a list containing the classification of all the answers."
+    else:
+        initial_prompt = "Follow the given examples. Your task is to read the following question carefully and answer it step by step. \
+        Note that the last sentence in your response can ONLY start with `Therefore the answer is`. \
+        If you don't know the answer, just write 'unanwerable'."
     
     if args.json_demo:
         questions, answers = utils.get_qas(args)
@@ -61,10 +67,10 @@ def main():
         # predictions = []
         if args.multiple_prompting_rounds:
             messages.append({ "role": "user", "content": qa['question'] })
-            messages.append({ "role": "system", "content": "You are a helpful assistant." })
+            # messages.append({ "role": "system", "content": "You are a helpful assistant." })
         else:
             messages = [
-                {"role": "system", "content": 'You are a helpful assistant.'},
+                # {"role": "system", "content": 'You are a helpful assistant.'},
                 {"role": "user", "content": (demo + '\n' + initial_prompt + "\nUser: " + qa['question'])}
             ]
         
@@ -93,6 +99,8 @@ def main():
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
+        # elif args.model == "chatglm_pro":
+        #     prediction = utils.chatglm(messages, args)
         else:
             kwargs = {
                 "model": args.model,
@@ -105,7 +113,21 @@ def main():
         print(f"prediction is: {prediction}\n")
         print(f"Ground Truth: {qa['answer']}")
         print("---------------------------")
-        score_prompt = f"""
+        if args.dataset == "boolq":
+            score_prompt = f"""
+Question: ```{qa['question']}```
+
+Student's answer:  ```{prediction}```
+
+You should first read the given question and then read the student's answer.
+Your task is to provide a score out of 100 for the student's answer based on whether the student's answer is correct according to \
+the passage in the question.
+
+Note that the last sentence in your response can ONLY start with `Therefore the score is:` \
+and followed by a score between 0 and 100.
+"""     
+        else:
+            score_prompt = f"""
 Question: ```{qa['question']}```
 
 Student's answer:  ```{prediction}```
@@ -133,7 +155,7 @@ Note that the last sentence in your response can ONLY start with `Therefore the 
 and followed by a score between 0 and 100.
 """
         score_message = [
-            {"role": "system", "content": "You are serious teacher."},
+            # {"role": "system", "content": "You are serious teacher."},
             {"role": "user", "content": (score_prompt)}
         ]
         if args.model == 'claude':
@@ -146,14 +168,20 @@ and followed by a score between 0 and 100.
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
+        # elif args.model == "chatglm_pro":
+        #     response = utils.chatglm(score_message, args)
         else:
             kwargs = {
+                # "model": "chatglm_pro",
                 "model": args.model,
                 "messages": score_message
             }
             response = utils.openai_ChatCompletion_create(**kwargs)
         print(f"SCORE RESPONSE: {response}")
-        response_list = response.split('\n')
+        if "chatglm" in args.model:
+            response_list = response.split('\\n')
+        else:
+            response_list = response.split('\n')
         score = 0
         for i in range(len(response_list)-1, -1, -1):
             if re.findall(r'\d+', response_list[i]):
@@ -168,14 +196,26 @@ and followed by a score between 0 and 100.
         #     score = 0
         print(f"Score is {score}")
         print("**************************")
-        if extracted_answer == qa['answer'] and score >= 90:
-            correct += 1
-        elif extracted_answer == qa['answer'] and score < 90:
-            right_wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
-        elif extracted_answer != qa['answer'] and score >= 90:
-            wrong_right_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+        if args.dataset == "boolq":
+            # import pdb
+            # pdb.set_trace()
+            if str(qa['answer']).lower() in prediction.lower() and score >= 90:
+                correct += 1
+            elif str(qa['answer']).lower() in prediction.lower() and score < 90:
+                right_wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+            elif str(qa['answer']).lower() not in prediction.lower() and score >= 90:
+                wrong_right_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+            else:
+                wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
         else:
-            wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+            if extracted_answer == qa['answer'] and score >= 90:
+                correct += 1
+            elif extracted_answer == qa['answer'] and score < 90:
+                right_wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+            elif extracted_answer != qa['answer'] and score >= 90:
+                wrong_right_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
+            else:
+                wrong_list.append({'question': qa['question'], 'pred_ans': prediction, 'ground_truth': qa['answer'], 'score': response})
     
     end = time.time()
     print(f"Total correct number: {correct}")
@@ -214,7 +254,10 @@ def arg_parser():
     parser = argparse.ArgumentParser(description="Inference with selected prompts.")
     parser.add_argument("--random_seed", type=int, default=42, help="random seed")
     parser.add_argument(
-        "--dataset", type=str, default="gsm8k", choices=["squad","gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+        "--dataset", type=str, default="gsm8k", choices=["multiple_rc", "boolq", "squad","gsm8k","svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+    )
+    parser.add_argument(
+        "--dataset_path", type=str, default="./dataset/GSM8K/"
     )
     parser.add_argument(
         "--trainset_path", type=str, default="./dataset/GSM8K/train.jsonl", help="prompts to use"
@@ -276,6 +319,12 @@ def arg_parser():
     parser.add_argument(
         "--multiple_lines", action='store_true', help='Use demonstrations that has multiple lines in Response message.'
     )
+    parser.add_argument(
+        "--zhipukey", type=str, default="", help='API key for zhipu'
+    )
+    parser.add_argument(
+        "--distill", type=bool, default=False, help="whether load training set"
+    )
 
     args = parser.parse_args()
 
@@ -307,6 +356,10 @@ def arg_parser():
         args.dataset_path = "./dataset/MAWPS/MultiArith.json"
     elif args.dataset == 'squad':
         args.dataset_path = "squad_v2"
+    elif args.dataset == 'boolq':
+        args.dataset_path = "boolq"
+    elif args.dataset == "multiple_rc":
+        args.dataset_path == "./dataset/MultiRC/"
     else:
         raise ValueError("dataset is not properly defined ...")
 

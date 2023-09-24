@@ -26,7 +26,7 @@ def main():
     # demo = '''1. Ant-Man and the Wasp - upcoming American superhero film based on Marvel Comics characters Scott Lang / Ant-Man and Hope van Dyne / Wasp. Is there going to be an Ant-Man 2 movie? Answer is True\n2. Kentucky - 70 mph speed limit on rural freeways as of 2007. Is there a speed limit on the Ohio River? Answer is True\n3. Marvel's Agents of S.H.I.E.L.D. - American television series created for ABC by Joss Whedon, Jed Whedon, and Maurissa Tancharoen, based on Marvel Comics organization S.H.I.E.L.D. Is Marvel Agents of Shield in the MCU? Answer is True\n4. '''
 
     demo_tokens = tokenizer(demo, return_tensors="pt").input_ids
-    summary_vectors = model(demo_tokens, output_softprompt=True).softprompt
+    summary_vectors = model(demo_tokens, output_softprompt=True, segment_lengths=250).softprompt
     print(f"Compressing {demo_tokens.size(1)} tokens to {summary_vectors.size(1)} summary vectors")
     
     dataloader = utils.create_dataloader(args)
@@ -35,32 +35,50 @@ def main():
     if args.qes_limit == 0:
         args.qes_limit = len(dataloader)
     
+    answer_list = []
+    gt_list = []
+    
     start = time.time()
     for count, qa in enumerate(dataloader):
         if args.qes_limit is not None and count == args.qes_limit:
             break
-        message = ('\nFollow the given examples and answer the following question with true or false: ' + qa['question'] + ' Answer is: ')
+        if args.dataset == 'boolq':
+            message = (demo + '\nFollow the given examples and answer the following question with true or false: ' + qa['question'] + ' Answer is: ')
+        elif args.dataset == 'multiple_rc':
+            message = (demo + '\nFollow the given examples and read the given passage carefully. A student has given his answer to the question based on the passage. Your task is to respond whether the student\'s answer is correct or wrong.\n' + 'User: ' + qa['question'] + '\nResponse: The student\'s answer is ')
+        else:
+            raise NotImplemented
         print(message)
         
         message_tokens = tokenizer(message, return_tensors="pt").input_ids
         # pdb.set_trace()
         output = model(message_tokens, softprompt=summary_vectors)
-        if tokenizer.decode(output.logits[0,-1].argmax()) == '\n':
+        last = tokenizer.decode(output.logits[0,-1].argmax())
+        if last == '\n' or last == ' ':
             answer = tokenizer.decode(output.logits[0,-2].argmax()).lower()
         else:
-            answer = tokenizer.decode(output.logits[0,-1].argmax()).lower()
+            answer = last.lower()
         print(f"answer is: {answer}")
         print(f"ground truth is: {qa['answer']}")
-        if qa['answer'] == True:
-            if 'yes' in answer or 'true' in answer:
+        answer_list.append(answer)
+        gt_list.append(qa['answer'])
+        if args.dataset == 'multiple_rc':
+            if qa['answer'].lower() in answer:
+                print('yes')
                 correct += 1
             else:
                 wrong_list.append({'question': qa['question'], 'answer': answer, 'ground_truth': qa['answer']})
-        else:
-            if 'no' in answer or 'false' in answer:
-                correct += 1
+        elif args.dataset == 'boolq':
+            if qa['answer'] == True:
+                if 'yes' in answer or 'true' in answer:
+                    correct += 1
+                else:
+                    wrong_list.append({'question': qa['question'], 'answer': answer, 'ground_truth': qa['answer']})
             else:
-                wrong_list.append({'question': qa['question'], 'answer': answer, 'ground_truth': qa['answer']})
+                if 'no' in answer or 'false' in answer:
+                    correct += 1
+                else:
+                    wrong_list.append({'question': qa['question'], 'answer': answer, 'ground_truth': qa['answer']})
     
     end = time.time()
     print(f"Total correct number: {correct}")
@@ -82,7 +100,10 @@ def arg_parser():
     parser = argparse.ArgumentParser(description="Inference with selected prompts.")
     parser.add_argument("--random_seed", type=int, default=42, help="random seed")
     parser.add_argument(
-        "--dataset", type=str, default="gsm8k", choices=["boolq", "squad", "gsm8k", "svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+        "--dataset", type=str, default="gsm8k", choices=["multiple_rc", "boolq", "squad", "gsm8k", "svamp", "aqua", "csqa", "asdiv", "last_letters", "addsub", "singleeq", "strategyqa", "multiarith"], help="dataset to inference"
+    )
+    parser.add_argument(
+        "--dataset_path", type=str, default="./dataset/GSM8K/"
     )
     parser.add_argument(
         "--trainset_path", type=str, default="./dataset/GSM8K/train.jsonl", help="prompts to use"
@@ -110,6 +131,9 @@ def arg_parser():
     )
     parser.add_argument(
         "--use_code_style_prompt", type=bool, default=False, help='Use code-style prompt as mentioned in paper for last_letters dataset'
+    )
+    parser.add_argument(
+        "--distill", type=bool, default=False, help="whether load training set"
     )
 
     args = parser.parse_args()
@@ -144,6 +168,8 @@ def arg_parser():
         args.dataset_path = "squad_v2"
     elif args.dataset == 'boolq':
         args.dataset_path = "boolq"
+    elif args.dataset == "multiple_rc":
+        args.dataset_path == "./dataset/MultiRC/"
     else:
         raise ValueError("dataset is not properly defined ...")
 

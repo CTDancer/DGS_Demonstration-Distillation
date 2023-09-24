@@ -1,0 +1,23 @@
+User: There were 25 peaches in each basket. Five baskets of peaches were delivered to a market. The farmers have eaten 5 peaches. The remaining peaches are packed into smaller boxes of 15 each. How many boxes of peaches are there?
+Response: 5 baskets x 25 peaches = 125 peaches delivered. After farmers ate 5, there are 125 - 5 = 120 peaches. Divide by 15 per box: 120 / 15 = 8 boxes. Answer: 8.
+
+User: Among the career home run leaders for MLB, Hank Aaron has 175 fewer than twice the number that Dave Winfield has. Hank Aaron hit 755 home runs. How many home runs did Dave Winfield hit in his career?
+Response: Let x be Dave's home runs. Hank's is 2x - 175 = 755. Solve for x: 2x = 755 + 175, 2x = 930, x = 465. Answer: 465.
+
+User: Marcus is making calzones. It takes him 20 minutes to sauté the onions and a quarter of that time to sauté the garlic and peppers. It takes him 30 minutes to knead the dough, twice as long to let it rest, and 1/10th the combined kneading and resting time to assemble the calzones. How many minutes does Marcus spend on the calzones total?
+Response: Sauté garlic/peppers: 20/4 = 5 mins. Dough: Knead 30 mins, rest 2 x 30 = 60 mins. Assembly: 1/10 x (30 + 60) = 9 mins. Total: 5 + 30 + 60 + 9 = 124 mins.
+
+User: James decides to buy himself a new barbell. It cost 30% more than his old $250 barbell. How much did it cost?
+Response: 30% of $250 = 0.3 x 250 = $75 more. New cost = $250 + $75 = $325.
+
+User: The county fair was hosting a pumpkin contest to see who could grow the biggest pumpkin in pounds. Brad entered his pumpkin with a weight of 54 pounds. Jessica's was half the weight of Brad's. Betty's pumpkin weight 4 times the amount of Jessica's pumpkin. What is the difference between the heaviest and lightest pumpkin in pounds?
+Response: Jessica: 54 / 2 = 27 pounds. Betty: 4 x 27 = 108 pounds. Difference: 108 - 27 = 81 pounds.
+
+User: John's new computer cost $1500. He needs to get a monitor and other peripherals that cost 1/5 that much. He also wants to upgrade the $300 video card in the base computer with one that costs twice as much. How much did he spend?
+Response: Peripherals: $1500 / 5 = $300. Video card upgrade: $300 x 2 = $600. Total cost: $1500 + $300 + $600 = $2100.
+
+User: Georgia is sick and coughs 5 times a minute. Her brother Robert is also sick but he coughs twice as much as her. After 20 minutes, how many times have they coughed?
+Response: Robert coughs 5 x 2 = 10 times per minute. In 20 minutes, they cough 20 x (5 + 10) = 300 times.
+
+User: Justice has 3 ferns, 5 palms, and 7 succulent plants in her house. If she wants a total of 24 plants in her home, how many more plants does she need?
+Response: Justice has 3 + 5 + 7 = 15 plants. She needs 24 - 15 = 9 more plants. Answer: 9.

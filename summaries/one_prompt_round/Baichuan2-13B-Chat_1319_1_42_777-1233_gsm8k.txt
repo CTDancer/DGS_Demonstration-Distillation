@@ -1,0 +1,4 @@
+Total correct number: 197
+Correct Percentage: 0.14935557240333586
+wrong Percentage: 0.8506444275966641
+Execution time: 158743.84181261063 seconds

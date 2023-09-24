@@ -10,6 +10,7 @@ import torch
 import openai
 import requests
 import tiktoken
+import zhipuai
 
 API_KEY = " "
 # define for no solution if GPT cannot generate a valid solution
@@ -147,105 +148,34 @@ def claude(message):
             break
     return response1
 
+def chatglm(message, args):
+    zhipuai.api_key = args.zhipukey
+    response = zhipuai.model_api.sse_invoke(
+        model="chatglm_pro",
+        prompt=message,
+        temperature=args.temperature
+    )
+    # pdb.set_trace()
+    response_data = [event.data for event in response.events()]
+    response = ""
+    for data in response_data:
+        response += data
+    # pdb.set_trace()
+    return response
+
 def load_data(args):
     questions = []
     answers = []
     decoder = json.JSONDecoder()
 
     if args.dataset == "gsm8k":
-        with open(args.dataset_path) as f:
+        dataset_path = "./dataset/GSM8K/train.jsonl" if args.distill is True else args.dataset_path
+        with open(dataset_path) as f:
             lines = f.readlines()
             for line in lines:
                 json_res = decoder.raw_decode(line)[0]
                 questions.append(json_res["question"].strip())
                 answers.append(json_res["answer"].split("#### ")[-1].replace(",", ""))
-    elif args.dataset == "aqua":
-        with open(args.dataset_path) as f:
-            lines = f.readlines()
-            for line in lines:
-                json_res = decoder.raw_decode(line)[0]
-                qes = json_res["question"].strip() + " Answer Choices:"
-
-                for opt in json_res["options"]:
-                    opt = opt.replace(')', ') ')
-                    qes += f" ({opt}"
-
-                questions.append(qes)
-                answers.append(json_res["correct"])
-    elif args.dataset == "svamp":
-        with open(args.dataset_path) as f:
-            json_data = json.load(f)
-            for line in json_data:
-                q = line["Body"].strip() + " " + line["Question"].strip()
-                a = str(line["Answer"])
-                if a[-2:] == ".0":
-                    a = a[:-2]
-                questions.append(q)
-                answers.append(a)
-    elif args.dataset == "asdiv":
-        with open(args.dataset_path) as f:
-            json_data = json.load(f)["Instances"]
-            for line in json_data:
-                q = line['input'].strip()
-                a = line['output'][0]
-                questions.append(q)
-                answers.append(a)
-    elif args.dataset in ("addsub", "singleeq", "multiarith"):
-        with open(args.dataset_path) as f:
-            json_data = json.load(f)
-            for line in json_data:
-                q = line["sQuestion"].strip()
-                a = str(line["lSolutions"][0])
-                if a[-2:] == ".0":
-                    a = a[:-2]
-                questions.append(q)
-                answers.append(a)
-    elif args.dataset == "csqa":
-        with open(args.dataset_path) as f:
-            lines = f.readlines()
-            for line in lines:
-                json_res = decoder.raw_decode(line)[0]
-                choice = "Answer Choices:"
-                for c in json_res["question"]["choices"]:
-                    choice += " ("
-                    choice += c["label"]
-                    choice += ") "
-                    choice += c["text"]
-                questions.append(json_res["question"]["stem"].strip() + " " + choice)
-                answers.append(json_res["answerKey"])
-    elif args.dataset == "strategyqa":
-        if 'task' in args.dataset_path:
-            with open(args.dataset_path) as f:
-                json_data = json.load(f)["examples"]
-                for line in json_data:
-                    q = line["input"].strip()
-                    a = int(line["target_scores"]["Yes"])
-                    if a == 1:
-                        a = "yes"
-                    else:
-                        a = "no"
-                    questions.append(q)
-                    answers.append(a)
-        else:
-            with open(args.dataset_path, encoding='utf-8') as f:
-                json_data = json.load(f)
-                for line in json_data:
-                    q = line["question"].strip() 
-                    if line['answer']:
-                        a = 'yes'
-                    else:
-                        a = 'no'
-                    questions.append(q)
-                    answers.append(a)
-    elif args.dataset in ("coin_flip", "last_letters"):
-        with open(args.dataset_path) as f:
-            json_data = json.load(f)
-            json_data = json_data["examples"]
-            for line in json_data:
-                q = line["question"]
-                a = line["answer"]
-                questions.append(q)
-                answers.append(a)
     elif args.dataset == "squad":
         dataset_squad_v2 = load_dataset("squad_v2")
         for data in dataset_squad_v2['train']:
@@ -256,12 +186,76 @@ def load_data(args):
                 answers.append(data['answers']['text'][0])
     elif args.dataset == "boolq":
         dataset_boolq = load_dataset("boolq")
-        # for data in dataset_boolq['validation']:
-        #     questions.append('Passage: ' + data['passage'] + '\nQuestion: ' + data['question'] + '\nAnswer: ')
-        #     answers.append(data['answer'])
-        for data in dataset_boolq['validation']:
-            questions.append(data['passage'] + ' ' + data['question'] + '?')
-            answers.append(data['answer'])
+        if args.distill is True:
+            for data in dataset_boolq['train']:
+                questions.append('Passage: ' + data['passage'] + ' Question: ' + data['question'] + '?')
+                answers.append(data['answer'])
+        else:
+            for data in dataset_boolq['validation']:
+                questions.append('Passage: ' + data['passage'] + ' Question: ' + data['question'] + '?')
+                answers.append(data['answer'])
+            # for data in dataset_boolq['validation']:
+            #     questions.append(data['passage'] + ' ' + data['question'] + '?')
+            #     answers.append(data['answer'])
+    elif args.dataset == "ag_news":
+        dataset_ag = load_dataset("ag_news")
+        if args.distill is True:
+            for data in dataset_ag['train']:
+                questions.append("Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). " + data['text'])
+                answers.append(str(data['label']))
+        else:
+            for data in dataset_ag['test']:
+                questions.append("Classify the following text into one of these categories: World (0), Sports (1), Business (2), Sci/Tech (3). " + data['text'])
+                answers.append(str(data['label']))
+    elif args.dataset == "multiple_rc":
+        if args.distill is True:
+            dataset_path = "./dataset/MultiRC/train.jsonl"
+        else:
+            dataset_path = "./dataset/MultiRC/val.jsonl"
+        print(f"dataset_path: {dataset_path}")
+        with open(dataset_path) as f:
+            lines = f.readlines()
+            for line in lines:
+                json_res = decoder.raw_decode(line)[0]
+                # pdb.set_trace()
+                question = f"Passage: \"{json_res['passage']['text']}\"\n"
+                count = 0
+                for question_data in json_res['passage']['questions']:
+                    question += f"Question{count}: \"{question_data['question']}\""
+                    
+                    choices = []
+                    # Loop through answer choices
+                    for idx, answer in enumerate(question_data['answers']):
+                        choices.append(chr(65 + idx) + ". " + answer['text'])
+                    choices_str = ' '.join(choices)
+                    question += f"Choices: {choices_str} \n"
+                    count += 1
+                
+                answer = ""
+                count = 0
+                # pdb.set_trace()
+                for question_data in json_res['passage']['questions']:
+                    # correct_answers = [answer['label'] for idx, answer in enumerate(question_data['answers'])]
+                    # answer += f"Question{count}: {str(correct_answers)} "
+                    correct_answers = [chr(65 + idx) for idx, answer in enumerate(question_data['answers']) if answer['label'] == 1]
+                    if len(correct_answers) == 0:
+                        correct_answers = ['Z']
+                    answer += f"Question{count}: {''.join(correct_answers)} "
+                    count += 1
+                questions.append(question)
+                answers.append(answer)
+                # passage = f"Passage: \"{json_res['passage']['text']}\"\n"
+                # for question_data in json_res['passage']['questions']:
+                #     ques = 'Question: ' + question_data['question']
+                #     for answer in question_data['answers']:
+                #         ques = 'Question: ' + question_data['question']
+                #         ans = ''
+                #         ques += '\nStudent\'s Answer: ' + answer['text'] + '. Is the student\'s answer correct or wrong?'
+                #         question = passage + ques
+                #         ans = 'Correct' if answer['label'] == 1 else 'Wrong'
+                #         questions.append(question)
+                #         answers.append(ans)
+                    
     else:
         raise NotImplementedError
 
@@ -395,35 +389,48 @@ def get_qas(args):
         qas = create_chat_completion_input_prompt(args, args.demo_path)
         questions = [qa["question"] for qa in qas]
         answers = [qa["answer"] for qa in qas]
-    elif args.multiple_lines:
-        with open(args.demo_path, 'r') as file:
-            qas = file.read()
-        qas = qas.split('\n\n')
-        questions = []
-        answers = []
-        for i in range(len(qas)):
-            questions.append(qas[i].split('\n')[0][6:])
-            answers.append(qas[i].split('Response: ')[1])
+    # elif args.multiple_lines:
+    #     with open(args.demo_path, 'r') as file:
+    #         qas = file.read()
+    #     qas = qas.split('\n\n')
+    #     questions = []
+    #     answers = []
+    #     for i in range(len(qas)):
+    #         questions.append(qas[i].split('\n')[0][6:])
+    #         answers.append(qas[i].split('Response: ')[1])
+    # else:
+    #     with open(args.demo_path, 'r') as file:
+    #         qas = file.read()
+    #     qas = qas.split('\n')
+    #     questions = []
+    #     answers = []
+    #     for i in range(0, len(qas), 2):
+    #         questions.append(qas[i][6:])
+    #         answers.append(qas[i+1][10:])
     else:
-        with open(args.demo_path, 'r') as file:
-            qas = file.read()
-        qas = qas.split('\n')
-        questions = []
-        answers = []
-        for i in range(0, len(qas), 2):
-            questions.append(qas[i][6:])
-            answers.append(qas[i+1][10:])
+        try:
+            with open(args.demo_path, "r") as file:
+                demo = file.read()
+        except FileNotFoundError:
+            print("Your demo path doesn't exist. Please try another path.")
     
     return questions, answers
 
-def get_demos(questions=None, answers=None):
+def get_demos(args, questions=None, answers=None):
     ''' format the demonstration '''
     
-    assert len(questions) == len(answers), "number of questions should be equal to number of answers"
-    
-    demonstrations = ""
-    for i in range(len(questions)):
-        demonstrations += ( "User: " + questions[i] + "\n" + "Response: " + answers[i] + "\n\n" )
+    if args.json_demo:
+        assert len(questions) == len(answers), "number of questions should be equal to number of answers"
+        
+        demonstrations = ""
+        for i in range(len(questions)):
+            demonstrations += ( "User: " + questions[i] + "\n" + "Response: " + answers[i] + "\n\n" )
+    else:
+        try:
+            with open(args.demo_path, "r") as file:
+                demonstrations = file.read()
+        except FileNotFoundError:
+            print("Your demo path doesn't exist. Please try another path.")
         
     return demonstrations
 
@@ -477,18 +484,17 @@ def select_prompt(prompts, used_index, done):
     index = random.choice(candidates)    
     return prompts[index], done
 
-def sample(dataloader, args):
-    ''' randomly sample a question-answer pair from the dataloader '''
-    
+def sample(args):
+    ''' randomly sample a question-answer pair from the training set '''
+    args.distill = True
+    # pdb.set_trace()
+    train_dataloader = create_dataloader(args)
+    args.distill = False
     set_random_seed(args.random_seed)
-    random.shuffle(dataloader)
+    random.shuffle(train_dataloader)
     
-    return dataloader[0]['question'], dataloader[0]['answer']
+    return train_dataloader[0]['question'], train_dataloader[0]['answer']
 
-def compute_distance(prediction, answer):
-    ''' compute how much does the prediction differ from the answer '''
-    
-    pass
 
 def create_completion_input_prompt(args) -> str:
     '''return formatted selected prompts for openai Completion'''
@@ -587,3 +593,55 @@ def num_tokens_from_messages(messages, model="gpt-3.5-turbo"):
       return num_tokens
   else:
       raise NotImplementedError(f"""num_tokens_from_messages() is not presently implemented for model {model}.""")
+  
+def calculate_metrics(predictions, ground_truth):
+    # Initialize variables to keep track of overall metrics
+    total_precision = 0
+    total_recall = 0
+    total_f1 = 0
+    exact_match_count = 0
+    
+    # Initialize variables for TP, FP, FN
+    total_tp = 0
+    total_fp = 0
+    total_fn = 0
+    
+    # Iterate over each question's prediction and ground truth
+    for prediction, truth in zip(predictions, ground_truth):
+        # Initialize variables for this specific question
+        tp = 0
+        fp = 0
+        fn = 0
+        
+        # Calculate TP, FP, FN for this question
+        for char in prediction:
+            if char in truth:
+                tp += 1
+            else:
+                fp += 1
+        for char in truth:
+            if char not in prediction:
+                fn += 1
+        
+        # Add TP, FP, FN for this question to the overall totals
+        total_tp += tp
+        total_fp += fp
+        total_fn += fn
+        
+        # Check if the prediction matches the ground truth exactly
+        exact_match = prediction == truth
+        if exact_match:
+            exact_match_count += 1
+    
+    # Calculate precision, recall, and F1 score using TP, FP, FN
+    total_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 1.0
+    total_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 1.0
+    total_f1 = 2 * (total_precision * total_recall) / (total_precision + total_recall) if (total_precision + total_recall) > 0 else 0.0
+    
+    # Calculate the exact match rate
+    num_questions = len(predictions)
+    exact_match_rate = exact_match_count / num_questions
+    
+    return total_precision, total_recall, total_f1, exact_match_rate
+
+                
