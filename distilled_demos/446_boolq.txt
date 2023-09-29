@@ -1,0 +1,11 @@
+User: Passage: Capital punishment in the United Kingdom was used until the second half of the 20th century, with the last executions in 1964. The death penalty was abolished for murder in 1965 in Great Britain and 1973 in Northern Ireland. It was completely abolished in 1998. Question: Can you be sentenced to death in the UK?
+Response: No
+
+User: Passage: The winter solstice marks the shortest day of the year with the longest night. In the Northern Hemisphere, it's in December, and in the Southern Hemisphere, it's in June. Question: Is the winter solstice the shortest day of the year?
+Response: Yes
+
+User: Passage: Earth was born at Kamogawa Sea World in Japan on October 13, 2008. His mother is Lovey, and his father is Oscar, who died on December 21, 2012. Question: Are there still killer whales at Sea World?
+Response: Yes
+
+User: Passage: Theft by finding occurs when someone takes possession of an object they think is abandoned without confirming if it's truly abandoned. Some call it "larceny by finding" or "stealing by finding." Question: Can you get arrested for finding a wallet?
+Response: Yes

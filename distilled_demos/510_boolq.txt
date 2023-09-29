@@ -1,0 +1,12 @@
+User: Passage: Although rhubarb is a vegetable, it is often put to the same culinary uses as fruits. The leaf stalks can be used raw, when they have a crisp texture (similar to celery, although it is in a different family), but are most commonly cooked with sugar and used in pies, crumbles and other desserts. They have a strong, tart taste. Several varieties have been domesticated for human consumption, most of which are recognised as Rheum x hybridum by the Royal Horticultural Society. Question: is rhubarb and celery in the same family
+Response: False
+
+User: Passage: The required personal qualifications for a candidate for the presidential elections are the same as those for any other official election, as set forth in the French Electoral code (Code électoral). A candidate for an election must be a citizen, have attained the age of 18 years, be qualified to vote, not be ineligible by dint of a criminal conviction or judicial decision and have a bank account. Question: do you have to be born in france to be president
+Response: False
+
+User: Passage: Equus is a genus of mammals in the family Equidae, which includes horses, donkeys, and zebras. Within Equidae, Equus is the only recognized extant genus, comprising seven living species. The term equine refers to any member of this genus, including horses. Like Equidae more broadly, Equus has numerous extinct species known only from fossils. The genus most likely originated in North America and spread quickly to the Old World. Equines are odd-toed ungulates with slender legs, long heads, relatively long necks, manes (erect in most subspecies), and long tails. All species are herbivorous, and mostly grazers, with simpler digestive systems than ruminants, but able to subsist on lower-quality vegetation. Question: are horses donkeys and zebras the same species
+Response: False
+
+User: Passage: The Amazing Spider-Man 2 was originally envisioned as the beginning of a shared fictional universe, which would have continued with two sequels and several spin-off films centered on Venom and the Sinister Six, among others. Due to its performing below expectations, all subsequent installments were cancelled and a new iteration of the character, portrayed by Tom Holland in the Marvel Cinematic Universe, began with the 2016 film Captain America: Civil War. Question: was tom holland in amazing spider man 2
+Response: False
+

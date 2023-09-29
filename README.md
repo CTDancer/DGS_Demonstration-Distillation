@@ -1,1 +1,1 @@
-# Prompt-Distillation
+# Demonstration-Distillation

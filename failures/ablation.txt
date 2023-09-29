@@ -1,5 +1,0 @@
-```User: A banana plantation on Jakies Island can produce ten times as many bananas as a banana plantation on a nearby island. If the banana plantation on the nearby island produced 9000 bananas in a year, what's the total banana produce from the two islands that year?
-Response: Jakies Island produced 10 times as many bananas as the nearby island, totaling 10*9000 = 90000 bananas. Together, both islands produced 99000 bananas that year. Therefore, the answer is 99000.
-
-User: Elisa and her two friends went out to dinner. Each of them ordered a $10 meal. Afterwards, they each had a scoop of the same kind of ice cream. If the $45 Elisa had was enough to pay for everything, what was the cost of a scoop of ice cream?
-Response: The three friends had meals worth $10 * 3 = $30. Subtracting this from the $45 Elisa had leaves $15. Dividing this remaining amount by the number of ice cream scoops, which is 3, gives $5 per scoop. So, each scoop of ice cream cost $5.```

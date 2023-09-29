@@ -1,0 +1,16 @@
+User: Passage: Captain America: Civil War is a 2016 American superhero film based on the Marvel Comics character Captain America. It is the sequel to 2011's Captain America: The First Avenger and 2014's Captain America: The Winter Soldier. Question: is captain america civil war an avengers movie?
+Response: True
+User: Passage: Jockeys must be light to ride at the weights assigned to their mounts. The weight of a jockey usually ranges from 108 to 118 lb. Question: do jockeys have to weigh a certain amount?
+Response: True
+User: Passage: In 2014, The Hollywood Reporter stated that the seventh Tinkerbell film was canceled. Question: will there be another tinkerbell movie after neverbeast?
+Response: False
+User: Passage: Francis E. Warren Air Force Base is located approximately 3 miles west of Cheyenne, Wyoming. Question: is there an air force base in Wyoming?
+Response: True
+User: Passage: In the mid-season finale "Pretty Much Dead Already," Sophia is found as a walker and put down. Question: do they find Sophia on the walking dead?
+Response: True
+User: Passage: The Equinox and the Torrent are larger than the Vue. Question: is the Saturn Vue the same as the Chevy Equinox?
+Response: False
+User: Passage: The Sinner is based on the novel of the same name by German crime writer Petra Hammesfahr. Question: is The Sinner on Netflix based on a book?
+Response: True
+User: Passage: No NFL team has yet played a Super Bowl in their own stadium. Question: has an NFL team ever played a Super Bowl in their own stadium?
+Response: False

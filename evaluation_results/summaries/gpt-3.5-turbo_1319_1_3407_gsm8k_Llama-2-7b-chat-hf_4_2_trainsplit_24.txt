@@ -1,0 +1,13 @@
+Total correct number: 893
+Correct Percentage: 0.6770280515542078
+right-wrong Percentage: 0.11902956785443518
+wrong_right Percentage: 0.1379833206974981
+wrong Percentage: 0.06595905989385899
+Execution time: 30146.215811491013 seconds
+
+After check:
+Total correct number: 1086
+Correct Percentage: 0.6959818044
+right-wrong Percentage: 0.1273692191
+wrong_right Percentage: 0.1190295679
+wrong Percentage: 0.05761940864

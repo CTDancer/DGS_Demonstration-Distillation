@@ -1,0 +1,20 @@
+Certainly, here are the distilled User-Response pairs:
+
+User: Chris’s internet bill is $45 per month for 100 GB and $0.25 for every 1 GB over. His bill for this month is $65. How many GB over was Chris charged for on this bill?
+Response: To find the GB overage, we can set up the equation: $0.25G + $45 = $65, where G is the GB over. Solving for G: $0.25G = $65 - $45 = $20. Therefore, G = $20 / $0.25 = 80 GB.
+
+User: Dakota's medical bill consists of the hospital bed cost ($900/day * 3 days), specialists' fees (30 minutes * $250/hour / 60), and the ambulance cost. Adding these up: $2700 + $125 + $1800 = $4625.
+
+User: To find the money left, subtract the total spent from the initial amount: €55 - €27 = €28.
+
+User: Johnny TV makes 25% more movies than L&J Productions, so 220 + 0.25 * 220 = 275 movies per year. In five years, both companies produce 275 * 5 = 1375 movies.
+
+User: The original area is 96 sq ft. After extending by 2 feet on each side, the new area is 14 ft * 10 ft = 140 sq ft.
+
+User: Kayla bought half as much as Theresa, so 6 chocolate bars + 9 soda cans = 15 items.
+
+User: There are 30% * 1000 = 300 married guests and 50% * 1000 = 500 single guests. The remaining are children: 1000 - 300 - 500 = 200 children. There are 300 - 200 = 100 more married guests than children.
+
+User: The flag moved 60 feet up + 60 feet down = 120 feet over the course of the day.
+
+.

@@ -1,2 +1,0 @@
-Total correct number: 2608
-Correct Percentage: 0.7975535168195719

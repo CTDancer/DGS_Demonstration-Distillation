@@ -1,8 +1,0 @@
-User: Passage: Persian, also known as Farsi, is spoken in Iran, Afghanistan, and Tajikistan. It uses the Persian alphabet. Question: do Iran and Afghanistan speak the same language
-Response: True
-User: Passage: Good Samaritan laws protect those who give reasonable assistance to those injured or in peril, reducing hesitation to help. For example, in Canada, this law prevents rescuers from being sued for helping a victim in distress. Question: do good Samaritan laws protect those who help at an accident
-Response: True
-User: Passage: Windows Movie Maker, part of Windows Essentials, is a discontinued video editing software by Microsoft that allows video creation, editing, and publishing. Question: is Windows Movie Maker part of Windows Essentials
-Response: True
-User: Passage: The Elder Scrolls Online is set in Tamriel a millennium before Skyrim. It involves two conflicts: one against Daedric Prince Molag Bal and one for the vacant imperial throne. The player's objective is to recover their soul stolen by Molag Bal. Question: is Elder Scrolls Online the same as Skyrim
-Response: False

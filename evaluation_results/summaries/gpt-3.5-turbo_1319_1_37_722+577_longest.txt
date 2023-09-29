@@ -1,0 +1,12 @@
+Total correct number: 852
+Correct Percentage: 0.6459438968915845
+right-wrong Percentage: 0.06520090978013647
+wrong_right Percentage: 0.2312357846853677
+wrong Percentage: 0.0576194086429113
+Execution time: 23019.26609325409 seconds
+
+Total correct number: 1063
+Correct Percentage: 0.7293404094
+right-wrong Percentage: 0.07657316149
+wrong_right Percentage: 0.1478392722
+wrong Percentage: 0.04624715694

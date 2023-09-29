@@ -1,9 +1,0 @@
-Total correct number: 1957
-Correct Percentage: 0.5984709480122324
-Execution time: 150527.05816793442 secondsTotal correct number: 1957
-Correct Percentage: 0.5984709480122324
-Execution time: 150758.797539711 secondsTotal correct number: 1957
-Correct Percentage: 0.5984709480122324
-Execution time: 150906.3467926979 secondsTotal correct number: 1934
-Correct Percentage: 0.5914373088685015
-Execution time: 53861.610792160034 seconds

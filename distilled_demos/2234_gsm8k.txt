@@ -1,0 +1,24 @@
+User: Debelyn, Christel, and Andrena collect dolls. Debelyn had 20 dolls before she gave Andrena 2 dolls. Christel had 24 dolls before giving Andrena 5 dolls. After all the gifts, Andrena now has 2 more dolls than Christel, how many more dolls does Andrena have now than Debelyn?
+Response: Debelyn: 20 -> 18 dolls, Christel: 24 -> 19 dolls, Andrena: 19 + 2 = 21 dolls. Andrena has 21 - 18 = 3 more dolls than Debelyn. Answer: 3.
+User: Ezekiel hikes as a hobby. This past summer, he did a challenging three-day hike across 50 kilometers of wilderness. The first day, he covered 10 kilometers of steep mountainside. The second day was flatter, and he covered half the full hike distance. How many kilometers did he have to hike on the third day to finish the hike?
+Response: First day: 10 km, Second day: 50 / 2 = 25 km. Third day: 50 - 10 - 25 = 15 km. Answer: 15.
+User: Lucille has to divide the revenue from her business in the ratio of 4:11 for employee salaries and stock purchases, respectively. If she has $3000 as her revenue, calculate the total amount of money she spends on employee salary?
+Response: Employee salary ratio: 4/15 * $3000 = $800. Answer: $800.
+User: James watched 2 episodes of Jeopardy and 2 episodes of Wheel of Fortune. Jeopardy is 20 minutes, and Wheel of Fortune is twice as long. How many hours did he watch TV?
+Response: Jeopardy: 2 * 20 = 40 minutes, Wheel of Fortune: 2 * 20 * 2 = 80 minutes. Total: 40 + 80 = 120 minutes, which is 2 hours. Answer: 2.
+User: A fast-food chain offers free delivery for a minimum purchase of $18. Danny ordered 2 quarter-pounder burgers for $3.20 each, 2 large fries that cost $1.90 each, and 2 milkshakes that cost $2.40 each. How much more worth of food should he order to avail of the free delivery?
+Response: Total cost: $3.20 * 2 + $1.90 * 2 + $2.40 * 2 = $15. Danny should order $18 - $15 = $3 worth of additional food. Answer: $3.
+User: Violet is trying to figure out whether she should buy a family pass to the aquarium for $120 or pay for tickets separately. If adult tickets cost $35 and children's tickets cost $20, and Violet's family has 1 adult and 6 children, how much will she pay if she buys separate tickets?
+Response: Adult ticket: $35, Children's tickets: $20 * 6 = $120. Total: $35 + $120 = $155.
+User: There were 40 kids on Lake Pleasant. A fourth of the kids went tubing, but only half of the tubers went rafting. How many of the kids who joined the rafting excursion were also on the tubing excursion?
+Response: Tubing: 40 / 4 = 10 kids, Rafting: 10 / 2 = 5 kids. Answer: 5.
+User: Kimberly went strawberry picking with her family over the weekend. She picked 8 times the amount of strawberries her brother picked, and her parents picked 93 strawberries less than her. If her brother picked 3 baskets, each containing 15 strawberries, how many strawberries would they each have if they divide the total number of strawberries equally amongst them?
+Response: Brother: 3 baskets * 15 strawberries = 45 strawberries, Kimberly: 8 * 45 = 360 strawberries, Parents: 360 - 93 = 267 strawberries. Total: 45 + 360 + 267 = 672 strawberries. Each: 672 / 4 = 168 strawberries. Answer: 168.
+User: Teresa scored 70 marks in science, 80 in music, 85 in social studies, and the physics exam, which was the hardest test that Teresa had ever taken in her entire life, she scored half as many marks as she scored in music. Calculate the total marks Teresa scored in all the subjects.
+Response: Science + Music + Social Studies + Physics = 70 + 80 + 85 + (80 / 2) = 275. Answer: 275.
+User: It starts raining at 7:00 and pours heavily until it stops at 17:00 on a particular day. On the second day, the rain takes 2 more hours than it took on the first day to stop. On the third day, the rain pours for twice the amount of time it took on the second day. Calculate the total time it was raining in the three days.
+Response: First day: 17:00 - 7:00 = 10 hours, Second day: 10 hours + 2 hours = 12 hours, Third day: 2 * 12 hours = 24 hours. Total: 10 + 12 + 24 = 46 hours.
+User: Opal won $100.00 betting on a horse race. She put half of her winnings into savings and bet the other half of her winnings. This time, she made a 60% profit and again, put half of her earnings into savings. How much did she put into her savings?
+Response: Initial savings: $100 / 2 = $50, Second bet winnings: $100 * 60% = $60, Savings from second winnings: $60 / 2 = $30. Total savings: $50 + $30 = $80.
+User: Shem makes 2.5 times more money per hour than Kem. If Kem earns $4 per hour, how much does Shem earn for an 8-hour workday?
+Response: Shem earns $4 * 2.5 = $10 per hour. For an 8-hour workday, Shem earns $10 * 8 = $80.

@@ -1,0 +1,8 @@
+User: Passage: On the night of the sinking, the diamond changes hands between Rose and Jack, resulting in Jack being framed for its theft by Rose's fiancé Cal. Later, Cal places the diamond in his overcoat, which Rose wears as she enters a lifeboat. In the end, Rose drops the necklace into the water above the Titanic wreck site. Question: did they ever find the heart of the ocean necklace
+Response: True
+User: Passage: The Oasis class is a class of Royal Caribbean International cruise ships. Harmony of the Seas is larger than Oasis of the Seas. Question: is Harmony of the Seas bigger than Oasis of the Seas
+Response: True
+User: Passage: Shortcrust pastry is often used for pies, both sweet and savory. Question: is shortcrust pastry the same as pie crust
+Response: True
+User: Passage: Reynolds v. Sims, 377 U.S. 533 (1964) ruled that state legislative districts must be equal in population. Question: the warren court ruled that state legislative districts must be equal in population
+Response: True

@@ -1,0 +1,34 @@
+User: A salesman bought 48 backpacks for $576. He sold 17 for $18 each, 10 for $25 each, and the remainder for $22 each. How much was his profit?
+Response: Salesman sold 17 bags for $306, 10 for $250. Remaining 21 bags sold for $462. Total revenue: $306 + $250 + $462 = $1018. Profit: $1018 - $576 = $442.
+User: Ursula earns $8.50 per hour, works 8 hours a day, and 20 days a month. What's her annual salary?
+Response: Ursula earns $68 per day. In a month, she earns $68 x 20 = $1360. Annual salary: $1360 x 12 = $16,320.
+User: The selling price of a bicycle that sold for $220 last year increased by 15%. What's the new price?
+Response: Price increased by $220 x 15/100 = $33. New price: $220 + $33 = $253.
+User: Blossom's room is 10 feet long in each direction. What's the room's area in square inches?
+Response: Room length in inches: 10 feet x 12 inches/foot = 120 inches. Area: 120 inches x 120 inches = 14,400 square inches.
+User: Ruiz receives a monthly salary of $500 and got a 6% raise. What's his new salary?
+Response: Ruiz's raise is $500 x 6/100 = $30. New salary: $500 + $30 = $530.
+User: A store sells jeans for $40 each and offers a 10% discount for every two pairs bought together. What's the cost for 3 pairs?
+Response: Two pairs cost $80 with a $8 discount. So, 3 pairs cost $80 x 1.5 + $40 = $120 + $40 = $160.
+User: A retail store needs 50 phone reps working 8 hours a day at $14/hour for 5 days. What's the total cost?
+Response: 50 reps x 8 hours/day x 5 days/week = 2,000 hours. Total cost: 2,000 hours x $14/hour = $28,000.
+User: In a factory, 200 employees earn $12/hour, 40 earn $14/hour, and the rest earn $17/hour. What's the cost for an 8-hour shift?
+Response: Cost of 200 employees: 200 x $12/hour = $2,400/hour. Cost of 40 employees: 40 x $14/hour = $560/hour. Cost of 60 employees: 60 x $17/hour = $1,020/hour. Total cost: $2,400/hour + $560/hour + $1,020/hour = $3,980/hour.
+User: A church's 100 members bake 10 sheets of cookies each, with 16 cookies per sheet. How many cookies did they bake?
+Response: Each member bakes 10 sheets x 16 cookies/sheet = 160 cookies. Total cookies baked: 100 members x 160 cookies/member = 16,000 cookies.
+User: Sean buys 100 patches at $1.25 each and sells them for $12 each. What's his net profit?
+Response: Cost of patches: 100 x $1.25 = $125. Revenue from selling patches: 100 x $12 = $1,200. Net profit: $1,200 - $125 = $1,075.
+User: A movie theater can hold 50 people, charging $8 per ticket. On a Tuesday, they sold 24 tickets. How much money did they lose?
+Response: Potential revenue for 50 seats: 50 x $8 = $400. Revenue on Tuesday: 24 x $8 = $192. Loss: $400 - $192 = $208.
+User: Roger bought a $100,000 house with a 20% down payment. How much does he still owe?
+Response: Down payment: $100,000 x 20% = $20,000. Remaining balance: $100,000 - $20,000 = $80,000.
+User: A bead shop sells crystal beads for $9 each and metal beads for $10 each. Nancy buys 1 set of crystal beads and 2 sets of metal beads. How much does she spend?
+Response: 1 set of crystal beads: $9. 2 sets of metal beads: 2 x $10 = $20. Total cost: $9 + $20 = $29.
+User: John works 9 years as a bartender and 3.5 years as a manager. How many months of work experience does he have?
+Response: Bartending experience: 9 years x 12 months/year = 108 months. Managerial experience: 3.5 years x 12 months/year = 42 months. Total experience: 108 months + 42 months = 150 months.
+User: Tara takes a road trip, using 12 gallons of gas at different prices. How much does she spend?
+Response: Gas prices: $3, $3.50, $4, $4.50 per gallon. Costs: $3 x 12 = $36, $3.50 x 12 = $42, $4 x 12 = $48, $4.50 x 12 = $54. Total cost: $36 + $42 + $48 + $54 = $180.
+User: Jerry's lawsuit claims $50,000/year for 30 years, $200,000 medical bills, and triple punitive damages. If he receives 80%, how much does he get?
+Response: Lost salary: $50,000 x 30 = $1,500,000. Medical bills: $200,000. Punitive damages: 3 x ($200,000 + $1,500,000) = $6,900,000. Total claimed: $1,500,000 + $200,000 + $6,900,000 = $8,600,000. Received amount: 80% x $8,600,000 = $6,880,000.
+User: Neil trims 30 boxwoods at $5 each and shapes 4 at $15 each. What's the total cost?
+Response: Trimming cost: 30 x $5 = $150. Shaping cost: 4 x $15 = $60. Total cost: $150 + $60 = $210.

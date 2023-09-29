@@ -1,8 +1,0 @@
-correct_num: 3
-total: 5
-Accuracy: 0.6
-Execution time: 34.88760781288147 seconds
-correct_num: 5
-total: 5
-Accuracy: 0.8333333333333334
-Execution time: 39.02135753631592 seconds

@@ -1,0 +1,8 @@
+User: Hasan needs to remove plates to meet a 20-pound weight limit. Each plate weighs 10 ounces. How many plates should he remove?
+Response: Hasan should remove 6 plates.
+User: Alec wants three-quarters of his class of 60 students to vote for him. Half already support him, and 5 more are considering it. How many more votes does he need?
+Response: Alec needs 5 more votes.
+User: Peggy has 200 records. Sammy offers $4 each for all of them, while Bryan offers $6 each for half and $1 each for the other half. What's the profit difference between their deals?
+Response: Sammy's deal yields $100 more profit for Peggy.
+User: Angelo and Melanie need to study 2 chapters (3 hours each) and 4 worksheets (1.5 hours each) over a week. They study a maximum of 4 hours each day with breaks. How many days do they need to study?
+Response: Angelo and Melanie need to study for 4 days.

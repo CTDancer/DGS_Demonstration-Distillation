@@ -1,0 +1,8 @@
+[
+    {
+        "question": "Dominick went to his team's changing room and saw half as many robots as helmets and half as many helmets as footballs kept there. If there were 20 helmets, calculate the total number of items Dominick saw.",
+        "last_line": "The total number of items Dominick saw is 10 robots + 20 helmets + 10 footballs = 40 items. Therefore the answer is 40.",
+        "pred_ans": "40",
+        "ground_truth": "70"
+    }
+]

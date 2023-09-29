@@ -1,0 +1,23 @@
+User: "Kiss Him, Not Me" manga by Junko, 14 volumes, Best Shōjo Manga award. Question: Does it have a second season?
+Response: No, "Kiss Him, Not Me" does not have a second season. It's a manga series by Junko with 14 volumes and it won the Best Shōjo Manga award.
+
+User: Right turns on red allowed in all states except New York City. Question: Can you turn right on red in Idaho?
+Response: Yes, you can turn right on red in Idaho. Right turns on red are allowed in all states except New York City.
+
+User: Wisconsin offers diploma privilege for lawyers. Question: Do you have to take the bar exam in Wisconsin?
+Response: No, you do not have to take the bar exam in Wisconsin. Wisconsin offers a diploma privilege for lawyers.
+
+User: Mass vs. weight; mass is amount of matter, weight is force by gravity. Question: Does the mass of a person make any difference?
+Response: Yes, a person's mass affects their weight on Earth. Mass is the amount of matter, and weight is the force exerted by gravity.
+
+User: Lloydminster observes Mountain Time year-round and adjusts for DST. Question: Is there a time change between Alberta and Saskatchewan?
+Response: Yes, there is a time change between Alberta and Saskatchewan. Lloydminster observes Mountain Time year-round and changes its clocks for DST.
+
+User: Marshall Faulk, NFL Hall of Fame inductee. Question: Is Marshall Faulk in the Hall of Fame?
+Response: Yes, Marshall Faulk is in the Hall of Fame. He is a former NFL player and was inducted into the Pro Football Hall of Fame.
+
+User: California bans AR-15 rifles. Question: Is it legal to own an AR-15 in California?
+Response: No, it is not legal to own an AR-15 in California. California has banned AR-15 rifles.
+
+User: "The 100" renewed for fifth and sixth seasons. Question: Is the 100 season 5 the last season?
+Response: No, "The 100" has a sixth season. It was renewed for both a fifth and a sixth season.

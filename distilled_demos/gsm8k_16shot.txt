@@ -1,0 +1,63 @@
+User: A salesman bought 48 backpacks for $576. He sold 17 for $18 each, 10 for $25 each, and the rest for $22 each. What's his profit?
+
+Response: The salesman sold 17 bags for $306, 10 for $250, and 21 for $462. His total sales are $1018. The profit is $442.
+
+User: Ursula earns $8.50 an hour, working 8 hours a day for 20 days a month. What's her annual salary?
+
+Response: Ursula earns $68 a day, which is $1360 a month. Her annual salary is $16,320.
+
+User: The selling price of a bicycle that was $220 increased by 15%. What's the new price?
+
+Response: The price increased by $33, so the new price is $253.
+
+User: Blossom's room is 10 feet long in each direction. What's the area in square inches?
+
+Response: Her room is 120 inches long. The area is 14,400 square inches.
+
+User: Ruiz received a $30 raise on his $500 monthly salary. What's his new salary?
+
+Response: Ruiz's new salary is $530.
+
+User: A store sells jeans for $40 each and offers a 10% discount for every two pairs bought together. How much for 3 pairs?
+
+Response: Two pairs cost $72. Three pairs cost $112.
+
+User: A retail store wants to hire 50 phone reps working 8 hours a day for $14 per hour. After 5 days, how much will they pay?
+
+Response: They will work 2,000 hours in total. The cost is $28,000.
+
+User: In a factory, 200 employees earn $12/hour, 40 earn $14/hour, and the rest earn $17/hour. How much for one 8-hour shift?
+
+Response: The cost for 200 employees is $2,400 per hour, for 40 employees it's $560 per hour, and for 60 employees it's $1,020 per hour. The total is $3,980 per hour, or $31,840 for an 8-hour shift.
+
+User: A church's 100 members baked 16,000 cookies. Each baked 160 cookies. What's the total?
+
+Response: Each member baked 160 cookies, totaling 16,000 cookies.
+
+User: Sean buys 100 patches at $1.25 each and sells them for $12 each. What's his net profit?
+
+Response: Sean spent $125 and earned $1,200, so his net profit is $1,075.
+
+User: A theater can hold 50 people at $8 per ticket. They sold 24 tickets. How much money did they lose?
+
+Response: They made $192, so they lost $208.
+
+User: Roger bought a $100,000 house with a 20% down payment and his parents paid 30% of the remaining balance. What's his remaining debt?
+
+Response: Roger paid $20,000 down, leaving a $80,000 balance. His parents paid $24,000, so his remaining debt is $56,000.
+
+User: A bead shop sells crystal beads for $9 each and metal beads for $10 each. Nancy buys 1 set of crystal beads and 2 sets of metal beads. How much does she spend?
+
+Response: Nancy spent $9 for crystal beads and $20 for metal beads. In total, she spent $29.
+
+User: John buys 3 dress shirts at $20 each with 10% tax. How much did he pay?
+
+Response: The shirts cost $60 before tax and $6 in tax, so he paid $66.
+
+User: Mrs. Garcia pays her $378 insurance quarterly. What's her annual cost?
+
+Response: She pays $1,512 annually.
+
+User: Elizabeth buys 2 sets of steak knives for $80 each, each set containing 4 knives. What's the cost per knife?
+
+Response: Elizabeth bought 8 knives for $160, so each knife costs $20.

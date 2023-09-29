@@ -1,4 +1,0 @@
-correct_num: 1033
-total: 1319
-Accuracy: 0.7831690674753601
-Execution time: 11769.01636147499 seconds

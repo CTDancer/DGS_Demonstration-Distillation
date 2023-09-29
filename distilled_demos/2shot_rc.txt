@@ -1,0 +1,16 @@
+User: After peace, there were changes in industry and commerce legislation, leading to the formation of many limited liability companies. Railways were planned for resource development and defense. Serfdom was addressed following a petition by Polish landowners in Lithuania, leading to committees for peasants' betterment and eventual emancipation. Alexander supported turning serfs into independent communal proprietors. Emancipation law was signed in 1861.
+Question0: "What complex issue affected Russia's future?" Answers: A. The emancipation B. The railway plans C. The emancipation of serfs D. A peace treaty 
+Question1: "What significant event followed a petition by Polish landowners?" Answers: A. Alexander praised the idea to emancipate serfs B. Alexander ordered circulars to governors C. Railway plans were formed D. Alexander died E. Secret service 
+Question2: "When were railway plans made?" Answers: A. After peace B. During a war C. On March 3, 1861 
+Question3: "Aside from humanitarian concerns, what did emancipation serve?" Answers: A. The architects of the emancipation manifesto B. Economic, social, and political future C. Issues affecting the nation D. The existence of serfdom 
+Question4: "When was serfdom addressed?" Answers: A. 6 years after accession B. After peace C. In March 1931 
+Question5: "Who authorized committees for peasants' betterment?" Answers: A. Governor-General of Lithuania B. Russian peasantry C. Tsar Alexander D. Alexander 
+Question6: "Which idea for serf emancipation did Alexander support?" Answers: A. Independent communal proprietors B. Serfs as dependent laborers C. Serfs as independent communal proprietors D. Serfs leaving Russia 
+Response: Question0: AC  Question1: AB  Question2: A  Question3: BC  Question4: B  Question5: CD  Question6: AC
+
+User: Electronic espionage costs U.S. firms billions, but most don't take precautions. European firms spend on electronic security, yet encrypting communications is only partial protection. An expert mentioned an expected influx of East European refugees doubling as spies. Technology allows stealing erased corporate secrets. No personal computer is safe. Mark Goode, president of Micronyx Inc., mentioned the Soviets openly stealing Western corporate communications, citing a case involving a Swiss oil trader and the Soviet national shipping company.
+Question0: "Who did the Soviets contract with for crude oil transport in the Middle East?" Answers: A. Dubai oil trader B. Israeli Oil Trader C. Swiss D. Iran E. A Swiss oil trader F. Iraqi oil trader G. Country bordering Switzerland H. North Korea 
+Question1: "What is the full name of the expert claiming Soviets steal Western corporate communications?" Answers: A. Gorbachev B. W. Mark Goode C. Mark Goode D. Oliver North E. Richardson F. Mr. Gorbachev G. Mikhail Gorbachev 
+Question2: "Will the foreign banks' steps likely completely solve the problem?" Answers: A. Yes B. Impossible C. Maybe 
+Question3: "Do Europeans spend more or less on countering electronic espionage compared to the U.S.?" Answers: A. About the same B. More C. A lot more D. Less 
+Response: Question0: CE  Question1: B  Question2: C  Question3: B

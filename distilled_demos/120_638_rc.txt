@@ -1,0 +1,3 @@
+User: Passage: "Neighborhood Legal Services expands into areas with large Asian populations, addressing language and cultural barriers. They offer free legal services to those earning under $1,380 per month, including consumer, health, family, immigration, housing, public benefits, and labor legal services."
+    Question0: "What is the language goal of neighborhood legal services?"
+Response: Answer0: A. Expand the Asian languages offered. D. Have English and major Chinese languages become interchangeable. F. Our goal is to have that for the major Asian languages as well.

@@ -12,10 +12,7 @@ import requests
 import tiktoken
 import zhipuai
 
-API_KEY = " "
-# define for no solution if GPT cannot generate a valid solution
-# here define a magic number for the convenience of variance calculation
-NO_SOLUTION = '-10086'
+API_KEY = ""
 
 
 # set the random seed for reproducibility
@@ -60,13 +57,13 @@ def GPT3_request(model:str, input_prompt:list, max_tokens:int, time_interval, te
 
 def GPT3_5_request(model:str, messages:list, max_tokens:int, time_interval=2, temperature=0.7, stop=None):
     ''''''
-    API_KEY = "sk-AAMOOJ4kAVI8NeZKE066De9947874dF39aD8C804Dd89Be38"    # for api.dqwang.group
+    API_KEY = ""    # openai key
     resp = None
     done = False
     while not done:
         try:
             openai.api_key = API_KEY
-            openai.api_base = "https://api.dqwang.group/v1"
+            openai.api_base = ""
             resp = openai.ChatCompletion.create(
                 model=model,
                 messages=messages,
@@ -90,13 +87,12 @@ def GPT3_5_request(model:str, messages:list, max_tokens:int, time_interval=2, te
         # pause between each request to avoid rate limit
         time.sleep(time_interval)
     
-    # print("response is: ", resp)
     return resp['choices'][0]['message']['content']
 
 def openai_ChatCompletion_create(**kwargs):
-    url = 'https://api.dqwang.group/v1/chat/completions'
+    url = ''  # url
     headers = {
-        "Authorization": "Bearer " + "sk-AAMOOJ4kAVI8NeZKE066De9947874dF39aD8C804Dd89Be38",
+        "Authorization": "",    # openai token
         "Content-type": "application/json",
         }
     data = json.dumps(kwargs)
@@ -106,23 +102,23 @@ def openai_ChatCompletion_create(**kwargs):
     return json.loads(resp.content)['choices'][0]['message']['content']
 
 def claude(message):
-    token = 'xoxp-5807096092167-5818713672245-5841552251043-21a356216b20a6ee028d42dafc890a91'
+    token = '' # slack token
     
     def send_msg(token, message):
-        sendurl = 'https://slack.com/api/chat.postMessage'
+        sendurl = ''
         data = {
             "token": token,
-            "channel": "@Claude",
+            "channel": "",
             "text": message
         }
         response = requests.post(sendurl, data=data)
         return response.text
 
     def receive_msg(token, timestamp):
-        receiveurl = 'https://slack.com/api/conversations.history'
+        receiveurl = ''
         data = {
             "token": token,
-            "channel": "D05PZ7X729L",
+            "channel": "",
             "oldest": timestamp
         }
         response = requests.post(receiveurl, data=data)
@@ -155,12 +151,10 @@ def chatglm(message, args):
         prompt=message,
         temperature=args.temperature
     )
-    # pdb.set_trace()
     response_data = [event.data for event in response.events()]
     response = ""
     for data in response_data:
         response += data
-    # pdb.set_trace()
     return response
 
 def load_data(args):
@@ -217,7 +211,6 @@ def load_data(args):
             lines = f.readlines()
             for line in lines:
                 json_res = decoder.raw_decode(line)[0]
-                # pdb.set_trace()
                 question = f"Passage: \"{json_res['passage']['text']}\"\n"
                 count = 0
                 for question_data in json_res['passage']['questions']:
@@ -233,7 +226,6 @@ def load_data(args):
                 
                 answer = ""
                 count = 0
-                # pdb.set_trace()
                 for question_data in json_res['passage']['questions']:
                     # correct_answers = [answer['label'] for idx, answer in enumerate(question_data['answers'])]
                     # answer += f"Question{count}: {str(correct_answers)} "
@@ -389,24 +381,6 @@ def get_qas(args):
         qas = create_chat_completion_input_prompt(args, args.demo_path)
         questions = [qa["question"] for qa in qas]
         answers = [qa["answer"] for qa in qas]
-    # elif args.multiple_lines:
-    #     with open(args.demo_path, 'r') as file:
-    #         qas = file.read()
-    #     qas = qas.split('\n\n')
-    #     questions = []
-    #     answers = []
-    #     for i in range(len(qas)):
-    #         questions.append(qas[i].split('\n')[0][6:])
-    #         answers.append(qas[i].split('Response: ')[1])
-    # else:
-    #     with open(args.demo_path, 'r') as file:
-    #         qas = file.read()
-    #     qas = qas.split('\n')
-    #     questions = []
-    #     answers = []
-    #     for i in range(0, len(qas), 2):
-    #         questions.append(qas[i][6:])
-    #         answers.append(qas[i+1][10:])
     else:
         try:
             with open(args.demo_path, "r") as file:
@@ -449,30 +423,6 @@ def get_initial_prompt(dataset):
     
     return initial_prompt
 
-def get_prompts():
-    ''' define the prompts for distillation '''
-    
-    prompts = []
-    # prompts.append("Rephrase or edit the demonstrations above so as to delete as much unimportant information as possible")
-    # # prompts.append("Edit the given demonstrations to remove any redundant or repetitive information, ensuring the core message and logic remain intact if you can. ")
-    # # prompts.append("Reduce wordiness in the demonstrations, making it more concise without losing its essential meaning and logic.")
-    # prompts.append("Craft a succinct version of the demonstrations that omits redundant information while retaining its core essence and logic")
-    # prompts.append("Revise the demonstrations using abbreviations and shortening where appropriate, ensuring the essential details and logic remain intact")
-    # prompts.append("Can you please provide concise versions of the given demonstrations while retaining all the essential information, including key calculations and steps required to arrive at the answers? The goal is to make the solutions more streamlined without sacrificing clarity.")
-    # # prompts.append("Edit each ANSWER so as to keep all calculation steps and delete their explanations if you can. " + \
-    # #     "Then edit each QUESTION so as to omit as much redundant information as possible but must not lose any key information needed in the calculation steps of the answer if you can. ")
-    # # prompts.append("Revise the demonstrations using abbreviations and shortening where appropriate, but must not lose any key information in each question needed in the calculation steps of the answer if you can. ")
-    
-    # for i in range(len(prompts)):
-    #     prompts[i] = "These are the demonstrations for LLM chat completion. " + prompts[i] + \
-        # "NOTE: " + \
-        # "1. You must not remove the Q&A format. " + \
-        # "2. You must ensure that all the final answers remain the same after edition."
-    # prompts.append("First, edit or rephrase each Answer so as to omit any redundant information but must present all necessary computation steps. Then, edit or rephrase each question so as to keep all the information needed in the answer while omitting any redundant information. You must keep the Q&A format intact. If you think you can't do it, just output \"The demonstrations cannot be further distilled.\"")
-    # prompts.append("These are some Question-Answer pairs. For each Answer, craft a succinct version of it that present all essential calculation steps while omitting any redundant information. You must remain each Question intact. You must ensure the final answer is still correct. If you think you can't do it, just output \"The demonstrations cannot be further distilled\"")
-    # prompts.append("These are some Q-A pairs. For each content after 'Q: ', craft a succinct version of it that omits redundant information while retaining all the information and value needed in the corresponding 'A: '. You must not change the content after each 'A: '. There is no need for grammar correction. If you think you can't do it, just output \"The demonstrations cannot be further distilled\"")
-    return prompts
-
 def select_prompt(prompts, used_index, done):
     ''' select a prompt from prompts '''
 
@@ -487,7 +437,6 @@ def select_prompt(prompts, used_index, done):
 def sample(args):
     ''' randomly sample a question-answer pair from the training set '''
     args.distill = True
-    # pdb.set_trace()
     train_dataloader = create_dataloader(args)
     args.distill = False
     set_random_seed(args.random_seed)

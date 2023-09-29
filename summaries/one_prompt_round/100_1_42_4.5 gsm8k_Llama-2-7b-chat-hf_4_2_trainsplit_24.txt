@@ -1,4 +1,0 @@
-correct_num: 70
-total: 100
-Accuracy: 0.7
-Execution time: 715.0922043323517 seconds

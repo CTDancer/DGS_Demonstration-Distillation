@@ -1,4 +1,0 @@
-correct_num: 4
-total: 5
-Accuracy: 0.6666666666666666
-Execution time: 37.00007390975952 seconds

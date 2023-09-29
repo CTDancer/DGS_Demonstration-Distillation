@@ -1,0 +1,20 @@
+[
+    {
+        "question": "Passage: A queen ant (formally known as a gyne) is an adult, reproducing female ant in an ant colony; generally she will be the mother of all the other ants in that colony. Some female ants, such as Cataglyphis cursor, do not need to mate to produce offspring, reproducing through asexual parthenogenesis or cloning, and all of those offspring will be female. Others, like those in the genus Crematogaster, mate in a nuptial flight. Queen offspring develop from larvae specially fed in order to become sexually mature among most species. Depending on the species, there can be either a single mother queen, or potentially, hundreds of fertile queens in some species. Queen ants have one of the longest life-spans of any known insect -- up to 30 years. A queen of Lasius niger was held in captivity by German entomologist Hermann Appel for 283\u20444 years; also a Pogonomyrmex owyheei has a maximum estimated longevity of 30 years in the field. Question: do queen ants give birth to queen ants?",
+        "pred_ans": " True",
+        "ground_truth": true,
+        "score": " Therefore the score is: 90"
+    },
+    {
+        "question": "Passage: The style of film is presented in a nonlinear narrative. Each scene is introduced using a title card showing which of the 500 days it is. Co-writer of the film Scott Neustadter admitted the film was based on a real romance. Neustadter explains that when he met the real girl who inspired the character Summer as a student at the London School of Economics in 2002, he was rebounding from a bad breakup back home, and promptly fell ``crazily, madly, hopelessly in love'' with the girl who ``returned his kisses but not his ardor.'' The ending of the relationship was ``painfully and unforgettably awful,'' which prompted him to co-write the film with Michael H. Weber. When Neustadter later showed the script to Summer's real life counterpart, she said she related more to the Tom character. Weber also stated that, ``we've all been in the trenches of love, we've all gone through the highs and lows, so Scott and I felt that the only way to tell this story was to come at it from a completely real place. It was pretty interesting for us because Scott was just going through a break-up and I was in a long-term relationship, so we each brought a totally opposite perspective, living it and not living it, and I think that tension helped to bring out more of the comedy''. Question: is 500 days of summer based on a true story?",
+        "pred_ans": " True",
+        "ground_truth": true,
+        "score": " Therefore the score is: 100"
+    },
+    {
+        "question": "Passage: Some schools, however, have opted to compete in a sport at a higher level and are allowed to do so by the NCAA under certain circumstances. First, schools in Divisions II and III are allowed to classify one men's sport and one women's sport as Division I (except for football and basketball), provided that they were sponsoring said sports at Division I level prior to 2011. In addition to this, a lower-division school may compete as a Division I member in a given sport if the NCAA does not sponsor a championship in that sport for the school's own division. Division II schools may award scholarships and operate under Division I rules in their Division I sports. Division III schools cannot award scholarships in their Division I sports (except as noted below), but can operate under most Division I rules in those sports. Question: can a school be division 1 and 2?",
+        "pred_ans": " True",
+        "ground_truth": true,
+        "score": " Therefore the score is: 90"
+    }
+][]

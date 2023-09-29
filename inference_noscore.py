@@ -69,31 +69,15 @@ Then several questions are given and each followed by several answers. For each 
     for count, qa in enumerate(dataloader):
         if args.qes_limit is not None and count == args.qes_limit:
             break
-        # predictions = []
         if args.multiple_prompting_rounds:
             messages.append({ "role": "user", "content": qa['question'] })
-            # messages.append({ "role": "system", "content": "You are a helpful assistant." })
+            messages.append({ "role": "system", "content": "You are a helpful assistant." })
         else:
             messages = [
-                # {"role": "system", "content": 'You are a helpful assistant.'},
+                {"role": "system", "content": 'You are a helpful assistant.'},
                 {"role": "user", "content": (demo + '\n' + initial_prompt + "\nUser: " + qa['question'])}
             ]
         
-        # for i in range(0, args.multipath):
-        #     prediction = utils.GPT3_5_request(
-        #         model=args.model, 
-        #         messages=messages,
-        #         max_tokens=args.max_tokens,
-        #         time_interval=args.api_time_interval,
-        #         temperature=args.temperature
-        #     )
-        #     last_line = prediction.split('\n')[-1]
-        #     print(f"question is: {qa['question']}")
-        #     print(f"prediction is: {last_line}")
-        #     prediction = utils.answer_extraction(args, prediction).lstrip()
-        #     predictions.append(prediction)
-        # prediction = max(predictions, key=predictions.count)
-        # print(f"Extracted answer: {prediction}")
         if args.model == "claude":
             prediction = utils.claude((demo + '\n' + initial_prompt + "\nUser: " + qa['question']))
         elif args.model == 'gpt-3.5-turbo':
@@ -104,11 +88,8 @@ Then several questions are given and each followed by several answers. For each 
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
-        # elif args.model == "chatglm_pro":
-        #     prediction = utils.chatglm(messages, args)
         else:
             kwargs = {
-                # "model": "chatglm_pro",
                 "model": args.model,
                 "messages": messages,
                 "temperature": 0
@@ -120,8 +101,6 @@ Then several questions are given and each followed by several answers. For each 
         print(f"Ground Truth: {qa['answer']}")
         print("---------------------------")
         if args.dataset == "boolq":
-            # import pdb
-            # pdb.set_trace()
             if str(qa['answer']).lower() in prediction.lower():
                 correct += 1
             else:
@@ -131,8 +110,6 @@ Then several questions are given and each followed by several answers. For each 
             choices = re.findall(pattern, prediction)
             choices = [choice.replace(',', '') for choice in choices]
             gt = re.findall(pattern, qa['answer'])
-            # import pdb
-            # pdb.set_trace()
             print(f'choices: {choices}')
             print(f'gt: {gt}')
             if len(choices) == len(gt):
@@ -159,7 +136,6 @@ Then several questions are given and each followed by several answers. For each 
     print(f"wrong Percentage: {len(wrong_list) / args.qes_limit}")
     print(f"Execution time: {end - start} seconds")
     
-    # 将运行结果抄送到 summaries 文件夹
     if args.multiple_prompting_rounds:
         summary_path = f"./summaries/multiple_prompt_rounds/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
     else:

@@ -64,31 +64,15 @@ Then for each question, there are several answers. For each question, your task 
     for count, qa in enumerate(dataloader):
         if args.qes_limit is not None and count == args.qes_limit:
             break
-        # predictions = []
         if args.multiple_prompting_rounds:
             messages.append({ "role": "user", "content": qa['question'] })
-            # messages.append({ "role": "system", "content": "You are a helpful assistant." })
+            messages.append({ "role": "system", "content": "You are a helpful assistant." })
         else:
             messages = [
-                # {"role": "system", "content": 'You are a helpful assistant.'},
+                {"role": "system", "content": 'You are a helpful assistant.'},
                 {"role": "user", "content": (demo + '\n' + initial_prompt + "\nUser: " + qa['question'])}
             ]
         
-        # for i in range(0, args.multipath):
-        #     prediction = utils.GPT3_5_request(
-        #         model=args.model, 
-        #         messages=messages,
-        #         max_tokens=args.max_tokens,
-        #         time_interval=args.api_time_interval,
-        #         temperature=args.temperature
-        #     )
-        #     last_line = prediction.split('\n')[-1]
-        #     print(f"question is: {qa['question']}")
-        #     print(f"prediction is: {last_line}")
-        #     prediction = utils.answer_extraction(args, prediction).lstrip()
-        #     predictions.append(prediction)
-        # prediction = max(predictions, key=predictions.count)
-        # print(f"Extracted answer: {prediction}")
         if args.model == "claude":
             prediction = utils.claude((demo + '\n' + initial_prompt + "\nUser: " + qa['question']))
         elif args.model == 'gpt-3.5-turbo':
@@ -99,8 +83,6 @@ Then for each question, there are several answers. For each question, your task 
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
-        # elif args.model == "chatglm_pro":
-        #     prediction = utils.chatglm(messages, args)
         else:
             kwargs = {
                 "model": args.model,
@@ -155,7 +137,7 @@ Note that the last sentence in your response can ONLY start with `Therefore the 
 and followed by a score between 0 and 100.
 """
         score_message = [
-            # {"role": "system", "content": "You are serious teacher."},
+            {"role": "system", "content": "You are serious teacher."},
             {"role": "user", "content": (score_prompt)}
         ]
         if args.model == 'claude':
@@ -168,11 +150,8 @@ and followed by a score between 0 and 100.
                 time_interval=args.api_time_interval,
                 temperature=args.temperature
             )
-        # elif args.model == "chatglm_pro":
-        #     response = utils.chatglm(score_message, args)
         else:
             kwargs = {
-                # "model": "chatglm_pro",
                 "model": args.model,
                 "messages": score_message
             }
@@ -188,12 +167,6 @@ and followed by a score between 0 and 100.
                 score = int(re.findall(r'\d+', response_list[i])[0])
                 break
         
-        # if len(re.findall(r'\d+', response.split('\n')[-1])) != 0:
-        #     score = int(re.findall(r'\d+', response.split('\n')[-1])[0])
-        # elif len(response.split('\n')) >= 2 and len(re.findall(r'\d+', response.split('\n')[-2])) != 0:
-        #     score = int(re.findall(r'\d+', response.split('\n')[-2])[0])
-        # else:
-        #     score = 0
         print(f"Score is {score}")
         print("**************************")
         if args.dataset == "boolq":
@@ -225,7 +198,6 @@ and followed by a score between 0 and 100.
     print(f"wrong Percentage: {len(wrong_list) / args.qes_limit}")
     print(f"Execution time: {end - start} seconds")
     
-    # 将运行结果抄送到 summaries 文件夹
     if args.multiple_prompting_rounds:
         summary_path = f"./summaries/multiple_prompt_rounds/{args.model}_{args.qes_limit}_{args.multipath}_{args.random_seed}_{args.demo_path.split('/')[-1]}"
     else:

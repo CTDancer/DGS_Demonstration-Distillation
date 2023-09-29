@@ -1,8 +1,0 @@
-Q1: Bought 48 backpacks at $576. Sold some, made $442. Therefore the answer is 442.
-Q2: Ursula earns $8.50/hr, works 8 hrs/day, 20 days/month. Annual: $16,320. Therefore the answer is 16320.
-Q3: Bike price rose by 15% to $253. Therefore the answer is 253.
-Q4: Room: 10 ft on each side. Area: 14,400 sq inches. Therefore the answer is 14400.
-Q5: Ruiz's $500 salary grew by 6% to $530. Therefore the answer is 530.
-Q6: Jeans: $40, 10% off for every 2. 3 pairs: $112. Therefore the answer is 112.
-Q7: 50 reps, 8 hrs/day, $14/hr. 5-day pay: $28,000. Therefore the answer is 28000.
-Q8: Factory: 300 employees, various wages. 8-hr shift: $31,840. Therefore the answer is 31840.

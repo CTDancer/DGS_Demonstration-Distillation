@@ -1,0 +1,14 @@
+[
+    {
+        "question": "Tim has a box with 7 blue shoe boxes and 9 red shoe boxes. If he uses 3 blue shoeboxes and 1/3 red of his shoeboxes to go fishing, how many red and blue shoe boxes are left in Tim's box?",
+        "last_line": "Tim initially has 7 blue shoe boxes + 9 red shoe boxes = 16 shoe boxes in total. He uses 3 blue shoe boxes, leaving him with 7 - 3 = 4 blue shoe boxes. He also uses 1/3 * 9 = 3 red shoe boxes. Thus, he has 9 - 3 = 6 red shoe boxes left. Therefore the answer is 4 blue shoe boxes and 6 red shoe boxes.",
+        "pred_ans": "6",
+        "ground_truth": "10"
+    },
+    {
+        "question": "Dominick went to his team's changing room and saw half as many robots as helmets and half as many helmets as footballs kept there. If there were 20 helmets, calculate the total number of items Dominick saw.",
+        "last_line": "In total, Dominick saw 10 robots + 20 helmets + 20 footballs = 50 items. Therefore the answer is 50.",
+        "pred_ans": "50",
+        "ground_truth": "70"
+    }
+][]

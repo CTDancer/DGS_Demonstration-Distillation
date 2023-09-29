@@ -1,7 +1,0 @@
-```
-User: Nasser was an iconic Arab figure known for social justice, Arab unity, modernization, and anti-imperialism. His presidency led to a cultural boom, industrial projects, and criticism for authoritarianism and human rights violations. Historians view him as a major 20th-century Middle Eastern leader. Which century was Nasser prominent in?
-Response: 20th
-
-User: Irish pubs are famous for their atmosphere ("craic") and feature live music, either traditional or modern. Pubs in Northern Ireland are like those in the Republic of Ireland but lack spirit grocers. "The Troubles" preserved traditional bars due to a limited tourist industry. What country, aside from Ireland, is notable for its Irish pubs?
-Response: New Zealand
-```
